@@ -1,0 +1,13 @@
+PBS15Alpha: {
+  demo: False,
+  plcIP: '192.168.2.100',
+  slot: '0',
+  dataTag: 'PBSdata_2',
+  scanTime: 0.1,
+  waitTime: 3,
+  REST_URL: 'http://192.168.2.88/webservice/interface?call=getmainvalues&json=true',
+  refreshct: 1
+  }
+  
+  ## Testing unit on Sophos VPN (PBS)
+  #  REST_URL: 'http://172.20.20.102/webservice/interface?call=getmainvalues&json=true',
