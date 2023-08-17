@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.04
   Owner     := , 
-  Exported  := Tue Aug 15 09:18:33 2023
+  Exported  := Thu Aug 17 13:20:27 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
