@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.04
   Owner     := , 
-  Exported  := Fri Aug 18 12:17:46 2023
+  Exported  := Fri Aug 18 12:26:42 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21868,14 +21868,16 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		PH_On : BOOL (RADIX := Decimal) := 1;
 		pH_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
 		ph_r_cal_control : DINT (RADIX := Decimal) := 0;
-		ph_r_cal_date : DINT (RADIX := Decimal) := 0;
+		ph_r_cal_date : DINT (Description := "Date of last calibration",
+		            RADIX := Decimal) := 0;
 		ph_r_cal_status : DINT (RADIX := Decimal) := 0;
 		ph_r_cal_time : DINT (RADIX := Decimal) := 0;
 		ph_r_ph : DINT (RADIX := Decimal) := 0;
 		ph_r_sensor_disconnected : DINT (RADIX := Decimal) := 0;
 		ph_r_sensor_type : DINT (RADIX := Decimal) := 0;
 		ph_r_unit : DINT (RADIX := Decimal) := 0;
-		ph_r_user_level : DINT (RADIX := Decimal) := 0;
+		ph_r_user_level : DINT (Description := "Enumerated user level",
+		            RADIX := Decimal) := 0;
 		ph_r_user_password : DINT (RADIX := Decimal) := 0;
 		ph_r_user_unlock_eeprom : BOOL (RADIX := Decimal) := 0;
 		ph_r_wrong_sensor : BOOL (RADIX := Decimal) := 0;
