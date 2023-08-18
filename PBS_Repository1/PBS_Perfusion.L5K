@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.04
   Owner     := , 
-  Exported  := Fri Aug 18 12:36:46 2023
+  Exported  := Fri Aug 18 12:54:19 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21022,6 +21022,24 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		            RADIX := Float) := 0.00000000e+000;
 		DO_ON : BOOL (RADIX := Decimal) := 1;
 		DO_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
+		do_r_cal_control : DINT (RADIX := Decimal) := 0;
+		do_r_cal_date : DINT (RADIX := Decimal) := 0;
+		do_r_cal_status : DINT (RADIX := Decimal) := 0;
+		do_r_cal_time : DINT (RADIX := Decimal) := 0;
+		do_r_do : DINT (RADIX := Decimal) := 0;
+		do_r_sensor_disconnected : DINT (RADIX := Decimal) := 0;
+		do_r_sensor_type : DINT (RADIX := Decimal) := 0;
+		do_r_unit : DINT (RADIX := Decimal) := 0;
+		do_r_user_level : DINT (RADIX := Decimal) := 0;
+		do_r_user_password : DINT (RADIX := Decimal) := 0;
+		do_r_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
+		do_r_wrong_sensor : DINT (RADIX := Decimal) := 0;
+		do_w_cal_control : DINT (RADIX := Decimal) := 0;
+		do_w_cal_status : DINT (RADIX := Decimal) := 0;
+		do_w_sensor_type : DINT (RADIX := Decimal) := 0;
+		do_w_user_level : DINT (RADIX := Decimal) := 0;
+		do_w_user_password : DINT (RADIX := Decimal) := 0;
+		do_w_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
 		EStop : P_DIn  := [1128428823,0,0.00000000e+000,1,18,7,0,1,1,[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				],[14,'Discrete Input$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				],[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'],[92275667,750,0,5,1,0,0,[1637399,5000,0
@@ -22973,8 +22991,10 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_ROUTINE
 
 		ROUTINE Main 
+				N: JSR(RL_PH,0);
+				N: JSR(RL_MTS,0);
+				N: JSR(RL_DO,0);
 				N: JSR(PBS_MFCs,0);
-				N: JSR(PBS_MTS,0);
 				N: JSR(CM_Pumps,0);
 				N: JSR(CM_AI,0);
 				N: JSR(Conditioned_Addition_Control,0);
@@ -23006,11 +23026,6 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: [XIC(PlaceHolderIOFault[0].3) OTE(FIC140.Inp_IOFault) ,MOV(PlaceHolderFeedback4,FIC140.Inp_PosFdbk) ,P_D4SD(N2_3way) ,P_ValveSO(KV141) P_ValveSO(KV142) ,[XIC(EStop.Alm_TgtDisagree) OTE(FIC140_intlk.Inp_Intlk00) ,P_Intlk(FIC140_intlk) ,XIC(FIC140_intlk.Sts_IntlkOK) OTE(FIC140.Inp_IntlkOK) ] ,P_ValveC(FIC140) ,MOV(FIC140.Out_CV,PlaceHolderOutput4) ];
 		END_ROUTINE
 
-		ROUTINE PBS_MTS (Description := "Propagate MT scale data")
-				N: [MOV(MT_0_R_PV,WT701.Inp_PV) ,XIO(MT_0_R_DATA_OK) OTE(WT701.Inp_PVBad) ,XIO(MT_0_R_DATA_STABLE) OTE(WT701.Inp_PVUncertain) ];
-				N: [MOV(MT_1_R_PV,WT702.Inp_PV) ,XIO(MT_1_R_DATA_OK) OTE(WT702.Inp_PVBad) ,XIO(MT_1_R_DATA_STABLE) OTE(WT702.Inp_PVUncertain) ];
-		END_ROUTINE
-
 		ROUTINE Perfusion_Control 
 				N: XIC(Perfusion_On)XIO(P101_Cal.Cal_Running)[ONS(ONS[0].1) OTL(P101.PCmd_Prog) OTL(P105.PCmd_Prog) OTL(P101.PCmd_StartFwd) OTL(P105.PCmd_StartFwd) ,XIC(Level_Control_Enable) [MOV(P101_Speed,P101.PSet_SpeedRef) CPT(P105.PSet_SpeedRef,P101.PSet_SpeedRef * BRX_Level_Scaler.Out) ,LIM(Level_Deadband_High_SP,LIT801.Val,Level_Deadband_Low_SP) OTU(BRX_Level_Initialize) ,LIM(Level_Deadband_Low_SP,LIT801.Val,Level_Deadband_High_SP) OTL(BRX_Level_Initialize) ] ,XIO(Level_Control_Enable) MOV(P101_Speed,P101.PSet_SpeedRef) MOV(P101_Speed,P105.PSet_SpeedRef) OTL(BRX_Level_Initialize) ];
 				N: XIO(Perfusion_On)XIO(P101_Cal.Cal_Running)[OTL(BRX_Level_Initialize) ,XIO(P101.Sts_Stopped) OTU(P101.PCmd_StartFwd) OTL(P101.PCmd_Stop) ,XIO(P105.Sts_Stopped) OTU(P105.PCmd_StartFwd) OTL(P105.PCmd_Stop) ,XIC(P101.Sts_Stopped) MOV(0,P101.PSet_SpeedRef) OTU(P101.PCmd_Stop) ,XIC(P105.Sts_Stopped) MOV(0,P105.PSet_SpeedRef) OTU(P105.PCmd_Stop) ];
@@ -23036,6 +23051,19 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIC(P105_Dose_Running)MOV(P105_DeciRPM,P105_Ethernet:O.SetSpeed)TON(P105_Timer,?,?)OTL(P105_Ethernet:O.Run);
 				N: XIC(P105_Timer.DN)[OTU(P105_Dose_Running) ,OTU(P105_Ethernet:O.Run) ];
 				N: XIC(P105_Abort)[OTU(P105_StartDose) ,OTU(P105_Dose_Running) ,OTU(P105_Ethernet:O.Run) ];
+		END_ROUTINE
+
+		ROUTINE RL_DO (Description := "Propagate MT scale data")
+				N: MOV(do_r_do,DOpbs.PV);
+		END_ROUTINE
+
+		ROUTINE RL_MTS (Description := "Propagate MT scale data")
+				N: [MOV(MT_0_R_PV,WT701.Inp_PV) ,XIO(MT_0_R_DATA_OK) OTE(WT701.Inp_PVBad) ,XIO(MT_0_R_DATA_STABLE) OTE(WT701.Inp_PVUncertain) ];
+				N: [MOV(MT_1_R_PV,WT702.Inp_PV) ,XIO(MT_1_R_DATA_OK) OTE(WT702.Inp_PVBad) ,XIO(MT_1_R_DATA_STABLE) OTE(WT702.Inp_PVUncertain) ];
+		END_ROUTINE
+
+		ROUTINE RL_PH (Description := "Propagate MT scale data")
+				N: MOV(ph_r_ph,PHpbs.PV);
 		END_ROUTINE
 
 		ROUTINE RTD_Calibration 
