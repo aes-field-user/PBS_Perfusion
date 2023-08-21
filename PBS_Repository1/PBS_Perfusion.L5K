@@ -1,9 +1,9 @@
 ﻿(*********************************************
 
   Import-Export
-  Version   := RSLogix 5000 v32.04
+  Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Fri Aug 18 12:54:19 2023
+  Exported  := Mon Aug 21 13:30:26 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21408,6 +21408,58 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		MediaAdj_InProgress : BOOL (RADIX := Decimal) := 0;
 		MediaFill_ON : BOOL (RADIX := Decimal) := 0;
 		MediaLoSpeed : REAL (RADIX := Float) := 5.00000000e+001;
+		mfc_0_AIR_r_data_ok : BOOL (RADIX := Decimal) := 0;
+		mfc_0_AIR_r_id : DINT (Description := "a two digit hex id for each mfc, valid values are 0 - 100 hex",
+		            RADIX := Decimal) := 0;
+		mfc_0_AIR_r_mdot_pv : REAL (Description := "mass flow pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_0_AIR_r_type : DINT (Description := "a enumeration indicating the mfc type (what gas), types: N2, CO2, AIR, O2",
+		            RADIX := Decimal) := 0;
+		mfc_0_AIR_r_valve_pv : REAL (Description := "valve position pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_0_AIR_w_cmd_mode : DINT (Description := "an enumeration for valve control: 0 - cmd valve closed, 1 - cmd valve open, 2 - cmd valve in sp mode w/ mfc_0_w_mdot_sp as the sp",
+		            RADIX := Decimal) := 0;
+		mfc_0_AIR_w_mdot_sp : REAL (Description := "mass flow sp as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_1_O2_r_data_ok : BOOL (RADIX := Decimal) := 0;
+		mfc_1_O2_r_id : DINT (Description := "a two digit hex id for each mfc, valid values are 0 - 100 hex",
+		            RADIX := Decimal) := 0;
+		mfc_1_O2_r_mdot_pv : REAL (Description := "mass flow pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_1_O2_r_type : DINT (Description := "a enumeration indicating the mfc type (what gas), types: N2, CO2, AIR, O2",
+		            RADIX := Decimal) := 0;
+		mfc_1_O2_r_valve_pv : REAL (Description := "valve position pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_1_O2_w_cmd_mode : DINT (Description := "an enumeration for valve control: 0 - cmd valve closed, 1 - cmd valve open, 2 - cmd valve in sp mode w/ mfc_0_w_mdot_sp as the sp",
+		            RADIX := Decimal) := 0;
+		mfc_1_O2_w_mdot_sp : REAL (Description := "mass flow sp as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_2_CO2_r_data_ok : BOOL (RADIX := Decimal) := 0;
+		mfc_2_CO2_r_id : DINT (Description := "a two digit hex id for each mfc, valid values are 0 - 100 hex",
+		            RADIX := Decimal) := 0;
+		mfc_2_CO2_r_mdot_pv : REAL (Description := "mass flow pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_2_CO2_r_type : DINT (Description := "a enumeration indicating the mfc type (what gas), types: N2, CO2, AIR, O2",
+		            RADIX := Decimal) := 0;
+		mfc_2_CO2_r_valve_pv : REAL (Description := "valve position pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_2_CO2_w_cmd_mode : DINT (Description := "an enumeration for valve control: 0 - cmd valve closed, 1 - cmd valve open, 2 - cmd valve in sp mode w/ mfc_0_w_mdot_sp as the sp",
+		            RADIX := Decimal) := 0;
+		mfc_2_CO2_w_mdot_sp : REAL (Description := "mass flow sp as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_3_N2_r_data_ok : BOOL (RADIX := Decimal) := 0;
+		mfc_3_N2_r_id : DINT (Description := "a two digit hex id for each mfc, valid values are 0 - 100 hex",
+		            RADIX := Decimal) := 0;
+		mfc_3_N2_r_mdot_pv : REAL (Description := "mass flow pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_3_N2_r_type : DINT (Description := "a enumeration indicating the mfc type (what gas), types: N2, CO2, AIR, O2",
+		            RADIX := Decimal) := 0;
+		mfc_3_N2_r_valve_pv : REAL (Description := "valve position pv as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
+		mfc_3_N2_w_cmd_mode : DINT (Description := "an enumeration for valve control: 0 - cmd valve closed, 1 - cmd valve open, 2 - cmd valve in sp mode w/ mfc_0_w_mdot_sp as the sp",
+		            RADIX := Decimal) := 0;
+		mfc_3_N2_w_mdot_sp : REAL (Description := "mass flow sp as a % of full range: 0 - 100 in 0.01 increments",
+		            RADIX := Float) := 0.00000000e+000;
 		MT_0_R_DATA_OK : BOOL (RADIX := Decimal) := 1;
 		MT_0_R_DATA_STABLE : BOOL (RADIX := Decimal) := 0;
 		MT_0_R_PV : REAL (RADIX := Float) := -6.02299988e-001;
