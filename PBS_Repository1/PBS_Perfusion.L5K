@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Mon Aug 21 19:28:50 2023
+  Exported  := Thu Aug 24 13:49:00 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -391,6 +391,40 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                     Unicast := Yes)
 					InputData  := [[0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 					OutputData  := [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+			END_CONNECTION
+
+	END_MODULE
+
+	MODULE Spent_Media_Harvest_Scale (Description := "Hardy",
+	                                  Parent := "Local",
+	                                  ParentModPortId := 3,
+	                                  CatalogNumber := "Hardy 6500 Series",
+	                                  Vendor := 258,
+	                                  ProductType := 43,
+	                                  ProductCode := 2,
+	                                  Major := 2,
+	                                  Minor := 35,
+	                                  PortLabel := "A1",
+	                                  NodeAddress := "192.168.1.34",
+	                                  Mode := 2#0000_0000_0000_0000,
+	                                  CompatibleModule := 1,
+	                                  KeyMask := 2#0000_0000_0001_1111,
+	                                  SafetyEnabled := 0)
+			ExtendedProp := [[[___<public><PL>02<Version Name=$Q1.3$Q/></PL><Vendor>Hardy Process Solutions</Vendor><CatNum>Hardy 6500 Series</CatNum></public>___]]]
+			ConfigData  := [96,4,0,1,0,1.00000000e+001,2,9.99999000e+005,4,1.00000000e+001,0.00000000e+000,1.00115895e+000
+		,1.00000000e+003,3,10,0,0.00000000e+000,1,1.00000000e+001,3,0,0,0,0,0.00000000e+000];
+			CONNECTION _200424802C702C64 (Rate := 10000,
+			                              InputSize := 52,
+			                              OutputSize := 48,
+			                              EventID := 0,
+			                              Priority := Scheduled,
+			                              InputConnectionType := Unicast,
+			                              InputProductionTrigger := Cyclic,
+			                              ConnectionPath := "20 04 24 80 2c 70 2c 64",
+			                              InputTagSuffix := "I",
+			                              OutputTagSuffix := "O")
+					InputData (COMMENT.COMMAND_STATUS := "Status Register$N0: Command Success$N1: Motion Error$N2: A/D Error$N3: Out of Tolerance Error") := [2,0,0,0,0,0,0.00000000e+000,0.00000000e+000,0,0,0,0,0];
+					OutputData (COMMENT.COMMAND := "Write #1 to ZERO the gross weight. Write #2 to TARE net weight") := [2,0,0,0,0,0,0,0,0,0,0,0];
 			END_CONNECTION
 
 	END_MODULE
@@ -3381,6 +3415,88 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: EQU(errorInteger,90)OTE(LoLo);
 				N: EQU(errorInteger,100)OTE(HiHi);
 				N: EQU(errorInteger,200)OTE(Failure);
+		END_ROUTINE
+
+	END_ADD_ON_INSTRUCTION_DEFINITION
+
+	ADD_ON_INSTRUCTION_DEFINITION pH_Cal (Description := "Calibration Routine for pH Probes",
+	                                      Revision := "1.0",
+	                                      ExecutePrescan := No,
+	                                      ExecutePostscan := No,
+	                                      ExecuteEnableInFalse := No,
+	                                      CreatedDate := "2023-08-22T18:33:45.100Z",
+	                                      CreatedBy := "DESKTOP-1FEFFUM\Rockwell24",
+	                                      EditedDate := "2023-08-24T16:46:55.058Z",
+	                                      EditedBy := "DESKTOP-1FEFFUM\Rockwell24",
+	                                      SoftwareRevision := "v32.03")
+		PARAMETERS
+			EnableIn : BOOL (Description := "Enable Input - System Defined Parameter",
+			                    Usage := Input,
+			                    RADIX := Decimal,
+			                    Required := No,
+			                    Visible := No,
+			                    ExternalAccess := Read Only);
+			EnableOut : BOOL (Description := "Enable Output - System Defined Parameter",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := No,
+			                     ExternalAccess := Read Only);
+		END_PARAMETERS
+
+		LOCAL_TAGS
+			Start : BOOL (RADIX := Decimal,
+			                ExternalAccess := None,
+			                DefaultData := 0);
+			State : DINT (RADIX := Decimal,
+			                ExternalAccess := None,
+			                DefaultData := 0);
+			Msg_Clean_Probe_1 : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Msg_Place_Probe_1 : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Place_Probe_1_ACK : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Msg_Clean_Probe_2 : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Clean_Probe_2_ACK : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Msg_Place_Probe_2 : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+			Place_Probe_2_ACK : BOOL (RADIX := Decimal,
+			                            ExternalAccess := None,
+			                            DefaultData := 0);
+		END_LOCAL_TAGS
+
+		ROUTINE Logic 
+				N: ;
+				N: XIC(Start)MOV(10,State);
+				RC: "First State: Prompt Operator to Remove and Clean Sensor Message. Acknowledge to Progress.";
+				N: EQU(State,10)[OTE(Msg_Clean_Probe_1) ,MOV(20,State) ];
+				RC: "Second State: Prompt Operator to Place Probe in Standard1. Acknowledge to Progress.";
+				N: EQU(State,20)[OTE(Msg_Place_Probe_1) ,XIC(Place_Probe_1_ACK) MOV(30,State) ];
+				RC: "Third Step: Sample and Check for Stability. If Stable, Store Value and Progress. If Unstable, Error and End Cal";
+				N: EQU(State,30)[XIC(?) MOV(40,State) ,XIO(?) MOV(100,State) ];
+				RC: "Fourth Step: Prompt Operator to Remove Probe from Standard1 and Rinse w/ DI Water";
+				N: EQU(State,40)[OTE(Msg_Clean_Probe_2) ,XIC(Clean_Probe_2_ACK) MOV(50,State) ];
+				RC: "Fifth State: Prompt Operator to Place Probe in Standard2. Acknowledge to Progress.";
+				N: EQU(State,50)[OTE(Msg_Place_Probe_2) ,XIC(Place_Probe_2_ACK) MOV(60,State) ];
+				RC: "Sixth Step: Sample and Check for Stability. If Stable, Store Value and Progress. If Unstable, Error and End Cal";
+				N: EQU(State,60)[XIC(?) MOV(70,State) ,XIO(?) MOV(100,State) ];
+				RC: "Seventh Step: Calculate Offset or Slope. (MT probe might be smart enough to do this one its own)";
+				N: EQU(State,70)MOV(80,State);
+				RC: "Eighth Step: Remove, Rinse, and Return Probe to System. Acknowledge to Progress";
+				N: EQU(State,80)[OTE(Msg_Clean_Probe_3) ,XIC(Clean_Probe_3_ACK) MOV(90,State) ];
+				RC: "Ninth Step: Final state. Hold Done output until the next execution of this AOI instance.";
+				N: EQU(State,90)OTE(Done);
+				RC: "Display Error Message and End Calibration";
+				N: EQU(State,100)OTE(Error);
 		END_ROUTINE
 
 	END_ADD_ON_INSTRUCTION_DEFINITION
@@ -22511,6 +22627,14 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0,0],[0,0,0],[-1610458977,0,0],[13,'Input Failure$00$00$00$00$00$00$00'],[6,'RA-BAS$00$00$00$00$00$00'
 				],[6,'P_Gate$00$00$00$00$00$00$00$00$00$00'],[16,'Gating Condition$00$00$00$00'],0],[6,'RA-BAS$00$00$00$00$00$00'
 				],[6,'area01$00$00'],2,1,0.00000000e+000];
+		WT703_AD_Error : BOOL (RADIX := Decimal) := 0;
+		WT703_Motion_Error : BOOL (RADIX := Decimal) := 0;
+		WT703_Out_Tolerance : BOOL (RADIX := Decimal) := 0;
+		WT703_Tare : BOOL (RADIX := Decimal) := 0;
+		WT703_Zero : BOOL (RADIX := Decimal) := 0;
+		WT703_Zero_In_Progress : BOOL (RADIX := Decimal) := 0;
+		WT703_Zero_Success : BOOL (RADIX := Decimal) := 0;
+		WT703_Zero_Timer : TIMER  := [0,5000,5000];
 	END_TAG
 
 	PROGRAM CM_PBS (MAIN := "Main",
@@ -22550,7 +22674,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: P_AInAdv(LIT801);
 				N: P_AInAdv(WT701);
 				N: P_AInAdv(WT702);
-				N: P_AInAdv(WT703);
+				N: [P_AInAdv(WT703) ,AFI() OTE(WT703.Inp_PVBad) ,AFI() OTE(WT703.Inp_PVUncertain) ,MOV(Spent_Media_Harvest_Scale:I.Net_Weight,WT703.Inp_PV) ,XIC(WT703_Zero) MOV(1,Spent_Media_Harvest_Scale:O.Command) ,XIC(WT703_Tare) MOV(2,Spent_Media_Harvest_Scale:O.Command) ,EQU(Spent_Media_Harvest_Scale:I.Command_Status,65535) OTE(WT703_Zero_In_Progress) ,EQU(Spent_Media_Harvest_Scale:I.Command_Status,0) TON(WT703_Zero_Timer,?,?) XIO(WT703_Zero_Timer.DN) OTE(WT703_Zero_Success) ,EQU(Spent_Media_Harvest_Scale:I.Command_Status,1) TON(WT703_Zero_Timer,?,?) XIO(WT703_Zero_Timer.DN) OTE(WT703_Motion_Error) ,EQU(Spent_Media_Harvest_Scale:I.Command_Status,2) TON(WT703_Zero_Timer,?,?) XIO(WT703_Zero_Timer.DN) OTE(WT703_AD_Error) ,EQU(Spent_Media_Harvest_Scale:I.Command_Status,3) TON(WT703_Zero_Timer,?,?) XIO(WT703_Zero_Timer.DN) OTE(WT703_Out_Tolerance) ];
 				N: P_AInAdv(AIC703);
 		END_ROUTINE
 
