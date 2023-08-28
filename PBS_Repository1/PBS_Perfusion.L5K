@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Fri Aug 25 15:11:58 2023
+  Exported  := Mon Aug 28 16:32:21 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -307,7 +307,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
-			                     InputCxnPoint := 10,
+			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
 			                     OutputSize := 64,
@@ -345,7 +345,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
-			                     InputCxnPoint := 10,
+			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
 			                     OutputSize := 64,
@@ -383,7 +383,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
-			                     InputCxnPoint := 10,
+			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
 			                     OutputSize := 64,
@@ -20964,6 +20964,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				],[6,'RA-BAS$00$00$00$00$00$00'],[6,'P_Gate$00$00$00$00$00$00$00$00$00$00'],[16,'Gating Condition$00$00$00$00'
 				],0],[6,'RA-BAS$00$00$00$00$00$00'],[6,'area01$00$00'],0,0,0.00000000e+000];
 		AirManualSP : REAL (RADIX := Float) := 0.00000000e+000;
+		AirManualSP_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		AirPercentOut : REAL (RADIX := Float) := 9.49999988e-001;
 		AirProgOper : BOOL (RADIX := Decimal) := 1;
 		AT701 : P_AInAdv (Description := "DO Transmitter") := [294915,0.00000000e+000,0,0,2,0.00000000e+000,1.00000000e+002,0.00000000e+000,1.00000000e+002
@@ -21132,8 +21133,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		CO2CVMax : REAL (RADIX := Float) := 1.00000000e+002;
 		CO2CVMin : REAL (RADIX := Float) := 0.00000000e+000;
 		CO2EUMax : REAL (RADIX := Float) := 8.33333358e-002;
+		CO2EUMax_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		CO2EUMin : REAL (RADIX := Float) := 0.00000000e+000;
+		CO2EUMin_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		CO2ManualSP : REAL (RADIX := Float) := 5.00000000e-002;
+		CO2ManualSP_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		CO2MaxCalc : REAL (RADIX := Float) := 8.33333358e-002;
 		CO2PercentOut : REAL (RADIX := Float) := 5.00000000e-002;
 		CO2ProgOper : BOOL (RADIX := Decimal) := 1;
@@ -21675,8 +21679,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		N2CVMax : REAL (RADIX := Float) := -5.00000000e+000;
 		N2CVMin : REAL (RADIX := Float) := -1.00000000e+002;
 		N2EUMax : REAL (RADIX := Float) := 0.00000000e+000;
+		N2EUMax_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		N2EUMin : REAL (RADIX := Float) := 3.33333343e-001;
+		N2EUMin_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		N2ManualSP : REAL (RADIX := Float) := 3.33333343e-001;
+		N2ManualSP_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		N2MaxCalc : REAL (RADIX := Float) := 3.33333343e-001;
 		N2PercentOut : REAL (RADIX := Float) := 0.00000000e+000;
 		N2ProgOper : BOOL (RADIX := Decimal) := 0;
@@ -21700,8 +21707,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		O2CVMax : REAL (RADIX := Float) := 1.00000000e+002;
 		O2CVMin : REAL (RADIX := Float) := 5.00000000e+000;
 		O2EUMax : REAL (RADIX := Float) := 3.33333343e-001;
+		O2EUMax_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		O2EUMin : REAL (RADIX := Float) := 0.00000000e+000;
+		O2EUMin_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		O2ManualSP : REAL (RADIX := Float) := 3.33333343e-001;
+		O2ManualSP_Inp : REAL (RADIX := Float) := 0.00000000e+000;
 		O2MaxCalc : REAL (RADIX := Float) := 3.33333343e-001;
 		O2PercentOut : REAL (RADIX := Float) := 0.00000000e+000;
 		O2ProgOper : BOOL (RADIX := Decimal) := 0;
@@ -23282,7 +23292,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)ONS(ONS[0].0)OTL(P104.PCmd_Prog)OTL(P103.PCmd_Prog)OTL(P103.PCmd_StartFwd)OTL(P104.PCmd_StartFwd);
 				N: CPT(MCV_HiAdjTimer.PRE,MCV_HiAdjTimeSP*1000)CPT(BRX_HiAdjTimer.PRE,BRX_HiadjTimeSP*1000)CPT(BRX_LoAdjTimer.PRE,BRX_LoadjTimeSP*1000);
 				N: XIC(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(P104.Sts_Stopped) OTU(P104.PCmd_StartFwd) OTL(P104.PCmd_Stop) ,XIO(P103.Sts_Stopped) OTU(P103.PCmd_StartFwd) OTL(P103.PCmd_Stop) ,XIC(P103.Sts_Stopped) MOV(0,P103.PSet_SpeedRef) OTU(P103.PCmd_Stop) ,XIC(P104.Sts_Stopped) MOV(0,P104.PSet_SpeedRef) OTU(P104.PCmd_Stop) ];
-				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(CondMed_AdjustInProgress) CMP(WT702.Val<MCV_HiSP) CMP(BRX_LoSP<LIT801.Val) CMP(LIT801.Val<BRX_HiSP) MOV(ConditionedMedia_Scaler.Out,P104.PSet_SpeedRef) MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) ,XIC(MCV_HiAdjEnable) XIO(CondMed_AdjustInProgress) LES(MCV_HiSP,WT702.Val) OTL(MCV_HiAdj) OTL(CondMed_AdjustInProgress) ,XIC(BRX_HiAdjEnable) XIO(CondMed_AdjustInProgress) CMP(LIT801.Val>BRX_HiSP) OTL(BRX_HiAdj) OTL(CondMed_AdjustInProgress) ,XIC(BRX_LoAdjEnable) XIO(CondMed_AdjustInProgress) LES(LIT801.Val,BRX_LoSP) OTL(BRX_LoAdj) OTL(CondMed_AdjustInProgress) ,XIC(MCV_HiAdj) XIC(MCV_HiAdj_Repeat) OTU(MCV_HiAdj) OTU(CondMed_AdjustInProgress) ,XIC(MCV_HiAdj) [MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out*Recirc_LoSP1) ,TON(MCV_HiAdjTimer,?,?) ,XIC(MCV_HiAdjTimer.DN) OTL(MCV_HiAdjTimer_Done) ] ,XIC(BRX_HiAdj) XIC(BRX_HiAdj_Repeat) OTU(BRX_HiAdj) OTU(CondMed_AdjustInProgress) ,XIC(BRX_HiAdj) [CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1<P104.Cfg_MaxSpdRef) MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out*Recirc_HiSP1) ,CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1>P104.Cfg_MaxSpdRef) CPT(P103.PSet_SpeedRef,P103.Cfg_MaxSpdRef/Recirc_HiSP1) CPT(P104.PSet_SpeedRef,P104.Cfg_MaxSpdRef) ,TON(BRX_HiAdjTimer,?,?) ,XIC(BRX_HiAdjTimer.DN) OTL(BRX_HiAdjTimer_Done) ] ,XIC(BRX_LoAdj) XIC(BRX_LoAdj_Repeat) OTU(CondMed_AdjustInProgress) OTU(BRX_LoAdj) ,XIC(BRX_LoAdj) [MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out*Recirc_LoSP2) ,TON(BRX_LoAdjTimer,?,?) ,XIC(BRX_LoAdjTimer.DN) OTL(BRX_LoAdjTimer_Done) ] ];
+				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(CondMed_AdjustInProgress) CMP(WT702.Val<MCV_HiSP) CMP(BRX_LoSP<LIT801.Val) CMP(LIT801.Val<BRX_HiSP) MOV(ConditionedMedia_Scaler.Out,P104.PSet_SpeedRef) MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) ,XIC(MCV_HiAdjEnable) XIO(CondMed_AdjustInProgress) LES(MCV_HiSP,WT702.Val) OTL(MCV_HiAdj) OTL(CondMed_AdjustInProgress) ,XIC(BRX_HiAdjEnable) XIO(CondMed_AdjustInProgress) CMP(LIT801.Val>BRX_HiSP) OTL(BRX_HiAdj) OTL(CondMed_AdjustInProgress) ,XIC(BRX_LoAdjEnable) XIO(CondMed_AdjustInProgress) LES(LIT801.Val,BRX_LoSP) OTL(BRX_LoAdj) OTL(CondMed_AdjustInProgress) ,XIC(MCV_HiAdj) XIC(MCV_HiAdj_Repeat) OTU(MCV_HiAdj) OTU(CondMed_AdjustInProgress) ,XIC(MCV_HiAdj) [MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP1 / 100 )) ,TON(MCV_HiAdjTimer,?,?) ,XIC(MCV_HiAdjTimer.DN) OTL(MCV_HiAdjTimer_Done) ] ,XIC(BRX_HiAdj) XIC(BRX_HiAdj_Repeat) OTU(BRX_HiAdj) OTU(CondMed_AdjustInProgress) ,XIC(BRX_HiAdj) [CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1<P104.Cfg_MaxSpdRef) MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_HiSP1 / 100 )) ,CMP(ConditionedMedia_Scaler.Out* ( Recirc_HiSP1 / 100 ) > P104.Cfg_MaxSpdRef) CPT(P103.PSet_SpeedRef,P103.Cfg_MaxSpdRef / ( Recirc_HiSP1 / 100 )) CPT(P104.PSet_SpeedRef,P104.Cfg_MaxSpdRef) ,TON(BRX_HiAdjTimer,?,?) ,XIC(BRX_HiAdjTimer.DN) OTL(BRX_HiAdjTimer_Done) ] ,XIC(BRX_LoAdj) XIC(BRX_LoAdj_Repeat) OTU(CondMed_AdjustInProgress) OTU(BRX_LoAdj) ,XIC(BRX_LoAdj) [MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP2 / 100 )) ,TON(BRX_LoAdjTimer,?,?) ,XIC(BRX_LoAdjTimer.DN) OTL(BRX_LoAdjTimer_Done) ] ];
 				RC: "If the vessel PV is still less than the MCV Hi Adjust Weight setpoint after dosing, then the system waits 10 seconds for stabilization before correcting again.";
 				N: XIC(MCV_HiAdjTimer_Done)[TON(MCV_HiAdj_Stability_Timer,?,?) ,LES(WT702.Val,MCV_HiSP) XIC(MCV_HiAdj_Stability_Timer.DN) [OTE(MCV_HiAdj_Repeat) ,OTU(MCV_HiAdjTimer_Done) ] ];
 				RC: "If the bioreactor PV is still greater than the BRX Hi Adjust Level setpoint after dosing, then the system waits 10 seconds for stabilization before correcting again.";
@@ -23315,9 +23325,9 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		ROUTINE Media_Fill 
 				N: XIO(MediaFill_ON)XIO(P102_Cal.Cal_Running)XIO(MCV_InitialFillRunning)[XIO(P102.Sts_Stopped) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,XIC(P102.Sts_Stopped) MOV(0,P102.PSet_SpeedRef) OTU(P102.PCmd_Stop) ];
 				N: CPT(MCV_LoAdjTimer.PRE,MCV_LoTimerSP*1000);
-				N: XIC(MediaFill_ON)XIO(P102_Cal.Cal_Running)XIO(MCV_InitialFillRunning)[XIO(MediaAdj_InProgress) LES(WT702.Val,MCV_LoSP) OTL(P102.PCmd_Prog) OTL(MediaAdj_InProgress) ,XIC(MediaAdj_InProgress) XIC(MCV_LoAdj_Repeat) OTU(MediaAdj_InProgress) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,XIC(MediaAdj_InProgress) [MOV(MediaLoSpeed,P102.PSet_SpeedRef) OTL(P102.PCmd_StartFwd) ,TON(MCV_LoAdjTimer,?,?) ,XIC(MCV_LoAdjTimer.DN) OTL(MCV_LoAdjTimer_Done) ] ];
+				N: XIC(MediaFill_ON)XIO(P102_Cal.Cal_Running)XIO(MCV_InitialFillRunning)[XIO(MediaAdj_InProgress) LES(WT702.Val,MCV_LoSP) OTL(P102.PCmd_Prog) OTL(MediaAdj_InProgress) ,XIC(MediaAdj_InProgress) XIC(MCV_LoAdj_Repeat) OTU(MediaAdj_InProgress) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,XIC(MediaAdj_InProgress) [MOV(MediaLoSpeed,P102.PSet_SpeedRef) OTL(P102.PCmd_StartFwd) ,TON(MCV_LoAdjTimer,?,?) ,XIC(MCV_LoAdjTimer.DN) OTE(MCV_LoAdjTimer_Done) ] ];
 				RC: "If the bioreactor PV is still less than the BRX Lo Adjust Level setpoint after dosing, then the system waits 10 seconds for stabilization before correcting again.";
-				N: XIC(MCV_LoAdjTimer_Done)[TON(MCV_LoAdj_Stability_Timer,?,?) ,LES(WT702.Val,MCV_LoSP) XIC(MCV_LoAdj_Stability_Timer.DN) [OTE(MCV_LoAdj_Repeat) ,OTU(MCV_LoAdjTimer_Done) ] ];
+				N: XIC(MCV_LoAdjTimer_Done)[TON(MCV_LoAdj_Stability_Timer,?,?) ,LES(WT702.Val,MCV_LoSP) XIC(MCV_LoAdj_Stability_Timer.DN) OTE(MCV_LoAdj_Repeat) ];
 				N: XIC(MCV_InitialFill)XIO(MediaAdj_InProgress)XIO(MCV_InitialFillRunning)OTL(MCV_InitialFillRunning);
 				N: XIC(MCV_InitialFillRunning)OTL(P102.PCmd_Prog)[MOV(MCV_InitialFillSpeed,P102.PSet_SpeedRef) OTL(P102.PCmd_StartFwd) ,GEQ(WT702.Val,MCV_FillWeight) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) OTU(MCV_InitialFillRunning) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_InitialFill)OTU(MCV_InitialFillRunning)OTU(MediaFill_ON);
@@ -23508,8 +23518,9 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: AFI()XIC(AirProgOper)CMP(( O2PercentOut + CO2PercentOut + N2PercentOut + AirManualSP) > 1)CPT(AirPercentOut,AirManualSP-( N2PercentOut + CO2PercentOut + O2PercentOut + AirManualSP - 1));
 				N: XIC(GasControl_ON)MUL(N2PercentOut,TotalFlowSP,FIC140.PSet_CV)MUL(CO2PercentOut,TotalFlowSP,FIC130.PSet_CV)MUL(AirPercentOut,TotalFlowSP,FIC110.PSet_CV)MUL(O2PercentOut,TotalFlowSP,FIC120.PSet_CV);
 				N: XIO(GasControl_ON)MUL(N2PercentOut,0,FIC140.PSet_CV)MUL(CO2PercentOut,0,FIC130.PSet_CV)MUL(AirPercentOut,0,FIC110.PSet_CV)MUL(O2PercentOut,0,FIC120.PSet_CV);
-				N: [GRT(O2EUMax,O2MaxCalc) MOV(O2MaxCalc,O2EUMax) ,GRT(N2EUMin,N2MaxCalc) MOV(N2MaxCalc,N2EUMin) ,GRT(CO2EUMax,CO2MaxCalc) MOV(CO2MaxCalc,CO2EUMax) ];
-				N: [GRT(CO2ManualSP,CO2MaxCalc) MOV(CO2MaxCalc,CO2ManualSP) ,GRT(O2ManualSP,O2MaxCalc) MOV(O2MaxCalc,O2ManualSP) ,GRT(N2ManualSP,N2MaxCalc) MOV(N2MaxCalc,N2ManualSP) ,GRT(AirManualSP,CCAMaxCalc) MOV(CCAMaxCalc,AirManualSP) ];
+				N: [DIV(O2EUMax_Inp,100,O2EUMax) GRT(O2EUMax,O2MaxCalc) MOV(O2MaxCalc,O2EUMax) ,DIV(N2EUMax_Inp,100,N2EUMax) GRT(N2EUMax,N2MaxCalc) MOV(N2MaxCalc,N2EUMax) ,DIV(CO2EUMax_Inp,100,CO2EUMax) GRT(CO2EUMax,CO2MaxCalc) MOV(CO2MaxCalc,CO2EUMax) ];
+				N: [DIV(O2EUMin_Inp,100,O2EUMin) ,DIV(N2EUMin_Inp,100,N2EUMin) ,DIV(CO2EUMin_Inp,100,CO2EUMin) ];
+				N: [DIV(CO2ManualSP_Inp,100,CO2ManualSP) GRT(CO2ManualSP,CO2MaxCalc) MOV(CO2MaxCalc,CO2ManualSP) ,DIV(O2ManualSP_Inp,100,O2ManualSP) GRT(O2ManualSP,O2MaxCalc) MOV(O2MaxCalc,O2ManualSP) ,DIV(N2ManualSP_Inp,100,N2ManualSP) GRT(N2ManualSP,N2MaxCalc) MOV(N2MaxCalc,N2ManualSP) ,DIV(AirManualSP_Inp,100,AirManualSP) GRT(AirManualSP,CCAMaxCalc) MOV(CCAMaxCalc,AirManualSP) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTU(GasControl_ON);
 		END_ROUTINE
 
