@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Wed Aug 30 13:33:03 2023
+  Exported  := Wed Aug 30 18:26:24 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21117,6 +21117,10 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		BRX_LoAdjTimer_Done : BOOL (RADIX := Decimal) := 0;
 		BRX_LoadjTimeSP : REAL (RADIX := Float) := 5.00000000e+000;
 		BRX_LoAdj_Assess1 : BOOL (RADIX := Decimal) := 0;
+		BRX_LoAdj_Assess2 : BOOL (RADIX := Decimal) := 0;
+		BRX_LoAdj_Buffer : BOOL (RADIX := Decimal) := 0;
+		BRX_LoAdj_Idle : BOOL (RADIX := Decimal) := 0;
+		BRX_LoAdj_PumpAdj : BOOL (RADIX := Decimal) := 0;
 		BRX_LoAdj_Repeat : BOOL (RADIX := Decimal) := 0;
 		BRX_LoAdj_Reset : BOOL (RADIX := Decimal) := 0;
 		BRX_LoAdj_Stability_Timer : TIMER  := [4085931,10000,0];
@@ -21170,6 +21174,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		conditionedMediaONS2 : BOOL (RADIX := Decimal) := 0;
 		conditionedMedia_auto : BOOL (RADIX := Decimal) := 1;
 		ConditionedMedia_Initialize : BOOL (RADIX := Decimal) := 1;
+		ConditionedMedia_NoScale_Run : BOOL (RADIX := Decimal) := 0;
 		ConditionedMedia_PID : PID_ENHANCED (Description := "DO rich media addition pump") := [1,5251080,1.00000000e+001,3.00000000e+002,0.00000000e+000,0.00000000e+000,8.00000000e+001
 				,0.00000000e+000,3.00000000e+002,0.00000000e+000,1.00000000e+000,1.00000000e+000,1.00000000e+000
 				,1.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000
@@ -21614,6 +21619,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		MCV_InitialFill : BOOL (RADIX := Decimal) := 0;
 		MCV_InitialFillRunning : BOOL (RADIX := Decimal) := 0;
 		MCV_InitialFillSpeed : REAL (RADIX := Float) := 1.00000000e+002;
+		MCV_InitialFill_Done : BOOL (RADIX := Decimal) := 0;
 		MCV_LoAdjTimer : TIMER  := [-1609840817,20000,0];
 		MCV_LoAdjTimer_Done : BOOL (RADIX := Decimal) := 1;
 		MCV_LoAdj_Assess1 : BOOL (RADIX := Decimal) := 0;
@@ -23316,16 +23322,14 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_FBD_ROUTINE
 
 		ROUTINE Conditioned_Addition_Control 
-				RC: "When Conditioned Media PID is ON and Pump Cals are not runnning, put the pumps in program and start them";
-				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)ONS(ONS[0].0)OTL(P104.PCmd_Prog)OTL(P103.PCmd_Prog)OTL(P103.PCmd_StartFwd)OTL(P104.PCmd_StartFwd);
+				N: XIC(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(P104.Sts_Stopped) [OTU(P104.PCmd_StartFwd) ,OTL(P104.PCmd_Stop) ] ,XIO(P103.Sts_Stopped) [OTU(P103.PCmd_StartFwd) ,OTL(P103.PCmd_Stop) ] ,XIC(P103.Sts_Stopped) [MOV(0,P103.PSet_SpeedRef) ,OTU(P103.PCmd_Stop) ] ,XIC(P104.Sts_Stopped) [MOV(0,P104.PSet_SpeedRef) ,OTU(P104.PCmd_Stop) ] ];
 				RC: "Scales user input (s --> ms) and moves to relevant timer";
 				N: CPT(MCV_HiAdjTimer.PRE,MCV_HiAdjTimeSP * 1000)CPT(BRX_HiAdjTimer.PRE,BRX_HiadjTimeSP * 1000)CPT(BRX_LoAdjTimer.PRE,BRX_LoadjTimeSP * 1000);
-				RC: "When Conditioned Media PID is OFF and pumps are not being cal$'d, stop pumps and set pump speed to 0";
-				N: XIC(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(P104.Sts_Stopped) OTU(P104.PCmd_StartFwd) OTL(P104.PCmd_Stop) ,XIO(P103.Sts_Stopped) OTU(P103.PCmd_StartFwd) OTL(P103.PCmd_Stop) ,XIC(P103.Sts_Stopped) MOV(0,P103.PSet_SpeedRef) OTU(P103.PCmd_Stop) ,XIC(P104.Sts_Stopped) MOV(0,P104.PSet_SpeedRef) OTU(P104.PCmd_Stop) ];
 				RC: "Any State above 10 means Active Media Adjustment";
 				N: [GRT(MCV_HiAdj_State,10) ,GRT(BRX_HiAdj_State,10) ,GRT(BRX_LoAdj_State,10) ]OTE(CondMed_AdjustInProgress);
-				RC: "When the Media and BRX Vessel Values are withing the Adjustment SP, then the pumps will be driven by the PID.";
-				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)XIO(CondMed_AdjustInProgress)LES(WT702.Val,MCV_HiSP)GRT(LIT801.Val,BRX_LoSP)LES(LIT801.Val,BRX_HiSP)MOV(ConditionedMedia_Scaler.Out,P104.PSet_SpeedRef)MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef);
+				RC: "When the Media and BRX Vessel Values are withing the Adjustment SP, then the pumps will be driven by the PID.$N"
+				    "The GRT and EQU rungs are to make the grahics work. Probably a better way to do that system wide, instead of here fot only this process.";
+				N: XIO(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)XIO(CondMed_AdjustInProgress)LES(WT702.Val,MCV_HiSP)GRT(LIT801.Val,BRX_LoSP)LES(LIT801.Val,BRX_HiSP)[[OTE(ConditionedMedia_NoScale_Run) ,MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) ,MOV(ConditionedMedia_Scaler.Out,P104.PSet_SpeedRef) ] ,GRT(P103.PSet_SpeedRef,0) [OTL(P103.PCmd_Prog) ,OTU(P103.PCmd_Stop) ,OTL(P103.PCmd_StartFwd) ] ,GRT(P104.PSet_SpeedRef,0) [OTL(P104.PCmd_Prog) ,OTU(P104.PCmd_Stop) ,OTL(P104.PCmd_StartFwd) ] ,EQU(P103.PSet_SpeedRef,0) OTL(P103.PCmd_Stop) ,EQU(P104.PSet_SpeedRef,0) OTL(P104.PCmd_Stop) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTL(ConditionedMedia_Initialize);
 		END_ROUTINE
 
@@ -23353,8 +23357,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_ROUTINE
 
 		ROUTINE Media_Fill 
-				RC: "When Media FIll is OFF, Initial Fill is not running, and pumps are not being cal$'d, stop pumps and set pump speed to 0";
-				N: XIO(MediaFill_ON)XIO(P102_Cal.Cal_Running)XIO(MCV_InitialFillRunning)[XIO(P102.Sts_Stopped) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,XIC(P102.Sts_Stopped) MOV(0,P102.PSet_SpeedRef) OTU(P102.PCmd_Stop) ];
+				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_InitialFill)OTU(MediaFill_ON);
 				RC: "Scale user input of time ( s --> ms) and move to timer";
 				N: CPT(MCV_LoAdjTimer.PRE,MCV_LoTimerSP*1000);
 				RC: "BEGIN STATE MACHINE$N"
@@ -23364,38 +23367,44 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "Turn OFF State Machine On Start-Up$N"
 				    "Turn OFF State Machine if PID OFF$N"
 				    "Turn OFF State Machine if Cal is Running";
-				N: [XIC(MCV_LoAdj_Reset) ,XIO(MediaFill_ON) ,XIC(s:fs) ,XIC(MCV_InitialFillRunning) ,XIC(P102_Cal.Cal_Running) ][MOV(0,MCV_LoAdj_State) ,OTU(MCV_LoAdj_Reset) ,OTU(MediaFill_ON) ];
+				N: [XIC(MCV_LoAdj_Reset) ,XIO(MediaFill_ON) ,XIC(s:fs) ,XIC(MCV_InitialFill) ,XIC(P102_Cal.Cal_Running) ][MOV(0,MCV_LoAdj_State) ,OTU(MCV_LoAdj_Reset) ,OTU(MediaFill_ON) ];
 				RC: "State 0: State Machine OFF$N"
-				    "Toggle Start Bit to Move to State 10 and Enable State Machine";
-				N: EQU(MCV_LoAdj_State,0)[OTE(MCV_LoAdj_OFF) ,XIC(MediaFill_ON) MOV(10,MCV_LoAdj_State) ];
+				    "Turn OFF Pumps and Set Speed To Zero$N"
+				    "$N"
+				    "Toggle Start Bit to Move to State 10$N"
+				    "Enable State Machine$N"
+				    "Put Pump in Program Mode";
+				N: EQU(MCV_LoAdj_State,0)[OTE(MCV_LoAdj_OFF) ,ONS(ONS[0].20) XIO(P102.Sts_Stopped) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,ONS(ONS[0].21) XIC(P102.Sts_Stopped) MOV(0,P102.PSet_SpeedRef) OTU(P102.PCmd_Stop) ,XIC(MediaFill_ON) MOV(10,MCV_LoAdj_State) OTL(P102.PCmd_Prog) ];
 				RC: "State 10: Idle$N"
+				    "Stop Pump and Set Pump Speed to 0$N"
 				    "If the vessel weight PV exceeds the SP, move to State 20.";
-				N: EQU(MCV_LoAdj_State,10)[OTE(MCV_LoAdj_Idle) ,LES(WT702.Val,MCV_LoSP) MOV(20,MCV_LoAdj_State) ];
+				N: EQU(MCV_LoAdj_State,10)[OTE(MCV_LoAdj_Idle) ,OTU(P102.PCmd_StartFwd) MOV(0,P102.PSet_SpeedRef) OTL(P102.PCmd_Stop) ,LES(WT702.Val,MCV_LoSP) MOV(20,MCV_LoAdj_State) ];
 				RC: "State 20: Pump Speed Adjustment$N"
 				    "P-104 Output is set to P-103 PV multiplied by BRX Hi Adjust speed ratio for BRX_HiAdjTimer time.$N"
+				    "Run Pump$N"
 				    "Move to State 30 when timer is done.$N"
 				    "";
-				N: EQU(MCV_LoAdj_State,20)[OTE(MCV_LoAdj_PumpAdj) ,MOV(MediaLoSpeed,P102.PSet_SpeedRef) ,TON(MCV_LoAdjTimer,?,?) ,XIC(MCV_LoAdjTimer.DN) MOV(30,MCV_LoAdj_State) ];
+				N: EQU(MCV_LoAdj_State,20)[OTE(MCV_LoAdj_PumpAdj) ,MOV(MediaLoSpeed,P102.PSet_SpeedRef) ,OTU(P102.PCmd_Stop) OTL(P102.PCmd_StartFwd) ,TON(MCV_LoAdjTimer,?,?) ,XIC(MCV_LoAdjTimer.DN) MOV(30,MCV_LoAdj_State) ];
 				RC: "Step 30: Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured BRX Hi Adjust Weight go to State 50.$N"
 				    "If Vessel weight PV exceeds configured BRX Hi Adjust Weight go to State 40.";
-				N: EQU(MCV_LoAdj_State,30)[OTE(MCV_LoAdj_Assess1) ,GEQ(LIT801.Val,BRX_HiSP) MOV(50,MCV_LoAdj_State) ,LES(LIT801.Val,BRX_HiSP) MOV(40,MCV_LoAdj_State) ];
+				N: EQU(MCV_LoAdj_State,30)[OTE(MCV_LoAdj_Assess1) ,GEQ(WT702.Val,BRX_HiSP) MOV(50,MCV_LoAdj_State) ,LES(WT702.Val,BRX_HiSP) MOV(40,MCV_LoAdj_State) ];
 				RC: "Step 40: Buffer$N"
+				    "Stop Pump$N"
 				    "Wait 10 seconds for BRX level reading to stabilize, then proceed to State 50.";
-				N: EQU(MCV_LoAdj_State,40)[OTE(MCV_LoAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,TON(MCV_LoAdj_Stability_Timer,?,?) ,XIC(MCV_LoAdj_Stability_Timer.DN) MOV(50,MCV_LoAdj_State) ];
+				N: EQU(MCV_LoAdj_State,40)[OTE(MCV_LoAdj_Buffer) ,OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,TON(MCV_LoAdj_Stability_Timer,?,?) ,XIC(MCV_LoAdj_Stability_Timer.DN) MOV(50,MCV_LoAdj_State) ];
 				RC: "Step 50: Post Buffer Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured BRX Hi Adjust Weight go to State 10.$N"
 				    "If Vessel weight PV exceeds configured BRX Hi Adjust Weight go to State 20.$N"
 				    "-------------------------------------------------------------------------------------------------------------$N"
 				    "LAST RUNG OF STATE MACHINE";
-				N: EQU(MCV_LoAdj_State,50)[OTE(MCV_LoAdj_Assess2) ,GEQ(LIT801.Val,MCV_LoSP) MOV(10,MCV_LoAdj_State) ,LES(LIT801.Val,MCV_LoSP) MOV(20,MCV_LoAdj_State) ];
+				N: EQU(MCV_LoAdj_State,50)[OTE(MCV_LoAdj_Assess2) ,GEQ(WT702.Val,MCV_LoSP) MOV(10,MCV_LoAdj_State) ,LES(WT702.Val,MCV_LoSP) MOV(20,MCV_LoAdj_State) ];
 				RC: "Any State above 10 means Active Media Adjustment";
 				N: GRT(MCV_LoAdj_State,10)OTE(MediaAdj_InProgress);
-				RC: "Starts the MCV Initial Fill Process";
-				N: XIC(MCV_InitialFill)XIO(MediaAdj_InProgress)XIO(MCV_InitialFillRunning)OTL(MCV_InitialFillRunning);
-				RC: "Turn on P102 and set to MCV_InitialFillSpeed until MCV_FillWeight";
-				N: XIC(MCV_InitialFillRunning)OTL(P102.PCmd_Prog)[MOV(MCV_InitialFillSpeed,P102.PSet_SpeedRef) OTL(P102.PCmd_StartFwd) ,GEQ(WT702.Val,MCV_FillWeight) OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) OTU(MCV_InitialFillRunning) ];
-				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_InitialFill)OTU(MCV_InitialFillRunning)OTU(MediaFill_ON);
+				RC: "InItial Fill$N"
+				    "---------------------------------$N"
+				    "Turn on P102 and set to MCV_InitialFillSpeed until MCV_FillWeight";
+				N: XIC(MCV_InitialFill)XIO(MediaAdj_InProgress)[MOV(MCV_InitialFillSpeed,P102.PSet_SpeedRef) [OTE(MCV_InitialFillRunning) ,OTL(P102.PCmd_StartFwd) ] ,GEQ(WT702.Val,MCV_FillWeight) [OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,OTU(MCV_InitialFill) ,OTL(MCV_InitialFill_Done) ] ,XIC(MCV_InitialFillRunning) OTL(P102.PCmd_Prog) ];
 		END_ROUTINE
 
 		ROUTINE PBS_MFCs 
@@ -23454,7 +23463,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		ROUTINE SM_BRX_HiAdj 
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
-				N: AFI()XIC(EStop.Alm_TgtDisagree)OTE(test_BOOL);
+				N: XIC(EStop.Alm_TgtDisagree)OTU(BRX_HiAdjEnable);
 				RC: "Reset State Machine After Fault$N"
 				    "Turn OFF State Machine by Putting in State 0$N"
 				    "Turn OFF State Machine On Start-Up$N"
@@ -23463,7 +23472,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: [XIC(BRX_HiAdj_Reset) ,XIO(BRX_HiAdjEnable) ,XIC(s:fs) ,XIC(ConditionedMedia_Initialize) ,XIC(P103_Cal.Cal_Running) ,XIC(P104_Cal.Cal_Running) ][MOV(0,BRX_HiAdj_State) ,OTU(BRX_HiAdj_Reset) ,OTU(BRX_HiAdjEnable) ];
 				RC: "State 0: State Machine OFF$N"
 				    "Toggle Start Bit to Move to State 10 and Enable State Machine";
-				N: EQU(BRX_HiAdj_State,0)[OTE(BRX_HiAdj_OFF) ,XIC(BRX_HiAdjEnable) MOV(10,BRX_HiAdj_State) ];
+				N: EQU(BRX_HiAdj_State,0)[OTE(BRX_HiAdj_OFF) ,XIC(BRX_HiAdjEnable) MOV(10,BRX_HiAdj_State) [OTL(P103.PCmd_Prog) ,OTL(P104.PCmd_Prog) ] ];
 				RC: "State 10: Idle$N"
 				    "If the vessel weight PV exceeds the SP, move to State 20.";
 				N: EQU(BRX_HiAdj_State,10)[OTE(BRX_HiAdj_Idle) ,GRT(LIT801.Val,BRX_HiSP) MOV(20,BRX_HiAdj_State) ];
@@ -23478,7 +23487,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: EQU(BRX_HiAdj_State,30)[OTE(BRX_HiAdj_Assess1) ,LES(LIT801.Val,BRX_HiSP) MOV(10,BRX_HiAdj_State) ,GEQ(LIT801.Val,BRX_HiSP) MOV(40,BRX_HiAdj_State) ];
 				RC: "Step 40: Buffer$N"
 				    "Wait 10 seconds for BRX level reading to stabilize, then proceed to State 50.";
-				N: EQU(BRX_HiAdj_State,40)[OTE(MCV_HiAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,TON(BRX_HiAdj_Stability_Timer,?,?) ,XIC(BRX_HiAdj_Stability_Timer.DN) MOV(50,BRX_HiAdj_State) ];
+				N: EQU(BRX_HiAdj_State,40)[OTE(MCV_HiAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,OTU(P103.PCmd_StartFwd) OTL(P103.PCmd_Stop) ,OTU(P104.PCmd_StartFwd) OTL(P104.PCmd_Stop) ,TON(BRX_HiAdj_Stability_Timer,?,?) ,XIC(BRX_HiAdj_Stability_Timer.DN) MOV(50,BRX_HiAdj_State) ];
 				RC: "Step 50: Post Buffer Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured BRX Hi Adjust Weight go to State 10.$N"
 				    "If Vessel weight PV exceeds configured BRX Hi Adjust Weight go to State 20.";
@@ -23487,7 +23496,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		ROUTINE SM_BRX_LoAdj 
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
-				N: AFI()XIC(EStop.Alm_TgtDisagree)OTE(test_BOOL);
+				N: XIC(EStop.Alm_TgtDisagree)OTU(BRX_LoAdjEnable);
 				RC: "Reset State Machine After Fault$N"
 				    "Turn OFF State Machine by Putting in State 0$N"
 				    "Turn OFF State Machine On Start-Up$N"
@@ -23496,30 +23505,30 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: [XIC(BRX_LoAdj_Reset) ,XIO(BRX_LoAdjEnable) ,XIC(s:fs) ,XIC(ConditionedMedia_Initialize) ,XIC(P103_Cal.Cal_Running) ,XIC(P104_Cal.Cal_Running) ][MOV(0,BRX_LoAdj_State) ,OTU(BRX_LoAdj_Reset) ,OTU(BRX_LoAdjEnable) ];
 				RC: "State 0: State Machine OFF$N"
 				    "Toggle Start Bit to Move to State 10 and Enable State Machine";
-				N: EQU(BRX_LoAdj_State,0)[OTE(BRX_HLoAdj_OFF) ,XIC(BRX_LoAdjEnable) MOV(10,BRX_LoAdj_State) ];
+				N: EQU(BRX_LoAdj_State,0)[OTE(BRX_HLoAdj_OFF) ,XIC(BRX_LoAdjEnable) MOV(10,BRX_LoAdj_State) [OTL(P103.PCmd_Prog) ,OTL(P104.PCmd_Prog) ] ];
 				RC: "State 10: Idle$N"
 				    "If the vessel weight PV is less than the SP, move to State 20.";
-				N: EQU(BRX_LoAdj_State,10)[OTE(BRX_HiAdj_Idle) ,LES(LIT801.Val,BRX_LoSP) MOV(20,BRX_LoAdj_State) ];
+				N: EQU(BRX_LoAdj_State,10)[OTE(BRX_LoAdj_Idle) ,LES(LIT801.Val,BRX_LoSP) MOV(20,BRX_LoAdj_State) ];
 				RC: "State 20: Pump Speed Adjustment$N"
 				    "P-104 Output is set to P-103 PV multiplied by BRX LoAdjust speed ratio for BRX_LoAdjTimer time.$N"
 				    "Move to State 30 when timer is done.";
-				N: EQU(BRX_LoAdj_State,20)[OTE(BRX_HiAdj_PumpAdj) ,MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP2 / 100 )) ,TON(BRX_LoAdjTimer,?,?) ,XIC(BRX_LoAdjTimer.DN) MOV(30,BRX_LoAdj_State) ];
+				N: EQU(BRX_LoAdj_State,20)[OTE(BRX_LoAdj_PumpAdj) ,MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP2 / 100 )) ,TON(BRX_LoAdjTimer,?,?) ,XIC(BRX_LoAdjTimer.DN) MOV(30,BRX_LoAdj_State) ];
 				RC: "Step 30: Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured BRX Lo Adjust Weight go to State 40.$N"
 				    "If Vessel weight PV exceeds configured BRX LoAdjust Weight go to State 50.";
 				N: EQU(BRX_LoAdj_State,30)[OTE(BRX_LoAdj_Assess1) ,LES(LIT801.Val,BRX_LoSP) MOV(40,BRX_LoAdj_State) ,GEQ(LIT801.Val,BRX_LoSP) MOV(50,BRX_LoAdj_State) ];
 				RC: "Step 40: Buffer$N"
 				    "Wait 10 seconds for MCV weight reading to stabilize, then proceed to State 50.";
-				N: EQU(BRX_LoAdj_State,40)[OTE(MCV_LoAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,TON(BRX_LoAdj_Stability_Timer,?,?) ,XIC(BRX_LoAdj_Stability_Timer.DN) MOV(50,BRX_LoAdj_State) ];
+				N: EQU(BRX_LoAdj_State,40)[OTE(BRX_LoAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,OTU(P103.PCmd_StartFwd) OTL(P103.PCmd_Stop) ,OTU(P104.PCmd_StartFwd) OTL(P104.PCmd_Stop) ,TON(BRX_LoAdj_Stability_Timer,?,?) ,XIC(BRX_LoAdj_Stability_Timer.DN) MOV(50,BRX_LoAdj_State) ];
 				RC: "Step 50: Post Buffer Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured BRX Lo Adjust Weight go to State 20.$N"
 				    "If Vessel weight PV exceeds configured BRX Lo Adjust Weight go to State 10.";
-				N: EQU(BRX_LoAdj_State,50)[OTE(BRX_HiAdj_Assess2) ,GEQ(LIT801.Val,BRX_LoSP) MOV(10,BRX_LoAdj_State) ,LES(LIT801.Val,BRX_LoSP) MOV(20,BRX_LoAdj_State) ];
+				N: EQU(BRX_LoAdj_State,50)[OTE(BRX_LoAdj_Assess2) ,GEQ(LIT801.Val,BRX_LoSP) MOV(10,BRX_LoAdj_State) ,LES(LIT801.Val,BRX_LoSP) MOV(20,BRX_LoAdj_State) ];
 		END_ROUTINE
 
 		ROUTINE SM_MCV_HiAdj 
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
-				N: AFI()XIC(EStop.Alm_TgtDisagree)OTE(test_BOOL);
+				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_HiAdjEnable);
 				RC: "Reset State Machine After Fault$N"
 				    "Turn OFF State Machine by Putting in State 0$N"
 				    "Turn OFF State Machine On Start-Up$N"
@@ -23528,7 +23537,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: [XIC(MCV_HiAdj_Reset) ,XIO(MCV_HiAdjEnable) ,XIC(s:fs) ,XIC(ConditionedMedia_Initialize) ,XIC(P103_Cal.Cal_Running) ,XIC(P104_Cal.Cal_Running) ][MOV(0,MCV_HiAdj_State) ,OTU(MCV_HiAdj_Reset) ,OTU(MCV_HiAdjEnable) ];
 				RC: "State 0: State Machine OFF$N"
 				    "Toggle Start Bit to Move to State 10 and Enable State Machine";
-				N: EQU(MCV_HiAdj_State,0)[OTE(MCV_HiAdj_OFF) ,XIC(MCV_HiAdjEnable) MOV(10,MCV_HiAdj_State) ];
+				N: EQU(MCV_HiAdj_State,0)[OTE(MCV_HiAdj_OFF) ,XIC(MCV_HiAdjEnable) MOV(10,MCV_HiAdj_State) [OTL(P103.PCmd_Prog) ,OTL(P104.PCmd_Prog) ] ];
 				RC: "State 10: Idle$N"
 				    "If the vessel weight PV exceeds the SP, move to State 20.";
 				N: EQU(MCV_HiAdj_State,10)[OTE(MCV_HiAdj_Idle) ,GRT(WT702.Val,MCV_HiSP) MOV(20,MCV_HiAdj_State) ];
@@ -23536,14 +23545,14 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "P-104 Output is set to P-103 PV multiplied by MCV Hi Adjust speed ratio for MCV_HiAdjTimer time.$N"
 				    "Move to State 30 when timer is done.$N"
 				    "";
-				N: EQU(MCV_HiAdj_State,20)[OTE(MCV_HiAdj_PumpAdj) ,MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP1 / 100 )) ,TON(MCV_HiAdjTimer,?,?) ,XIC(MCV_HiAdjTimer.DN) MOV(30,MCV_HiAdj_State) ];
+				N: EQU(MCV_HiAdj_State,20)[OTE(MCV_HiAdj_PumpAdj) ,MOV(ConditionedMedia_Scaler.Out,P103.PSet_SpeedRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP1 / 100 )) ,OTU(P103.PCmd_Stop) OTL(P103.PCmd_StartFwd) ,OTU(P104.PCmd_Stop) OTL(P104.PCmd_StartFwd) ,TON(MCV_HiAdjTimer,?,?) ,XIC(MCV_HiAdjTimer.DN) MOV(30,MCV_HiAdj_State) ];
 				RC: "Step 30: Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured MCV Hi Adjust Weight go to State 50.$N"
 				    "If Vessel weight PV exceeds configured MCV Hi Adjust Weight go to State 40.";
 				N: EQU(MCV_HiAdj_State,30)[OTE(MCV_HiAdj_Assess1) ,GEQ(WT702.Val,MCV_HiSP) MOV(40,MCV_HiAdj_State) ,LES(WT702.Val,MCV_HiSP) MOV(10,MCV_HiAdj_State) ];
 				RC: "Step 40: Buffer$N"
 				    "Wait 10 seconds for MCV weight reading to stabilize, then proceed to State 50.";
-				N: EQU(MCV_HiAdj_State,40)[OTE(MCV_HiAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,TON(MCV_HiAdj_Stability_Timer,?,?) ,XIC(MCV_HiAdj_Stability_Timer.DN) MOV(50,MCV_HiAdj_State) ];
+				N: EQU(MCV_HiAdj_State,40)[OTE(MCV_HiAdj_Buffer) ,MOV(0,P103.PSet_SpeedRef) MOV(0,P104.PSet_SpeedRef) ,OTU(P103.PCmd_StartFwd) OTL(P103.PCmd_Stop) ,OTU(P104.PCmd_StartFwd) OTL(P104.PCmd_Stop) ,TON(MCV_HiAdj_Stability_Timer,?,?) ,XIC(MCV_HiAdj_Stability_Timer.DN) MOV(50,MCV_HiAdj_State) ];
 				RC: "Step 50: Post Buffer Assess Vessel Level$N"
 				    "If Vessel weight PV is less than configured MCV Hi Adjust Weight go to State 10.$N"
 				    "If Vessel weight PV exceeds configured MCV Hi Adjust Weight go to State 20.";
