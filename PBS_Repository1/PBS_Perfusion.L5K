@@ -2,10 +2,10 @@
 
   Import-Export
   Version   := RSLogix 5000 v32.03
-  Owner     := , 
+  Owner     := ,
   Exported  := Wed Aug 30 18:26:24 2023
 
-  Note:  File encoded in UTF-8.  Only edit file in a program 
+  Note:  File encoded in UTF-8.  Only edit file in a program
          which supports UTF-8 (like Notepad, not Wordpad).
 
 **********************************************)
@@ -308,6 +308,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
 			                     InputCxnPoint := 101,
+			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
 			                     OutputSize := 64,
@@ -346,6 +347,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
 			                     InputCxnPoint := 101,
+			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
 			                     OutputSize := 64,
@@ -383,6 +385,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 		,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 			CONNECTION Standard (Rate := 100000,
+			                     InputCxnPoint := 101,
 			                     InputCxnPoint := 101,
 			                     InputSize := 56,
 			                     OutputCxnPoint := 112,
@@ -560,7 +563,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		LOCAL_TAGS
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Alarm_Code$N"
 				    "Takes the alarm WORD and breaks it into BITS that are easily used in the program. $N"
 				    "$N"
@@ -695,7 +698,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                       DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle";
@@ -874,7 +877,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                                     DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "When the command trigger is received and start conditions are deemed ok, set state=12$N"
 				    "if trigger is received when start conditions indicate that failure is inevitable, set state=10$N"
 				    "(Clear the output assembly command word, in case it wasn$'t already zero = idle)";
@@ -1044,7 +1047,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                       DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle";
@@ -1268,7 +1271,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                        DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -1525,7 +1528,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                         DefaultData := "[0,0]");
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Input Assembly$N"
 				    "Take the cyclic data collected from the drive and breaks it down into variable to be used in the program$N"
 				    "";
@@ -1692,7 +1695,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                        DefaultData := "[0,0]");
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1)COP(Loc_Input_Assembly.Alarm_Code,Loc_AlarmCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -1844,7 +1847,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                          DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle";
@@ -1991,7 +1994,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                         DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle";
@@ -2138,7 +2141,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                       DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle";
@@ -2374,7 +2377,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                                 DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -2591,7 +2594,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                        DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -2767,7 +2770,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                        DefaultData := "[0,0]");
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1)COP(Loc_Input_Assembly.Alarm_Code,Loc_AlarmCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -2941,7 +2944,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		LOCAL_TAGS
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Status Code$N"
 				    "Takes the status WORD and breaks it into BITS that are easily used in the program. $N"
 				    "";
@@ -3113,7 +3116,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                     DefaultData := 0);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "When the command trigger is received and start conditions are deemed ok, set state=12$N"
 				    "if trigger is received when start conditions indicate that failure is inevitable, set state=10$N"
 				    "(Clear the output assembly command word, in case it wasn$'t already zero = idle)";
@@ -3298,7 +3301,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                        DefaultData := "[0,0]");
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "Create readable local copy of the input assembly and status";
 				N: COP(Input[0],Loc_Input_Assembly,1)COP(Loc_Input_Assembly.Status_Code,Loc_StatusCode,1)COP(Loc_Input_Assembly.Alarm_Code,Loc_AlarmCode,1);
 				RC: "Make sure the ethernet/ip commands are maintained long enough to catch at least one RPI cycle $N"
@@ -3408,7 +3411,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		LOCAL_TAGS
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				N: EQU(errorInteger,0)OTE(OK);
 				N: EQU(errorInteger,40)OTE(Lo);
 				N: EQU(errorInteger,50)OTE(Hi);
@@ -3605,7 +3608,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                            DefaultData := 0.00000000e+000);
 		END_LOCAL_TAGS
 
-		ROUTINE Logic 
+		ROUTINE Logic
 				RC: "============================================================$N"
 				    "Pump Calibration Control Module$N"
 				    "============================================================";
@@ -22630,7 +22633,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 					,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000];
 		END_TAG
 
-		ROUTINE Brx_Comms 
+		ROUTINE Brx_Comms
 				N: XIC(BRX_Comm_Toggle)XIO(Brx_heartbeat_Alarm)TON(BRX_Heartbeat_Fail,?,?);
 				N: XIC(BRX_Comm_Toggle)XIC(BRX_Data.exchangeHeartbeat)ONS(ONS[0].9)MOV(0,BRX_Heartbeat_Fail.ACC);
 				N: XIC(BRX_Comm_Toggle)XIC(BRX_Heartbeat_Fail.DN)OTL(Brx_heartbeat_Alarm);
@@ -22639,11 +22642,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIO(BRX_Comm_Toggle)OTU(Brx_heartbeat_Alarm);
 		END_ROUTINE
 
-		ROUTINE CM_Agitator 
+		ROUTINE CM_Agitator
 				N: [[XIC(WT702.Alm_LoLo) OTE(SIC401_intlk.Inp_Intlk00) ,XIC(EStop.Alm_TgtDisagree) OTE(SIC401_intlk.Inp_Intlk01) ,P_Intlk(SIC401_intlk) ,XIC(SIC401_intlk.Sts_IntlkOK) OTE(SIC401.Inp_IntlkOK) ] ,P_VSD(SIC401,SIC401_FaultCodeList) ];
 		END_ROUTINE
 
-		ROUTINE CM_AI 
+		ROUTINE CM_AI
 				N: [MOV(Test_Temp_Raw,TT700.Inp_PV) ,P_AInAdv(TT700) ];
 				N: P_AInAdv(AT701);
 				N: P_AInAdv(AT702);
@@ -22654,18 +22657,18 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: P_AInAdv(AIC703);
 		END_ROUTINE
 
-		ROUTINE CM_AO 
+		ROUTINE CM_AO
 				N: [MOV(Temp_Limit_Adm,Heater_Output.Cfg_MaxCV) MOV(Temp_Limit_Adm,Heater_Output.Cfg_CVEUMax) MOV(Temp_Scaler.Out,Heater_Output.PSet_CV) ,[XIC(SIC401.Sts_Stopped) OTE(Heater_Output_intlk.Inp_Intlk00) ,XIC(TT700.Alm_HiHi) OTE(Heater_Output_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(Heater_Output_intlk.Inp_Intlk02) ,P_Intlk(Heater_Output_intlk) ,XIC(Heater_Output_intlk.Sts_IntlkOK) OTE(Heater_Output.Inp_IntlkOK) ] ,P_AOut(Heater_Output) ];
 		END_ROUTINE
 
-		ROUTINE CM_DI 
+		ROUTINE CM_DI
 				N: P_DIn(EStop);
 		END_ROUTINE
 
-		ROUTINE CM_DO 
+		ROUTINE CM_DO
 		END_ROUTINE
 
-		ROUTINE CM_Pumps 
+		ROUTINE CM_Pumps
 				N: [XIC(P101Fault) OTE(P101Fault_Output) ,[XIC(LIT801.Alm_HiHi) OTE(P101_intlk.Inp_Intlk00) ,XIC(WT701.Alm_LoLo) OTE(P101_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(P101_intlk.Inp_Intlk02) ,P_Intlk(P101_intlk) ,XIC(P101_intlk.Sts_IntlkOK) OTE(P101.Inp_IntlkOK) ] ,[P_VSD(P101,P101_FaultCodeList) ,XIC(P101.Out_Fwd) [OTL(P101_Jog_Move.Start) ,OTL(P101.Inp_CommandDir) ,OTL(P101.Inp_ActualDir) ,OTU(P101.Out_Fwd) ,OTU(P101_Running_Rev) ] ,XIC(P101.Out_Rev) [OTL(P101_Jog_Move.Start) ,OTU(P101.Inp_CommandDir) ,OTU(P101.Inp_ActualDir) ,OTL(P101_Running_Rev) ,OTU(P101.Out_Rev) ,OTU(P101_Running_Fwd) ] ,XIC(P101.Sts_StoppingFwd) [OTL(P101_Crash_Stop.Stop) ,OTU(P101_Running_Fwd) ,OTU(P101_Running_Rev) ] ,XIC(P101_Status_Code.Moving) OTU(P101_Jog_Move.Start) ,XIO(P101_Status_Code.Moving) OTU(P101_Crash_Stop.Stop) ,[XIC(P101_Running_Fwd) CPT(P101_Jog_Move.Speed,P101.Val_SpeedRef/ ( P101_Cal_Constant * 60)) ,XIC(P101_Running_Rev) CPT(P101_Jog_Move.Speed,P101.Val_SpeedRef/ ( P101_Cal_Constant * 60) * -1) ] ,NEQ(P101_Update_Jog_Speed.Speed,P101_Jog_Move.Speed) ONS(ONS[0].15) MOV(P101_Jog_Move.Speed,P101_Update_Jog_Speed.Speed) OTE(P101_Update_Jog_Speed.Start) ] ,AFI() Pump_Cal(P101_Cal,P101.Sts_RunningFwd,P101.PCmd_Prog,P101.Cfg_SpeedRefEUMin,P101.Cfg_SpeedRefEUMax,P101.Cfg_SpeedFdbkEUMin,P101.Cfg_SpeedFdbkEUMax,P101.Cfg_MinSpdRef,P101.Cfg_MaxSpdRef,P101.PSet_SpeedRef,P101.PCmd_StartFwd,P101.Sts_Prog,P101.PCmd_Stop) ,AMP_Motor_Enable(P101_Enable,P101_Drive:I.Data,P101_Drive:O.Data,P101_Enable.Enable) ,AMP_Alarm_Reset(P101_Alarm_Reset,P101_Drive:I.Data,P101_Drive:O.Data,P101_Alarm_Reset.Reset) ,AMP_Jog_Move(P101_Jog_Move,P101_Drive:I.Data,P101_Drive:O.Data,P101_Jog_Move.Start,P101_Jog_Move.Speed,P101_Jog_Move.Acc,P101_Jog_Move.Dec) ,AMP_Crash_Stop(P101_Crash_Stop,P101_Drive:I.Data,P101_Drive:O.Data,P101_Crash_Stop.Stop) ,AMP_Relative_Move(P101_Relative_Move,P101_Drive:I.Data,P101_Drive:O.Data,P101_Relative_Move.Start,P101_Relative_Move.Distance,P101_Relative_Move.Speed,P101_Relative_Move.Acc,P101_Relative_Move.Dec) ,AMP_Update_Jog_Speed(P101_Update_Jog_Speed,P101_Drive:I.Data,P101_Drive:O.Data,P101_Update_Jog_Speed.Start,P101_Update_Jog_Speed.Speed) ,AMP_Input_Assembly(P101_Input_Assembly_Instance,P101_Drive:I.Data,P101_Input_Assembly) ,AMP_Status_Code(P101_Status_Code,P101_Input_Assembly.Status_Code) ];
 				N: [[XIC(WT702.Alm_HiHi) OTE(P102_intlk.Inp_Intlk00) ,XIC(WT701.Alm_LoLo) OTE(P102_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(P102_intlk.Inp_Intlk02) ,P_Intlk(P102_intlk) ,XIC(P102_intlk.Sts_IntlkOK) OTE(P102.Inp_IntlkOK) ] ,[P_VSD(P102,P102_FaultCodeList) ,XIC(P102.Out_Fwd) [OTL(P102_Jog_Move.Start) ,OTL(P102.Inp_CommandDir) ,OTL(P102.Inp_ActualDir) ,OTU(P102.Out_Fwd) ,OTU(P102_Running_Rev) ] ,XIC(P102.Out_Rev) [OTL(P102_Jog_Move.Start) ,OTU(P102.Inp_CommandDir) ,OTU(P102.Inp_ActualDir) ,OTL(P102_Running_Rev) ,OTU(P102.Out_Rev) ,OTU(P102_Running_Fwd) ] ,XIC(P102.Sts_StoppingFwd) [OTL(P102_Crash_Stop.Stop) ,OTU(P102_Running_Fwd) ,OTU(P102_Running_Rev) ] ,XIC(P102_Status_Code.Moving) OTU(P102_Jog_Move.Start) ,XIO(P102_Status_Code.Moving) OTU(P102_Crash_Stop.Stop) ,[XIC(P102_Running_Fwd) CPT(P102_Jog_Move.Speed,P102.Val_SpeedRef/ ( P102_Cal_Constant * 60)) ,XIC(P102_Running_Rev) CPT(P102_Jog_Move.Speed,P102.Val_SpeedRef/ ( P102_Cal_Constant * 60) * -1) ] ,NEQ(P102_Update_Jog_Speed.Speed,P102_Jog_Move.Speed) ONS(ONS[0].16) MOV(P102_Jog_Move.Speed,P102_Update_Jog_Speed.Speed) OTE(P102_Update_Jog_Speed.Start) ] ,AFI() Pump_Cal(P102_Cal,P102.Sts_RunningFwd,P102.PCmd_Prog,P102.Cfg_SpeedRefEUMin,P102.Cfg_SpeedRefEUMax,P102.Cfg_SpeedFdbkEUMin,P102.Cfg_SpeedFdbkEUMax,P102.Cfg_MinSpdRef,P102.Cfg_MaxSpdRef,P102.PSet_SpeedRef,P102.PCmd_StartFwd,P102.Sts_Prog,P102.PCmd_Stop) ,AMP_Motor_Enable(P102_Enable,P102_Drive:I.Data,P102_Drive:O.Data,P102_Enable.Enable) ,AMP_Alarm_Reset(P102_Alarm_Reset,P102_Drive:I.Data,P102_Drive:O.Data,P102_Alarm_Reset.Reset) ,AMP_Jog_Move(P102_Jog_Move,P102_Drive:I.Data,P102_Drive:O.Data,P102_Jog_Move.Start,P102_Jog_Move.Speed,P102_Jog_Move.Acc,P102_Jog_Move.Dec) ,AMP_Crash_Stop(P102_Crash_Stop,P102_Drive:I.Data,P102_Drive:O.Data,P102_Crash_Stop.Stop) ,AMP_Relative_Move(P101_Relative_Move,P102_Drive:I.Data,P102_Drive:O.Data,P102_Relative_Move.Start,P102_Relative_Move.Distance,P102_Relative_Move.Speed,P102_Relative_Move.Acc,P102_Relative_Move.Dec) ,AMP_Update_Jog_Speed(P102_Update_Jog_Speed,P102_Drive:I.Data,P102_Drive:O.Data,P102_Update_Jog_Speed.Start,P102_Update_Jog_Speed.Speed) ,AMP_Input_Assembly(P102_Input_Assembly_Instance,P102_Drive:I.Data,P102_Input_Assembly) ,AMP_Status_Code(P102_Status_Code,P102_Input_Assembly.Status_Code) ];
 				N: [[XIC(LIT801.Alm_HiHi) OTE(P103_intlk.Inp_Intlk00) ,XIC(WT702.Alm_LoLo) OTE(P103_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(P103_intlk.Inp_Intlk02) ,P_Intlk(P103_intlk) ,XIC(P103_intlk.Sts_IntlkOK) OTE(P103.Inp_IntlkOK) ] ,[P_VSD(P103,P103_FaultCodeList) ,XIC(P103.Out_Fwd) [OTL(P103_Jog_Move.Start) ,OTL(P103.Inp_CommandDir) ,OTL(P103.Inp_ActualDir) ,OTU(P103.Out_Fwd) ,OTU(P103_Running_Rev) ] ,XIC(P103.Out_Rev) [OTL(P103_Jog_Move.Start) ,OTU(P103.Inp_CommandDir) ,OTU(P103.Inp_ActualDir) ,OTL(P103_Running_Rev) ,OTU(P103.Out_Rev) ,OTU(P103_Running_Fwd) ] ,XIC(P103.Sts_StoppingFwd) [OTL(P103_Crash_Stop.Stop) ,OTU(P103_Running_Fwd) ,OTU(P103_Running_Rev) ] ,XIC(P103_Status_Code.Moving) OTU(P103_Jog_Move.Start) ,XIO(P103_Status_Code.Moving) OTU(P103_Crash_Stop.Stop) ,[XIC(P103.Out_Fwd) CPT(P103_Jog_Move.Speed,P103.Val_SpeedRef/ ( P103_Cal_Constant * 60)) ,XIC(P103.Out_Rev) CPT(P103_Jog_Move.Speed,P103.Val_SpeedRef/ ( P103_Cal_Constant * 60) * -1) ] ,NEQ(P103_Update_Jog_Speed.Speed,P103_Jog_Move.Speed) ONS(ONS[0].17) MOV(P103_Jog_Move.Speed,P103_Update_Jog_Speed.Speed) OTE(P103_Update_Jog_Speed.Start) ] ,AFI() Pump_Cal(P103_Cal,P103.Sts_RunningFwd,P103.PCmd_Prog,P103.Cfg_SpeedRefEUMin,P103.Cfg_SpeedRefEUMax,P103.Cfg_SpeedFdbkEUMin,P103.Cfg_SpeedFdbkEUMax,P103.Cfg_MinSpdRef,P103.Cfg_MaxSpdRef,P103.PSet_SpeedRef,P103.PCmd_StartFwd,P103.Sts_Prog,P103.PCmd_Stop) ,AMP_Motor_Enable(P103_Enable,P103_Drive:I.Data,P103_Drive:O.Data,P103_Enable.Enable) ,AMP_Alarm_Reset(P103_Alarm_Reset,P103_Drive:I.Data,P103_Drive:O.Data,P103_Alarm_Reset.Reset) ,AMP_Jog_Move(P103_Jog_Move,P103_Drive:I.Data,P103_Drive:O.Data,P103_Jog_Move.Start,P103_Jog_Move.Speed,P103_Jog_Move.Acc,P103_Jog_Move.Dec) ,AMP_Crash_Stop(P103_Crash_Stop,P103_Drive:I.Data,P103_Drive:O.Data,P103_Crash_Stop.Stop) ,AMP_Relative_Move(P103_Relative_Move,P103_Drive:I.Data,P103_Drive:O.Data,P103_Relative_Move.Start,P103_Relative_Move.Distance,P103_Relative_Move.Speed,P103_Relative_Move.Acc,P103_Relative_Move.Dec) ,AMP_Update_Jog_Speed(P103_Update_Jog_Speed,P103_Drive:I.Data,P103_Drive:O.Data,P103_Update_Jog_Speed.Start,P103_Update_Jog_Speed.Speed) ,AMP_Input_Assembly(P103_Input_Assembly_Instance,P103_Drive:I.Data,P103_Input_Assembly) ,AMP_Status_Code(P103_Status_Code,P103_Input_Assembly.Status_Code) ];
@@ -23321,7 +23324,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		END_FBD_ROUTINE
 
-		ROUTINE Conditioned_Addition_Control 
+		ROUTINE Conditioned_Addition_Control
 				N: XIC(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)[XIO(P104.Sts_Stopped) [OTU(P104.PCmd_StartFwd) ,OTL(P104.PCmd_Stop) ] ,XIO(P103.Sts_Stopped) [OTU(P103.PCmd_StartFwd) ,OTL(P103.PCmd_Stop) ] ,XIC(P103.Sts_Stopped) [MOV(0,P103.PSet_SpeedRef) ,OTU(P103.PCmd_Stop) ] ,XIC(P104.Sts_Stopped) [MOV(0,P104.PSet_SpeedRef) ,OTU(P104.PCmd_Stop) ] ];
 				RC: "Scales user input (s --> ms) and moves to relevant timer";
 				N: CPT(MCV_HiAdjTimer.PRE,MCV_HiAdjTimeSP * 1000)CPT(BRX_HiAdjTimer.PRE,BRX_HiadjTimeSP * 1000)CPT(BRX_LoAdjTimer.PRE,BRX_LoadjTimeSP * 1000);
@@ -23333,7 +23336,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIC(EStop.Alm_TgtDisagree)OTL(ConditionedMedia_Initialize);
 		END_ROUTINE
 
-		ROUTINE Main 
+		ROUTINE Main
 				N: JSR(RL_PH,0);
 				N: JSR(RL_MTS,0);
 				N: JSR(RL_DO,0);
@@ -23356,7 +23359,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: JSR(SM_BRX_LoAdj,0);
 		END_ROUTINE
 
-		ROUTINE Media_Fill 
+		ROUTINE Media_Fill
 				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_InitialFill)OTU(MediaFill_ON);
 				RC: "Scale user input of time ( s --> ms) and move to timer";
 				N: CPT(MCV_LoAdjTimer.PRE,MCV_LoTimerSP*1000);
@@ -23407,20 +23410,20 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIC(MCV_InitialFill)XIO(MediaAdj_InProgress)[MOV(MCV_InitialFillSpeed,P102.PSet_SpeedRef) [OTE(MCV_InitialFillRunning) ,OTL(P102.PCmd_StartFwd) ] ,GEQ(WT702.Val,MCV_FillWeight) [OTU(P102.PCmd_StartFwd) OTL(P102.PCmd_Stop) ,OTU(MCV_InitialFill) ,OTL(MCV_InitialFill_Done) ] ,XIC(MCV_InitialFillRunning) OTL(P102.PCmd_Prog) ];
 		END_ROUTINE
 
-		ROUTINE PBS_MFCs 
+		ROUTINE PBS_MFCs
 				N: [XIC(PlaceHolderIOFault[0].0) OTE(FIC110.Inp_IOFault) ,MOV(PlaceHolderFeedback1,FIC110.Inp_PosFdbk) ,P_D4SD(CCA_3way) ,P_ValveSO(KV112) P_ValveSO(KV111) ,[XIC(EStop.Alm_TgtDisagree) OTE(FIC110_intlk.Inp_Intlk00) ,P_Intlk(FIC110_intlk) ,XIC(FIC110_intlk.Sts_IntlkOK) OTE(FIC110.Inp_IntlkOK) ] ,P_ValveC(FIC110) ,MOV(FIC110.Out_CV,PlaceHolderOutput1) ];
 				N: [XIC(PlaceHolderIOFault[0].1) OTE(FIC120.Inp_IOFault) ,MOV(PlaceHolderFeedback2,FIC120.Inp_PosFdbk) ,P_D4SD(O2_3way) ,P_ValveSO(KV122) P_ValveSO(KV121) ,[XIC(EStop.Alm_TgtDisagree) OTE(FIC120_intlk.Inp_Intlk00) ,P_Intlk(FIC120_intlk) ,XIC(FIC120_intlk.Sts_IntlkOK) OTE(FIC120.Inp_IntlkOK) ] ,P_ValveC(FIC120) ,MOV(FIC120.Out_CV,PlaceHolderOutput2) ];
 				N: [XIC(PlaceHolderIOFault[0].2) OTE(FIC130.Inp_IOFault) ,MOV(PlaceHolderFeedback3,FIC130.Inp_PosFdbk) ,P_D4SD(CO2_3way) ,P_ValveSO(KV132) P_ValveSO(KV131) ,[XIC(EStop.Alm_TgtDisagree) OTE(FIC130_intlk.Inp_Intlk00) ,P_Intlk(FIC130_intlk) ,XIC(FIC130_intlk.Sts_IntlkOK) OTE(FIC130.Inp_IntlkOK) ] ,P_ValveC(FIC130) ,MOV(FIC130.Out_CV,PlaceHolderOutput3) ];
 				N: [XIC(PlaceHolderIOFault[0].3) OTE(FIC140.Inp_IOFault) ,MOV(PlaceHolderFeedback4,FIC140.Inp_PosFdbk) ,P_D4SD(N2_3way) ,P_ValveSO(KV141) P_ValveSO(KV142) ,[XIC(EStop.Alm_TgtDisagree) OTE(FIC140_intlk.Inp_Intlk00) ,P_Intlk(FIC140_intlk) ,XIC(FIC140_intlk.Sts_IntlkOK) OTE(FIC140.Inp_IntlkOK) ] ,P_ValveC(FIC140) ,MOV(FIC140.Out_CV,PlaceHolderOutput4) ];
 		END_ROUTINE
 
-		ROUTINE Perfusion_Control 
+		ROUTINE Perfusion_Control
 				N: XIC(Perfusion_On)XIO(P101_Cal.Cal_Running)[ONS(ONS[0].1) OTL(P101.PCmd_Prog) OTL(P105.PCmd_Prog) OTL(P101.PCmd_StartFwd) OTL(P105.PCmd_StartFwd) ,XIC(Level_Control_Enable) [MOV(P101_Speed,P101.PSet_SpeedRef) CPT(P105.PSet_SpeedRef,P101.PSet_SpeedRef * BRX_Level_Scaler.Out) ,LIM(Level_Deadband_High_SP,LIT801.Val,Level_Deadband_Low_SP) OTU(BRX_Level_Initialize) ,LIM(Level_Deadband_Low_SP,LIT801.Val,Level_Deadband_High_SP) OTL(BRX_Level_Initialize) ] ,XIO(Level_Control_Enable) MOV(P101_Speed,P101.PSet_SpeedRef) MOV(P101_Speed,P105.PSet_SpeedRef) OTL(BRX_Level_Initialize) ];
 				N: XIO(Perfusion_On)XIO(P101_Cal.Cal_Running)[OTL(BRX_Level_Initialize) ,XIO(P101.Sts_Stopped) OTU(P101.PCmd_StartFwd) OTL(P101.PCmd_Stop) ,XIO(P105.Sts_Stopped) OTU(P105.PCmd_StartFwd) OTL(P105.PCmd_Stop) ,XIC(P101.Sts_Stopped) MOV(0,P101.PSet_SpeedRef) OTU(P101.PCmd_Stop) ,XIC(P105.Sts_Stopped) MOV(0,P105.PSet_SpeedRef) OTU(P105.PCmd_Stop) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTU(Perfusion_On);
 		END_ROUTINE
 
-		ROUTINE Pump_Cal_And_Dosing 
+		ROUTINE Pump_Cal_And_Dosing
 				N: XIC(p101_Cal_Start)XIO(P101_Dose_Running)OTU(P101_Cal_Complete)OTL(P101_Cal_Running);
 				N: XIC(P101_Cal_Running)[ONS(ONS[0].4) CPT(P101_Relative_Move.Speed,( P101_Cal_Speed / 100 ) * 3.333) MUL(P101_CalRevs,P101_Motor_Constant,P101_Cal_Steps) MOV(P101_Cal_Steps,P101_Relative_Move.Distance) OTL(P101_Relative_Move.Start) ,XIC(P101_Relative_Move.In_Progress) OTU(P101_Relative_Move.Start) ,XIC(P101_Relative_Move.Done) [CPT(P101_Cal_ColConst,P101_Cal_Collected/ P101_Cal_Steps) MUL(P101_Cal_ColConst,P101_Motor_Constant,P101_Cal_Constant) ,MUL(P101_Cal_Constant,P101_MaxRPM,P101_Cal_Max_Flow) ,XIC(P101_Cal_Accept) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedRefEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedFdbkEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_MaxSpdRef) OTL(P101_Cal_Complete) OTU(P101_Cal_Running) ] ,XIC(P101_Cal_Abort) [OTU(P101_Cal_Complete) OTU(P101_Relative_Move.Start) OTL(P101_Crash_Stop.Stop) ,OTU(P101_Cal_Running) ] ];
 				N: XIC(P101_Dose_Start)XIO(P101_Cal_Running)OTL(P101_Dose_Running);
@@ -23454,14 +23457,14 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: MOV(ph_r_ph,PHpbs.PV);
 		END_ROUTINE
 
-		ROUTINE RTD_Calibration 
+		ROUTINE RTD_Calibration
 				N: SUB(TT700_Ref1Point,TT700.Val,TT700_1Point_Offset);
 				N: XIC(TT700_Accept1Point)ONS(ONS[0].8)NEQ(TT700_Ref1Point,TT700.Val)ADD(TT700_1Point_Offset,TT700.Cfg_PVEUMin,TT700_NewMin)ADD(TT700_1Point_Offset,TT700.Cfg_PVEUMax,TT700_NewMax)MOV(TT700_NewMin,TT700.Cfg_PVEUMin)MOV(TT700_NewMax,TT700.Cfg_PVEUMax)OTL(TT700_1Point_Complete);
 				N: XIC(TT700_CalClear)MOV(100,TT700.Cfg_PVEUMax)MOV(0,TT700.Cfg_PVEUMin)OTU(TT700_2Point_Complete)OTU(TT700_1Point_Complete);
 				N: XIC(TT700_2PointAccept)ONS(ONS[0].7)[MOV(TT700.Cfg_PVEUMin,TT700_MinCfg) MOV(TT700.Cfg_PVEUMax,TT700_MaxCfg) SUB(TT700_RawMax,TT700_RawMin,TT700_RawRange) SUB(TT700_RefMax,TT700_RefMin,TT700_RefRange) ,CPT(TT700.Cfg_PVEUMax,( TT700_MaxCfg - TT700_RawMin ) * ( TT700_RefRange / TT700_RawRange ) + TT700_RefMin) ,CPT(TT700.Cfg_PVEUMin,( TT700_MinCfg - TT700_RawMin ) * ( TT700_RefRange / TT700_RawRange ) + TT700_RefMin) OTL(TT700_2Point_Complete) ];
 		END_ROUTINE
 
-		ROUTINE SM_BRX_HiAdj 
+		ROUTINE SM_BRX_HiAdj
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
 				N: XIC(EStop.Alm_TgtDisagree)OTU(BRX_HiAdjEnable);
 				RC: "Reset State Machine After Fault$N"
@@ -23494,7 +23497,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: EQU(BRX_HiAdj_State,50)[OTE(BRX_HiAdj_Assess2) ,LES(LIT801.Val,BRX_HiSP) MOV(10,BRX_HiAdj_State) ,GEQ(LIT801.Val,BRX_HiSP) MOV(20,BRX_HiAdj_State) ];
 		END_ROUTINE
 
-		ROUTINE SM_BRX_LoAdj 
+		ROUTINE SM_BRX_LoAdj
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
 				N: XIC(EStop.Alm_TgtDisagree)OTU(BRX_LoAdjEnable);
 				RC: "Reset State Machine After Fault$N"
@@ -23526,7 +23529,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: EQU(BRX_LoAdj_State,50)[OTE(BRX_LoAdj_Assess2) ,GEQ(LIT801.Val,BRX_LoSP) MOV(10,BRX_LoAdj_State) ,LES(LIT801.Val,BRX_LoSP) MOV(20,BRX_LoAdj_State) ];
 		END_ROUTINE
 
-		ROUTINE SM_MCV_HiAdj 
+		ROUTINE SM_MCV_HiAdj
 				RC: "Stop State Machine as Needed (Estop, Cycle Stop, Fault, etc.)";
 				N: XIC(EStop.Alm_TgtDisagree)OTU(MCV_HiAdjEnable);
 				RC: "Reset State Machine After Fault$N"
@@ -23664,7 +23667,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			SUB_01 : FBD_MATH  := [3,1.00000000e+000,1.00000000e-001,8.99999976e-001];
 		END_TAG
 
-		ROUTINE GasControl 
+		ROUTINE GasControl
 				N: XIC(GasControl_ON)ONS(GasOnOns)[OTU(FIC140.PCmd_Unlock) OTU(FIC130.PCmd_Unlock) OTU(FIC120.PCmd_Unlock) OTU(FIC110.PCmd_Unlock) ,OTL(FIC140.PCmd_Lock) OTL(FIC130.PCmd_Lock) OTL(FIC120.PCmd_Lock) OTL(FIC110.PCmd_Lock) ];
 				N: XIO(GasControl_ON)ONS(GasOffOns)[OTU(FIC110.PCmd_Lock) OTU(FIC120.PCmd_Lock) OTU(FIC130.PCmd_Lock) OTU(FIC140.PCmd_Lock) ,OTL(FIC110.PCmd_Unlock) OTL(FIC120.PCmd_Unlock) OTL(FIC130.PCmd_Unlock) OTL(FIC140.PCmd_Unlock) OTL(pH_Initialize) OTL(DOPID_INITIALIZE) ];
 				N: LES(FIC120.Cfg_CVEUMax,TotalFlowSP)CPT(O2MaxCalc,FIC120.Cfg_CVEUMax /TotalFlowSP);
@@ -23693,10 +23696,13 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: [DIV(O2EUMax_Inp,100,O2EUMax) GRT(O2EUMax,O2MaxCalc) MOV(O2MaxCalc,O2EUMax) ,DIV(N2EUMax_Inp,100,N2EUMax) GRT(N2EUMax,N2MaxCalc) MOV(N2MaxCalc,N2EUMax) ,DIV(CO2EUMax_Inp,100,CO2EUMax) GRT(CO2EUMax,CO2MaxCalc) MOV(CO2MaxCalc,CO2EUMax) ];
 				N: [DIV(O2EUMin_Inp,100,O2EUMin) ,DIV(N2EUMin_Inp,100,N2EUMin) ,DIV(CO2EUMin_Inp,100,CO2EUMin) ];
 				N: [DIV(CO2ManualSP_Inp,100,CO2ManualSP) GRT(CO2ManualSP,CO2MaxCalc) MOV(CO2MaxCalc,CO2ManualSP) ,DIV(O2ManualSP_Inp,100,O2ManualSP) GRT(O2ManualSP,O2MaxCalc) MOV(O2MaxCalc,O2ManualSP) ,DIV(N2ManualSP_Inp,100,N2ManualSP) GRT(N2ManualSP,N2MaxCalc) MOV(N2MaxCalc,N2ManualSP) ,DIV(AirManualSP_Inp,100,AirManualSP) GRT(AirManualSP,CCAMaxCalc) MOV(CCAMaxCalc,AirManualSP) ];
+				N: [DIV(O2EUMax_Inp,100,O2EUMax) GRT(O2EUMax,O2MaxCalc) MOV(O2MaxCalc,O2EUMax) ,DIV(N2EUMax_Inp,100,N2EUMax) GRT(N2EUMax,N2MaxCalc) MOV(N2MaxCalc,N2EUMax) ,DIV(CO2EUMax_Inp,100,CO2EUMax) GRT(CO2EUMax,CO2MaxCalc) MOV(CO2MaxCalc,CO2EUMax) ];
+				N: [DIV(O2EUMin_Inp,100,O2EUMin) ,DIV(N2EUMin_Inp,100,N2EUMin) ,DIV(CO2EUMin_Inp,100,CO2EUMin) ];
+				N: [DIV(CO2ManualSP_Inp,100,CO2ManualSP) GRT(CO2ManualSP,CO2MaxCalc) MOV(CO2MaxCalc,CO2ManualSP) ,DIV(O2ManualSP_Inp,100,O2ManualSP) GRT(O2ManualSP,O2MaxCalc) MOV(O2MaxCalc,O2ManualSP) ,DIV(N2ManualSP_Inp,100,N2ManualSP) GRT(N2ManualSP,N2MaxCalc) MOV(N2MaxCalc,N2ManualSP) ,DIV(AirManualSP_Inp,100,AirManualSP) GRT(AirManualSP,CCAMaxCalc) MOV(CCAMaxCalc,AirManualSP) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTU(GasControl_ON);
 		END_ROUTINE
 
-		ROUTINE Main 
+		ROUTINE Main
 				N: JSR(PBS,0);
 				N: JSR(GasControl,0);
 				N: JSR(TempControl,0);
@@ -24949,7 +24955,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		END_FBD_ROUTINE
 
-		ROUTINE TempControl 
+		ROUTINE TempControl
 				N: XIO(Temp_Initialize)ONS(TempOnOns)[OTU(Heater_Output.PCmd_Unlock) ,OTL(Heater_Output.PCmd_Lock) ];
 				N: XIC(Temp_Initialize)ONS(TempOffOns)[OTU(Heater_Output.PCmd_Lock) ,OTL(Heater_Output.PCmd_Unlock) ];
 				N: XIC(EStop.Alm_TgtDisagree)OTL(Temp_Initialize);
