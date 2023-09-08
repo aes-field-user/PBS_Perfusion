@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.04
   Owner     := , 
-  Exported  := Thu Sep  7 14:04:16 2023
+  Exported  := Thu Sep  7 14:26:56 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21222,6 +21222,29 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,7.89211295e-042,1.00000000e+000];
 		DOPID_INITIALIZE : BOOL (RADIX := Decimal) := 1;
 		DOtestPV : REAL (RADIX := Float) := 2.50000000e+001;
+		do_cal_start : BOOL (RADIX := Decimal) := 1;
+		do_cal_state_var : DINT (RADIX := Decimal) := 2;
+		do_cal_st_abort : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_check_params : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_check_status : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_done_error : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_done_ok : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_done_pwd_error : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_eeprom_en : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_en_eeprom : BOOL (RADIX := Decimal) := 1;
+		do_cal_st_idle : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_init : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_ready_check_data : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_params : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user0 : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user0_ack : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user1 : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user1_ack : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_set_user2_ack : BOOL (RADIX := Decimal) := 1;
+		do_cal_st_start : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_update : BOOL (RADIX := Decimal) := 0;
+		do_cal_st_user_check_data : BOOL (RADIX := Decimal) := 0;
 		DO_HiDev : REAL (Description := "hi deviation alarm$N",
 		            RADIX := Float) := 0.00000000e+000;
 		DO_LoDev : REAL (Description := "low deviation alarm$N",
@@ -21243,9 +21266,21 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		do_w_cal_control : DINT (RADIX := Decimal) := 0;
 		do_w_cal_status : DINT (RADIX := Decimal) := 0;
 		do_w_sensor_type : DINT (RADIX := Decimal) := 0;
-		do_w_user_level : DINT (RADIX := Decimal) := 0;
-		do_w_user_password : DINT (RADIX := Decimal) := 0;
-		do_w_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
+		do_w_cal_buffer_tab : DINT (RADIX := Decimal) := 0;
+		do_w_cal_date : DINT (RADIX := Decimal) := 0;
+		do_w_cal_method : DINT (RADIX := Decimal) := 0;
+		do_w_cal_offset : DINT (RADIX := Decimal) := 0;
+		do_w_cal_process : DINT (RADIX := Decimal) := 0;
+		do_w_cal_slope : DINT (RADIX := Decimal) := 0;
+		do_w_cal_stability : DINT (RADIX := Decimal) := 0;
+		do_w_cal_time : DINT (RADIX := Decimal) := 0;
+		do_w_cal_unit : DINT (RADIX := Decimal) := 0;
+		do_w_user_level : DINT (Description := "Commanded Enumerated user level:$NLevel: 0 Hex: 0x3$NLevel 1: Hex: 0xC$NLevel 2: Hex: 0x30",
+		do_         RADIX := Decimal) := 48;
+		do_w_user_password : DINT (Description := "Commanded Password:$NLevel 0: 0x0000 0000$NLevel 1: 0x01145DEA$NLevel 2: 0x00F479CE",
+		do_         RADIX := Decimal) := 16021966;
+		do_w_user_unlock_eeprom : BOOL (Description := "Commanded probe eeprom lock state",
+		            RADIX := Decimal) := 1;
 		EStop : P_DIn  := [1128428823,0,0.00000000e+000,1,18,7,0,1,1,[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				],[14,'Discrete Input$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				],[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'],[92275667,750,0,5,1,0,0,[1637399,5000,0
@@ -23464,6 +23499,23 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		ROUTINE RL_DO (Description := "Propagate MT scale data")
 				N: MOV(do_r_do,DOpbs.PV);
+				N: XIC(do_cal_start)MOV(1,do_cal_state_var);
+				N: EQU(do_cal_state_var,0)OTE(do_cal_st_idle);
+				N: EQU(do_cal_state_var,1)[OTE(do_cal_st_en_eeprom) ,MOV(48,do_w_user_level) ,MOV(16021966,do_w_user_password) ,OTE(do_w_user_unlock_eeprom) ,MOV(2,do_cal_state_var) ];
+				N: EQU(do_cal_state_var,2)[OTE(do_cal_st_set_user2_ack) ,EQU(ph_r_user_level,48) MOV(3,do_cal_state_var) ,EQU(ph_r_user_level,3) MOV(14,do_cal_state_var) ];
+				N: EQU(do_cal_state_var,3)[OTE(do_cal_st_eeprom_en) ,MOV(4,do_cal_state_var) ,MOV(1,do_w_cal_control) ];
+				N: EQU(do_cal_state_var,4)[OTE(do_cal_st_set_params) ,MOV(5,do_cal_state_var) ,MOV(65542,ph_w_cal_unit) ,MOV(2,ph_w_cal_method) ,MOV(1,ph_w_cal_stability) ,MOV(1,ph_w_cal_buffer_tab) ,MOV(7,ph_w_cal_offset) ,MOV(4,ph_w_cal_slope) ,MOV(7.51,ph_w_cal_process) ,MOV(01012024,ph_w_cal_date) ,MOV(1200,ph_w_cal_time) ,MOV(5,do_cal_state_var) ];
+				N: EQU(do_cal_state_var,5)[OTE(do_cal_st_check_params) ,EQU(ph_r_cal_status,5) MOV(6,do_cal_state_var) ];
+				N: EQU(do_cal_state_var,6)OTE(do_cal_st_start);
+				N: EQU(do_cal_state_var,7)OTE(do_cal_st_check_status);
+				N: EQU(do_cal_state_var,8)OTE(do_cal_st_ready_check_data);
+				N: EQU(do_cal_state_var,9)OTE(do_cal_st_user_check_data);
+				N: EQU(do_cal_state_var,10)OTE(do_cal_st_update);
+				N: EQU(do_cal_state_var,11)OTE(do_cal_st_done_ok);
+				N: EQU(do_cal_state_var,12)OTE(do_cal_st_done_ok);
+				N: EQU(do_cal_state_var,13)OTE(do_cal_st_done_error);
+				N: EQU(do_cal_state_var,14)OTE(do_cal_st_done_pwd_error);
+				N: EQU(do_cal_state_var,15)OTE(do_cal_st_abort);
 		END_ROUTINE
 
 		ROUTINE RL_MTS (Description := "Propagate MT scale data")
