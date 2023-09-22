@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Tue Sep 12 18:50:37 2023
+  Exported  := Fri Sep 22 12:37:41 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -21225,12 +21225,35 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,1.00000000e+000];
 		DOPID_INITIALIZE : BOOL (RADIX := Decimal) := 0;
 		DOtestPV : REAL (RADIX := Float) := 2.50000000e+001;
+		do_cal_b_0_idle : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_100_start_pt2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_10_set_user2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_110_place_probe_pt2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_120_wait_for_stability_pt2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_130_write_pt2 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_140_wait_for_done : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_150_done_ok : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_160_done_error : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_170_pwd_error : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_20_set_user2_ack : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_30_set_pt1_params : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_30_set_pt1_params_Timer : TIMER  := [0,0,0];
+		do_cal_b_40_check_params : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_50_cal_method : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_60_place_probe : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_70_wait_for_stability_pt1 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_80_write_pt1 : BOOL (RADIX := Decimal) := 0;
+		do_cal_b_90_wait_pt1_write : BOOL (RADIX := Decimal) := 0;
+		do_cal_reset : BOOL (RADIX := Decimal) := 0;
+		do_cal_start : BOOL (RADIX := Decimal) := 0;
+		do_cal_state_var : DINT (RADIX := Decimal) := 0;
 		DO_HiDev : REAL (Description := "hi deviation alarm$N",
 		            RADIX := Float) := 0.00000000e+000;
 		DO_LoDev : REAL (Description := "low deviation alarm$N",
 		            RADIX := Float) := 0.00000000e+000;
 		DO_ON : BOOL (RADIX := Decimal) := 1;
 		DO_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
+		do_probe_placement_ready : BOOL (RADIX := Decimal) := 0;
 		do_r_cal_control : DINT (RADIX := Decimal) := 0;
 		do_r_cal_date : DINT (RADIX := Decimal) := 0;
 		do_r_cal_status : DINT (RADIX := Decimal) := 0;
@@ -21243,8 +21266,15 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		do_r_user_password : DINT (RADIX := Decimal) := 0;
 		do_r_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
 		do_r_wrong_sensor : DINT (RADIX := Decimal) := 0;
+		do_stability_ok : BOOL (RADIX := Decimal) := 0;
+		do_w_cal_buffer_tab : DINT (RADIX := Decimal) := 0;
 		do_w_cal_control : DINT (RADIX := Decimal) := 0;
+		do_w_cal_date : DINT (RADIX := Decimal) := 0;
+		do_w_cal_method : DINT (RADIX := Decimal) := 0;
+		do_w_cal_stability : DINT (RADIX := Decimal) := 0;
 		do_w_cal_status : DINT (RADIX := Decimal) := 0;
+		do_w_cal_time : DINT (RADIX := Decimal) := 0;
+		do_w_cal_unit_cal : DINT (RADIX := Decimal) := 0;
 		do_w_sensor_type : DINT (RADIX := Decimal) := 0;
 		do_w_user_level : DINT (RADIX := Decimal) := 0;
 		do_w_user_password : DINT (RADIX := Decimal) := 0;
@@ -22290,6 +22320,28 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0.00000000e+000,7.89211295e-042,1.00000000e+000,1.40129846e-042,1.49105023e-039,7.89211295e-042
 				,1.00000000e+000];
 		pHtestPV : REAL (RADIX := Float) := 0.00000000e+000;
+		ph_cal_b_0_idle : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_100_start_pt2 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_10_set_user2 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_110_place_probe_pt2 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_120_wait_for_stability_pt2 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_130_write_pt2 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_140_wait_for_done : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_150_done_ok : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_160_done_error : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_170_pwd_error : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_20_set_user2_ack : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_30_set_pt1_params : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_30_set_pt1_params_Timer : TIMER  := [0,0,0];
+		ph_cal_b_40_check_params : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_50_cal_method : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_60_place_probe : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_70_wait_for_stability_pt1 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_80_write_pt1 : BOOL (RADIX := Decimal) := 0;
+		ph_cal_b_90_wait_pt1_write : BOOL (RADIX := Decimal) := 0;
+		ph_cal_reset : BOOL (RADIX := Decimal) := 0;
+		ph_cal_start : BOOL (RADIX := Decimal) := 0;
+		ph_cal_state_var : DINT (RADIX := Decimal) := 0;
 		pH_HiDev : REAL (Description := "ph hi deviation$N",
 		            RADIX := Float) := 0.00000000e+000;
 		pH_Initialize : BOOL (RADIX := Decimal) := 0;
@@ -22297,6 +22349,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		            RADIX := Float) := 0.00000000e+000;
 		PH_On : BOOL (RADIX := Decimal) := 1;
 		pH_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
+		pH_probe_placement_ready : BOOL (RADIX := Decimal) := 0;
 		ph_r_cal_control : DINT (RADIX := Decimal) := 0;
 		ph_r_cal_date : DINT (Description := "Date of last calibration",
 		            RADIX := Decimal) := 0;
@@ -22313,8 +22366,15 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		ph_r_user_unlock_eeprom : BOOL (Description := "current probe eeprom lock state",
 		            RADIX := Decimal) := 0;
 		ph_r_wrong_sensor : BOOL (RADIX := Decimal) := 0;
+		pH_stability_ok : BOOL (RADIX := Decimal) := 0;
+		ph_w_cal_buffer_tab : DINT (RADIX := Decimal) := 0;
 		ph_w_cal_control : DINT (RADIX := Decimal) := 0;
+		ph_w_cal_date : DINT (RADIX := Decimal) := 0;
+		ph_w_cal_method : DINT (RADIX := Decimal) := 0;
+		ph_w_cal_stability : DINT (RADIX := Decimal) := 0;
 		ph_w_cal_status : DINT (RADIX := Decimal) := 0;
+		ph_w_cal_time : DINT (RADIX := Decimal) := 0;
+		ph_w_cal_unit_cal : DINT (RADIX := Decimal) := 0;
 		ph_w_user_level : DINT (Description := "Commanded Enumerated user level:$NLevel: 0 Hex: 0x3$NLevel 1: Hex: 0xC$NLevel 2: Hex: 0x30",
 		            RADIX := Decimal) := 0;
 		ph_w_user_password : DINT (Description := "Commanded Password:$NLevel 0: 0x0000 0000$NLevel 1: 0x01145DEA$NLevel 2: 0x00F479CE",
@@ -23230,6 +23290,48 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIC(ConditionedMedia_Initialize)XIO(P103_Cal.Cal_Running)XIO(P104_Cal.Cal_Running)XIO(CondMed_AdjustInProgress)[OTE(ConditionedMedia_Running) ,LES(WT702.Val,MCV_HiSP) GRT(LIT801.Val,BRX_LoSP) LES(LIT801.Val,BRX_HiSP) OTE(ConditionedMedia_NoAdjust_Speed) ];
 		END_ROUTINE
 
+		ROUTINE DO_CAL (Description := "STATE MACHINE FOR DO CAL")
+				RC: "Set odo cal state engine to Enable EEPROM$N"
+				    "";
+				N: XIC(do_cal_start)[MOV(10,do_cal_state_var) ,OTU(do_cal_start) OTU(do_cal_reset) ];
+				N: XIC(do_cal_reset)[MOV(0,do_cal_state_var) ,MOV(16#0002,do_w_cal_control) ,OTU(do_cal_start) OTU(do_cal_reset) ];
+				RC: "oDO Cal State: Idle/reset params$N"
+				    "";
+				N: EQU(do_cal_state_var,0)[OTE(do_cal_b_0_idle) ,MOV(0,do_w_cal_control) ,MOV(3,do_w_user_level) ,MOV(0,do_w_user_password) ,MOV(0,do_w_cal_unit_cal) ,MOV(2,do_w_cal_stability) ,MOV(1,do_w_cal_buffer_tab) ,MOV(0,do_w_cal_date) ,MOV(0,do_w_cal_time) ];
+				RC: "oDO Cal State: Set User Level to 1$N"
+				    "";
+				N: EQU(do_cal_state_var,10)[OTE(do_cal_b_10_set_user2) ,MOV(16#0000000C,do_w_user_level) ,MOV(16#01145DEA,do_w_user_password) ,MOV(20,do_cal_state_var) ];
+				RC: "Change User Level to 1";
+				N: EQU(do_cal_state_var,20)[OTE(do_cal_b_20_set_user2_ack) ,EQU(do_r_user_level,12) MOV(30,do_cal_state_var) ];
+				RC: "oDO Cal State: Set params for Calibration";
+				N: EQU(do_cal_state_var,30)[OTE(do_cal_b_30_set_pt1_params) ,TON(do_cal_b_30_set_pt1_params_Timer,?,?) ,MOV(16#0004000A,do_w_cal_unit_cal) ,MOV(16#01,do_w_cal_stability) ,MOV(16#0001,do_w_cal_buffer_tab) ,MOV(16#18092023,do_w_cal_date) ,MOV(16#00001022,do_w_cal_time) ,XIC(do_cal_b_30_set_pt1_params_Timer.DN) MOV(40,do_cal_state_var) ];
+				RC: "Check Parmeters are Pushed to Probe. TBD Later.";
+				N: EQU(do_cal_state_var,40)[OTE(do_cal_b_40_check_params) ,MOV(50,do_cal_state_var) ];
+				RC: "Proceed to 2-Point Cal or Jump to 1-Point Cal";
+				N: EQU(do_cal_state_var,50)[OTE(do_cal_b_50_cal_method) ,EQU(2,do_w_cal_method) MOV(60,do_cal_state_var) ,EQU(1,do_w_cal_method) MOV(100,do_cal_state_var) ];
+				RC: "PH Cal State: Verify probe accepts cal params. Then continue 2pt cal or jump to 1 pt";
+				N: EQU(do_cal_state_var,60)[OTE(do_cal_b_60_place_probe) ,XIC(do_probe_placement_ready) MOV(16#01,do_w_cal_control) MOV(70,do_cal_state_var) ];
+				RC: "Wait for Operator to Confirm Stable Reading";
+				N: EQU(do_cal_state_var,70)[OTE(do_cal_b_70_wait_for_stability_pt1) ,XIC(do_stability_ok) EQU(do_r_cal_status,8) MOV(80,do_cal_state_var) ];
+				RC: "Save cal values and move to next step";
+				N: EQU(do_cal_state_var,80)[OTE(do_cal_b_80_write_pt1) ,MOV(3,do_w_cal_control) ,MOV(90,do_cal_state_var) ];
+				RC: "Waiting for Write to Finish Then Move to 2nd Point (Offset Cal)";
+				N: EQU(do_cal_state_var,90)[OTE(do_cal_b_90_wait_pt1_write) ,[EQU(do_r_cal_status,1) ,EQU(do_r_cal_status,2) ] MOV(100,do_cal_state_var) ];
+				RC: "2nd Point or Offset Cal Start";
+				N: EQU(do_cal_state_var,100)[OTE(do_cal_b_100_start_pt2) ,MOV(1,do_w_cal_method) ,NEQ(1,do_w_cal_control) MOV(1,do_w_cal_control) ,MOV(110,do_cal_state_var) ];
+				RC: "Offset Cal Probe Placement";
+				N: EQU(do_cal_state_var,110)[OTE(do_cal_b_110_place_probe_pt2) ,XIC(do_probe_placement_ready) MOV(120,do_cal_state_var) ];
+				RC: "Offset Cal Stability Check by Operator";
+				N: EQU(do_cal_state_var,120)[OTE(do_cal_b_120_wait_for_stability_pt2) ,XIC(do_stability_ok) EQU(do_r_cal_status,8) MOV(130,do_cal_state_var) ];
+				RC: "Initiate Calibration Write";
+				N: EQU(do_cal_state_var,130)[OTE(do_cal_b_130_write_pt2) ,MOV(3,do_w_cal_control) ,MOV(140,do_cal_state_var) ];
+				RC: "Finish saving cal value";
+				N: EQU(do_cal_state_var,140)[OTE(do_cal_b_140_wait_for_done) ,[EQU(do_r_cal_status,1) ,EQU(do_r_cal_status,2) ] MOV(150,do_cal_state_var) ];
+				N: EQU(do_cal_state_var,150)OTE(do_cal_b_150_done_ok);
+				N: EQU(do_cal_state_var,160)OTE(do_cal_b_160_done_error);
+				N: EQU(do_cal_state_var,170)OTE(do_cal_b_170_pwd_error);
+		END_ROUTINE
+
 		ROUTINE Main 
 				N: JSR(RL_PH,0);
 				N: JSR(RL_MTS,0);
@@ -23469,6 +23571,44 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: XIC(Perfusion_Start)OTL(Perfusion_On);
 				N: [XIC(EStop.Alm_TgtDisagree) ,XIC(Perfusion_Stop_Trigger) ]OTU(Perfusion_On);
 				N: XIC(Perfusion_On)XIO(P101_Cal_Running)[OTE(Perfusion_Running) ,XIC(Level_Control_Enable) [CPT(P105.PSet_SpeedRef,( P101_Update_Jog_Speed.Speed ) * ( 60 ) * ( P101_Cal_Constant ) * BRX_Level_Scaler.Out) ,LIM(Level_Deadband_High_SP,LIT801.Val,Level_Deadband_Low_SP) OTU(BRX_Level_Initialize) ,LIM(Level_Deadband_Low_SP,LIT801.Val,Level_Deadband_High_SP) OTL(BRX_Level_Initialize) ] ,XIO(Level_Control_Enable) MOV(P101_Speed,P105.PSet_SpeedRef) OTL(BRX_Level_Initialize) ];
+		END_ROUTINE
+
+		ROUTINE PH_CAL (Description := "STATE MACHINE FOR PH CAL")
+				RC: "Set ph cal state engine to Enable EEPROM$N"
+				    "";
+				N: XIC(ph_cal_start)[MOV(10,ph_cal_state_var) ,OTU(ph_cal_start) OTU(ph_cal_reset) ];
+				N: XIC(ph_cal_reset)[MOV(0,ph_cal_state_var) ,MOV(16#0002,ph_w_cal_control) ,OTU(ph_cal_start) OTU(ph_cal_reset) ];
+				RC: "PH Cal State: Idle/reset params$N"
+				    "";
+				N: EQU(ph_cal_state_var,0)[OTE(ph_cal_b_0_idle) ,MOV(0,ph_w_cal_control) ,MOV(3,ph_w_user_level) ,MOV(0,ph_w_user_password) ,MOV(0,ph_w_cal_unit_cal) ,MOV(2,ph_w_cal_stability) ,MOV(1,ph_w_cal_buffer_tab) ,MOV(0,ph_w_cal_date) ,MOV(0,ph_w_cal_time) ];
+				RC: "PH Cal State: Set User Level to 1$N"
+				    "";
+				N: EQU(ph_cal_state_var,10)[OTE(ph_cal_b_10_set_user2) ,MOV(16#0000000C,ph_w_user_level) ,MOV(16#01145DEA,ph_w_user_password) ,MOV(20,ph_cal_state_var) ];
+				RC: "Change User Level to 1";
+				N: EQU(ph_cal_state_var,20)[OTE(ph_cal_b_20_set_user2_ack) ,EQU(ph_r_user_level,12) MOV(30,ph_cal_state_var) ];
+				RC: "PH Cal State: Set params for Calibration";
+				N: EQU(ph_cal_state_var,30)[OTE(ph_cal_b_30_set_pt1_params) ,TON(ph_cal_b_30_set_pt1_params_Timer,?,?) ,MOV(16#01,ph_w_cal_stability) ,MOV(16#0001,ph_w_cal_buffer_tab) ,MOV(16#18092023,ph_w_cal_date) ,MOV(16#1022,ph_w_cal_time) ,XIC(ph_cal_b_30_set_pt1_params_Timer.DN) MOV(40,ph_cal_state_var) ];
+				RC: "Check Parmeters are Pushed to Probe. TBD Later.";
+				N: EQU(ph_cal_state_var,40)[OTE(ph_cal_b_40_check_params) ,MOV(50,ph_cal_state_var) ];
+				RC: "Proceed to 2-Point Cal or Jump to 1-Point Cal";
+				N: EQU(ph_cal_state_var,50)[OTE(ph_cal_b_50_cal_method) ,EQU(2,ph_w_cal_method) MOV(60,ph_cal_state_var) ,EQU(1,ph_w_cal_method) MOV(100,ph_cal_state_var) ];
+				RC: "PH Cal State: Verify probe accepts cal params. Then continue 2pt cal or jump to 1 pt";
+				N: EQU(ph_cal_state_var,60)[OTE(ph_cal_b_60_place_probe) ,XIC(pH_probe_placement_ready) MOV(16#01,ph_w_cal_control) MOV(70,ph_cal_state_var) ];
+				RC: "Wait for Operator to Confirm Stable Reading";
+				N: EQU(ph_cal_state_var,70)[OTE(ph_cal_b_70_wait_for_stability_pt1) ,XIC(pH_stability_ok) EQU(ph_r_cal_status,8) MOV(80,ph_cal_state_var) ];
+				RC: "Save cal values and move to next step";
+				N: EQU(ph_cal_state_var,80)[OTE(ph_cal_b_80_write_pt1) ,MOV(3,ph_w_cal_control) ,MOV(90,ph_cal_state_var) ];
+				RC: "Waiting for Write to Finish Then Move to 2nd Point (Offset Cal)";
+				N: EQU(ph_cal_state_var,90)[OTE(ph_cal_b_90_wait_pt1_write) ,[EQU(ph_r_cal_status,1) ,EQU(ph_r_cal_status,2) ] MOV(100,ph_cal_state_var) ];
+				RC: "2nd Point or Offset Cal Start";
+				N: EQU(ph_cal_state_var,100)[OTE(ph_cal_b_100_start_pt2) ,MOV(1,ph_w_cal_method) ,NEQ(1,ph_w_cal_control) MOV(1,ph_w_cal_control) ,MOV(110,ph_cal_state_var) ];
+				N: EQU(ph_cal_state_var,110)[OTE(ph_cal_b_110_place_probe_pt2) ,XIC(pH_probe_placement_ready) MOV(120,ph_cal_state_var) ];
+				N: EQU(ph_cal_state_var,120)[OTE(ph_cal_b_120_wait_for_stability_pt2) ,XIC(pH_stability_ok) EQU(ph_r_cal_status,8) MOV(130,ph_cal_state_var) ];
+				N: EQU(ph_cal_state_var,130)[OTE(ph_cal_b_130_write_pt2) ,MOV(3,ph_w_cal_control) ,MOV(140,ph_cal_state_var) ];
+				N: EQU(ph_cal_state_var,140)[OTE(ph_cal_b_140_wait_for_done) ,[EQU(ph_r_cal_status,1) ,EQU(ph_r_cal_status,2) ] MOV(150,ph_cal_state_var) ];
+				N: EQU(ph_cal_state_var,150)OTE(ph_cal_b_150_done_ok);
+				N: EQU(ph_cal_state_var,160)OTE(ph_cal_b_160_done_error);
+				N: EQU(ph_cal_state_var,170)OTE(ph_cal_b_170_pwd_error);
 		END_ROUTINE
 
 		ROUTINE RL_DO (Description := "Propagate MT scale data")
