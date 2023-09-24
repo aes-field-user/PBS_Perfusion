@@ -3,7 +3,7 @@
   Import-Export
   Version   := RSLogix 5000 v32.03
   Owner     := , 
-  Exported  := Fri Sep 22 12:49:52 2023
+  Exported  := Sat Sep 23 20:08:07 2023
 
   Note:  File encoded in UTF-8.  Only edit file in a program 
          which supports UTF-8 (like Notepad, not Wordpad).
@@ -211,38 +211,6 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	              KeyMask := 2#0000_0000_0000_0000)
 	END_MODULE
 
-	MODULE P105_Ethernet (Parent := "Local",
-	                      ParentModPortId := 3,
-	                      CatalogNumber := "530_630_730 EtherNet/IP Pump",
-	                      Vendor := 1542,
-	                      ProductType := 43,
-	                      ProductCode := 1,
-	                      Major := 2,
-	                      Minor := 5,
-	                      PortLabel := "A1",
-	                      NodeAddress := "192.168.1.13",
-	                      Mode := 2#0000_0000_0000_0000,
-	                      CompatibleModule := 1,
-	                      KeyMask := 2#0000_0000_0001_1111,
-	                      SafetyEnabled := 0)
-			ExtendedProp := [[[___<public><PL>02<Version Name=$Q2.5$Q/></PL><Vendor>Watson-Marlow Ltd</Vendor><CatNum>530_630_730 EtherNet/IP Pump</CatNum></public>___]]]
-			CONNECTION _200424002C962C64 (Rate := 20000,
-			                              InputSize := 100,
-			                              OutputSize := 19,
-			                              EventID := 0,
-			                              Priority := Scheduled,
-			                              InputConnectionType := Unicast,
-			                              InputProductionTrigger := Cyclic,
-			                              ConnectionPath := "20 04 24 00 2c 96 2c 64",
-			                              InputTagSuffix := "I",
-			                              OutputTagSuffix := "O")
-					InputData (COMMENT.FLOWCAL := "nl/rev") := [2,10000,1,0,0,0,2000,0,2000,0,20000,0,20000,2426,0,0,2200,0,0,42,1,47,1,2,25,0,6,0,65,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
-		];
-					OutputData  := [10000,300,2200,0,0,0,0,1,0,0,0,0,0];
-			END_CONNECTION
-
-	END_MODULE
-
 	MODULE P101_Drive (Description := "stf stepper drive p101",
 	                   Parent := "Local",
 	                   ParentModPortId := 3,
@@ -253,7 +221,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                   Major := 1,
 	                   Minor := 1,
 	                   PortLabel := "A1",
-	                   NodeAddress := "192.168.1.30",
+	                   NodeAddress := "192.168.1.31",
 	                   CommMethod := 536870913,
 	                   ConfigMethod := 8388609,
 	                   Mode := 2#0000_0000_0000_0000,
@@ -291,7 +259,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                   Major := 1,
 	                   Minor := 1,
 	                   PortLabel := "A1",
-	                   NodeAddress := "192.168.1.31",
+	                   NodeAddress := "192.168.1.32",
 	                   CommMethod := 536870913,
 	                   ConfigMethod := 8388609,
 	                   Mode := 2#0000_0000_0000_0000,
@@ -329,7 +297,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                   Major := 1,
 	                   Minor := 1,
 	                   PortLabel := "A1",
-	                   NodeAddress := "192.168.1.32",
+	                   NodeAddress := "192.168.1.33",
 	                   CommMethod := 536870913,
 	                   ConfigMethod := 8388609,
 	                   Mode := 2#0000_0000_0000_0000,
@@ -367,7 +335,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                   Major := 1,
 	                   Minor := 1,
 	                   PortLabel := "A1",
-	                   NodeAddress := "192.168.1.33",
+	                   NodeAddress := "192.168.1.34",
 	                   CommMethod := 536870913,
 	                   ConfigMethod := 8388609,
 	                   Mode := 2#0000_0000_0000_0000,
@@ -395,6 +363,38 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 	END_MODULE
 
+	MODULE P105_Ethernet (Parent := "Local",
+	                      ParentModPortId := 3,
+	                      CatalogNumber := "530_630_730 EtherNet/IP Pump",
+	                      Vendor := 1542,
+	                      ProductType := 43,
+	                      ProductCode := 1,
+	                      Major := 2,
+	                      Minor := 5,
+	                      PortLabel := "A1",
+	                      NodeAddress := "192.168.1.35",
+	                      Mode := 2#0000_0000_0000_0000,
+	                      CompatibleModule := 1,
+	                      KeyMask := 2#0000_0000_0001_1111,
+	                      SafetyEnabled := 0)
+			ExtendedProp := [[[___<public><PL>02<Version Name=$Q2.5$Q/></PL><CatNum>530_630_730 EtherNet/IP Pump</CatNum></public>___]]]
+			CONNECTION _200424002C962C64 (Rate := 20000,
+			                              InputSize := 100,
+			                              OutputSize := 19,
+			                              EventID := 0,
+			                              Priority := Scheduled,
+			                              InputConnectionType := Unicast,
+			                              InputProductionTrigger := Cyclic,
+			                              ConnectionPath := "20 04 24 00 2c 96 2c 64",
+			                              InputTagSuffix := "I",
+			                              OutputTagSuffix := "O")
+					InputData (COMMENT.FLOWCAL := "nl/rev") := [2,10000,1,0,0,0,2000,0,2000,0,20000,0,20000,2426,0,0,2200,0,0,42,1,47,1,2,25,0,6,0,65,0,65,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+		];
+					OutputData  := [10000,300,2200,0,0,0,0,1,0,0,0,0,0];
+			END_CONNECTION
+
+	END_MODULE
+
 	MODULE Spent_Media_Harvest_Scale (Description := "Hardy",
 	                                  Parent := "Local",
 	                                  ParentModPortId := 3,
@@ -405,12 +405,12 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                                  Major := 2,
 	                                  Minor := 35,
 	                                  PortLabel := "A1",
-	                                  NodeAddress := "192.168.1.34",
+	                                  NodeAddress := "192.168.1.41",
 	                                  Mode := 2#0000_0000_0000_0000,
 	                                  CompatibleModule := 1,
 	                                  KeyMask := 2#0000_0000_0001_1111,
 	                                  SafetyEnabled := 0)
-			ExtendedProp := [[[___<public><PL>02<Version Name=$Q1.3$Q/></PL><Vendor>Hardy Process Solutions</Vendor><CatNum>Hardy 6500 Series</CatNum></public>___]]]
+			ExtendedProp := [[[___<public><PL>02<Version Name=$Q1.3$Q/></PL><CatNum>Hardy 6500 Series</CatNum></public>___]]]
 			ConfigData  := [96,4,0,1,0,1.00000000e+001,2,9.99999000e+005,4,1.00000000e+001,0.00000000e+000,1.00115895e+000
 		,1.00000000e+003,3,10,0,0.00000000e+000,1,1.00000000e+001,3,0,0,0,0,0.00000000e+000];
 			CONNECTION _200424802C702C64 (Rate := 10000,
@@ -425,6 +425,52 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 			                              OutputTagSuffix := "O")
 					InputData (COMMENT.COMMAND_STATUS := "Status Register$N0: Command Success$N1: Motion Error$N2: A/D Error$N3: Out of Tolerance Error") := [2,0,0,0,0,0,0.00000000e+000,0.00000000e+000,0,0,0,0,0];
 					OutputData (COMMENT.COMMAND := "Write #1 to ZERO the gross weight. Write #2 to TARE net weight") := [2,0,0,0,0,0,0,0,0,0,0,0];
+			END_CONNECTION
+
+	END_MODULE
+
+	MODULE Wago_IO (Description := "Wago IO via Ethernet",
+	                Parent := "Local",
+	                ParentModPortId := 3,
+	                CatalogNumber := "750-363",
+	                Vendor := 40,
+	                ProductType := 12,
+	                ProductCode := 363,
+	                Major := 1,
+	                Minor := 4,
+	                PortLabel := "A1",
+	                NodeAddress := "192.168.1.51",
+	                Mode := 2#0000_0000_0000_0000,
+	                CompatibleModule := 1,
+	                KeyMask := 2#0000_0000_0001_1111,
+	                SafetyEnabled := 0)
+			ExtendedProp := [[[___<public><PL>01<Version Name=$Q1.7$Q/><Connection Name=$Q_200424012C662C6C$Q Format=$Q0$Q/><Connection Name=$Q_200424012C672C6D$Q Format=$Q0$Q/></PL><CatNum>750-363</CatNum></public>___]]]
+			CONNECTION _200424012C662C6C (Rate := 5000,
+			                              InputSize := 5,
+			                              OutputSize := 3,
+			                              EventID := 0,
+			                              Priority := Scheduled,
+			                              InputConnectionType := Unicast,
+			                              InputProductionTrigger := Cyclic,
+			                              ConnectionPath := "20 04 24 01 2c 66 2c 6c",
+			                              InputTagSuffix := "I1",
+			                              OutputTagSuffix := "O1")
+					InputData  := [0,[0]];
+					OutputData  := [[0,0,0]];
+			END_CONNECTION
+
+			CONNECTION _200424012C672C6D (Rate := 5000,
+			                              InputSize := 16,
+			                              OutputSize := 8,
+			                              EventID := 0,
+			                              Priority := Scheduled,
+			                              InputConnectionType := Unicast,
+			                              InputProductionTrigger := Cyclic,
+			                              ConnectionPath := "20 04 24 01 2c 67 2c 6d",
+			                              InputTagSuffix := "I2",
+			                              OutputTagSuffix := "O2")
+					InputData  := [0,[0,0,0,0,0,0,0,0,0,0,0,0]];
+					OutputData  := [[0,0,0,0,0,0,0,0]];
 			END_CONNECTION
 
 	END_MODULE
@@ -20886,6 +20932,340 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 	END_ADD_ON_INSTRUCTION_DEFINITION
 
+	ADD_ON_INSTRUCTION_DEFINITION WAGO_455 (Description := "Normalizes data received from a WAGO 750-455 4-Channel 4-20mA Analog Input Module.",
+	                                        Revision := "1.1",
+	                                        RevisionNote := "Changed condition for overcurrent detection.",
+	                                        ExecutePrescan := No,
+	                                        ExecutePostscan := No,
+	                                        ExecuteEnableInFalse := No,
+	                                        CreatedDate := "2009-08-05T16:34:19.287Z",
+	                                        CreatedBy := "PC0802\Larry",
+	                                        EditedDate := "2018-07-26T16:47:11.636Z",
+	                                        EditedBy := "pc05303\LARRY",
+	                                        SoftwareRevision := "v29.00",
+	                                        AdditionalHelpText := "The WAGO_455 instruction normalizes data received from a WAGO 750-455 4-Channel 4-20mA Analog Input Module.  When it is enabled, the instruction provides the following information:$N$N    Channel 1 current expressed as numerical value from 0 to 32763$N    Channel 1 current in mA (x100)$N    Channel 1 under-current or broken wire detection$N    Channel 1 over-current detection$N$N    Channel 2 current expressed as numerical value from 0 to 32763$N    Channel 2 current in mA (x100)$N    Channel 2 under-current or broken wire detection$N    Channel 2 over-current detection$N$N    Channel 3 current expressed as numerical value from 0 to 32763$N    Channel 3 current in mA (x100)$N    Channel 3 under-current or broken wire detection$N    Channel 3 over-current detection$N$N    Channel 4 current expressed as numerical value from 0 to 32763$N    Channel 4 current in mA (x100)$N    Channel 4 under-current or broken wire detection$N    Channel 4 over-current detection$N$NThe $'ModuleInputs$' array must be mapped to the 8-byte (SINT) input process image of the respective WAGO 750-455 4-Channel 4-20mA Analog Input Module.$N$NUse the Copy (COP) instruction to copy the 750-455 module$'s 8-byte (SINT) input process image (see $'Controller Tags$') to a SINT[8] array for passing data to the $'ModuleInputs$' InOut array.  Perform this operation before calling the 750_455 Add-On Instruction.$N$NThe outputs Ch#_Undercurrent provide the following indication:$N$N    Off (FALSE) :  Current reading is greater than or equal to the threshold value of 4mA.$N    On (TRUE)  :  Current reading is less than the threshold value of 4mA.$N$NThe outputs Ch#_Overcurrent provide the following indication:$N$N    Off (FALSE) :  Current reading is less than or equal to the threshold value of 20mA.$N    On (TRUE)  :  Current reading is greater than the threshold value of 20mA.$N$NConsult the WAGO 750-455 Product Manual for further information about the 4-Channel 4-20mA Analog Input Module.")
+		PARAMETERS
+			EnableIn : BOOL (Description := "Enable Input - System Defined Parameter",
+			                    Usage := Input,
+			                    RADIX := Decimal,
+			                    Required := No,
+			                    Visible := No,
+			                    ExternalAccess := Read Only);
+			EnableOut : BOOL (Description := "Enable Output - System Defined Parameter",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := No,
+			                     ExternalAccess := Read Only);
+			ModuleInputs : SINT[8] (Description := "Input process image of WAGO 750-455 module.",
+			                        COMMENT[1].7 := "TC1 Sign Bit",
+			                        COMMENT[3].7 := "TC2 Sign Bit",
+			                        Usage := InOut,
+			                        RADIX := Decimal,
+			                        Required := Yes,
+			                        Visible := Yes);
+			Ch1_Value : DINT (Description := "Channel 1 Current Expressed as Numerical Value from 0 to 32763",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch1_Current : DINT (Description := "Channel 1 Current in mA (x100)",
+			                       Usage := Output,
+			                       RADIX := Decimal,
+			                       Required := No,
+			                       Visible := Yes,
+			                       ExternalAccess := Read Only,
+			                       DefaultData := 0);
+			Ch1_UnderCurrent : BOOL (Description := "Channel 1 Under-Current or Broken Wire Detected",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch1_OverCurrent : BOOL (Description := "Channel 1 Over-Current Detected",
+			                           Usage := Output,
+			                           RADIX := Decimal,
+			                           Required := No,
+			                           Visible := Yes,
+			                           ExternalAccess := Read Only,
+			                           DefaultData := 0);
+			Ch2_Value : DINT (Description := "Channel 2 Current Expressed as Numerical Value from 0 to 32763",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch2_Current : DINT (Description := "Channel 2 Current in mA (x100)",
+			                       Usage := Output,
+			                       RADIX := Decimal,
+			                       Required := No,
+			                       Visible := Yes,
+			                       ExternalAccess := Read Only,
+			                       DefaultData := 0);
+			Ch2_UnderCurrent : BOOL (Description := "Channel 2 Under-Current or Broken Wire Detected",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch2_OverCurrent : BOOL (Description := "Channel 2 Over-Current Detected",
+			                           Usage := Output,
+			                           RADIX := Decimal,
+			                           Required := No,
+			                           Visible := Yes,
+			                           ExternalAccess := Read Only,
+			                           DefaultData := 0);
+			Ch3_Value : DINT (Description := "Channel 3 Current Expressed as Numerical Value from 0 to 32763",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch3_Current : DINT (Description := "Channel 3 Current in mA (x100)",
+			                       Usage := Output,
+			                       RADIX := Decimal,
+			                       Required := No,
+			                       Visible := Yes,
+			                       ExternalAccess := Read Only,
+			                       DefaultData := 0);
+			Ch3_UnderCurrent : BOOL (Description := "Channel 3 Under-Current or Broken Wire Detected",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch3_OverCurrent : BOOL (Description := "Channel 3 Over-Current Detected",
+			                           Usage := Output,
+			                           RADIX := Decimal,
+			                           Required := No,
+			                           Visible := Yes,
+			                           ExternalAccess := Read Only,
+			                           DefaultData := 0);
+			Ch4_Value : DINT (Description := "Channel 4 Current Expressed as Numerical Value from 0 to 32763",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch4_Current : DINT (Description := "Channel 4 Current in mA (x100)",
+			                       Usage := Output,
+			                       RADIX := Decimal,
+			                       Required := No,
+			                       Visible := Yes,
+			                       ExternalAccess := Read Only,
+			                       DefaultData := 0);
+			Ch4_UnderCurrent : BOOL (Description := "Channel 4 Under-Current or Broken Wire Detected",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch4_OverCurrent : BOOL (Description := "Channel 4 Over-Current Detected",
+			                           Usage := Output,
+			                           RADIX := Decimal,
+			                           Required := No,
+			                           Visible := Yes,
+			                           ExternalAccess := Read Only,
+			                           DefaultData := 0);
+		END_PARAMETERS
+
+		LOCAL_TAGS
+			tmpREAL : REAL[8] (RADIX := Float,
+			                  ExternalAccess := Read/Write,
+			                  DefaultData := "[0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000]");
+			tmpDINT : DINT[12] (RADIX := Decimal,
+			                  ExternalAccess := Read/Write,
+			                  DefaultData := "[0,0,0,0,0,0,0,0,0,0,0,0]");
+		END_LOCAL_TAGS
+
+		ROUTINE Logic 
+				N: BTD(ModuleInputs[0],0,tmpDINT[0],0,8)BTD(ModuleInputs[1],0,tmpDINT[1],8,8)ADD(tmpDINT[1],tmpDINT[0],tmpDINT[2]);
+				N: MOV(tmpDINT[2],Ch1_Value);
+				N: MOV(Ch1_Value,tmpREAL[0])DIV(tmpREAL[0],20.48,tmpREAL[1])ADD(tmpREAL[1],400,Ch1_Current);
+				N: EQU(Ch1_Value,16#0003)OTE(Ch1_UnderCurrent);
+				N: EQU(Ch1_Value,16#7FFB)OTE(Ch1_OverCurrent);
+				N: BTD(ModuleInputs[2],0,tmpDINT[3],0,8)BTD(ModuleInputs[3],0,tmpDINT[4],8,8)ADD(tmpDINT[4],tmpDINT[3],tmpDINT[5]);
+				N: MOV(tmpDINT[5],Ch2_Value);
+				N: MOV(Ch2_Value,tmpREAL[2])DIV(tmpREAL[2],20.48,tmpREAL[3])ADD(tmpREAL[3],400,Ch2_Current);
+				N: EQU(Ch2_Value,16#0003)OTE(Ch2_UnderCurrent);
+				N: EQU(Ch2_Value,16#7FFB)OTE(Ch2_OverCurrent);
+				N: BTD(ModuleInputs[4],0,tmpDINT[6],0,8)BTD(ModuleInputs[5],0,tmpDINT[7],8,8)ADD(tmpDINT[7],tmpDINT[6],tmpDINT[8]);
+				N: MOV(tmpDINT[8],Ch3_Value);
+				N: MOV(Ch3_Value,tmpREAL[4])DIV(tmpREAL[4],20.48,tmpREAL[5])ADD(tmpREAL[5],400,Ch3_Current);
+				N: EQU(Ch3_Value,16#0003)OTE(Ch3_UnderCurrent);
+				N: EQU(Ch3_Value,16#7FFB)OTE(Ch3_OverCurrent);
+				N: BTD(ModuleInputs[6],0,tmpDINT[9],0,8)BTD(ModuleInputs[7],0,tmpDINT[10],8,8)ADD(tmpDINT[10],tmpDINT[9],tmpDINT[11]);
+				N: MOV(tmpDINT[11],Ch4_Value);
+				N: MOV(Ch4_Value,tmpREAL[6])DIV(tmpREAL[6],20.48,tmpREAL[7])ADD(tmpREAL[7],400,Ch4_Current);
+				N: EQU(Ch4_Value,16#0003)OTE(Ch4_UnderCurrent);
+				N: EQU(Ch4_Value,16#7FFB)OTE(Ch4_OverCurrent);
+		END_ROUTINE
+
+	END_ADD_ON_INSTRUCTION_DEFINITION
+
+	ADD_ON_INSTRUCTION_DEFINITION WAGO_461 (Description := "Normalizes data received from a WAGO 750-461 2-Channel RTD Analog Input Module.",
+	                                        Revision := "1.2",
+	                                        RevisionNote := "Changed handling of negative values.",
+	                                        ExecutePrescan := No,
+	                                        ExecutePostscan := No,
+	                                        ExecuteEnableInFalse := No,
+	                                        CreatedDate := "2009-08-05T16:34:19.287Z",
+	                                        CreatedBy := "PC0802\Larry",
+	                                        EditedDate := "2011-08-12T16:53:14.448Z",
+	                                        EditedBy := "PC0802\Larry",
+	                                        SoftwareRevision := "v16.03",
+	                                        AdditionalHelpText := "The WAGO_461 instruction normalizes data received from a WAGO 750-461 2-Channel RTD Analog Input Module and its variants.  When it is enabled, the instruction provides the following information:$N$N    Channel 1 measurement expressed as numerical value (Hex)$N    Channel 1 temperature in degC x10 (for Pt and Ni RTD sensors only)$N    Channel 1 resistance in ohms (for resistance measuring only)$N    Channel 1 under-range detection$N    Channel 1 over-range detection (e.g. broken wire)$N$N    Channel 2 measurement expressed as numerical value (Hex)$N    Channel 2 temperature in degC x10 (for Pt and Ni RTD sensors only)$N    Channel 2 resistance in ohms (for resistance measuring only)$N    Channel 2 under-range detection$N    Channel 2 over-range detection (e.g. broken wire)$N$NThe $'ModuleInputs$' array must be mapped to the 4-byte (SINT) input process image of the respective WAGO 750-461 2-Channel RTD Analog Input Module.$N$NUse the Copy (COP) instruction to copy the 750-461 module$'s 4-byte (SINT) input process image (see $'Controller Tags$') to a SINT[4] array for passing data to the $'ModuleInputs$' InOut array.  Perform this operation before calling the 750_461 Add-On Instruction.$N$NNote: This instruction will only work with the standard 750-461 module and the following variants:  $N750-461/000-002$N750-461/000-003$N750-461/000-004$N750-461/000-005$N750-461/000-006$N750-461/000-007$N750-461/003-000 (configured as one of the variants listed here)$NOther variations of this module are not currently supported.$N$NThe Ch1_RTD_Type and Ch2_RTD_Type instruction inputs allow selection of the resistive type for the respective module input channel.  Enter the value 0-9 to define the resistive type for each channel:$N$N    0 : Pt100 (default)$N    1 : Reserved (not currently supported)$N    2 : Reserved (not currently supported)$N    3 : Pt1000$N    4 : Ni100$N    5 : Reserved (not currently supported)$N    6 : Ni1000$N    7 : 10 Ohm to 1.2 kOhm$N    8 : 10 Ohm to 5.0 kOhm$N    9 : Channel not in use$N$NConsult the WAGO 750-461 Product Manual for further information about the 2-Channel RTD Analog Input Module.")
+		PARAMETERS
+			EnableIn : BOOL (Description := "Enable Input - System Defined Parameter",
+			                    Usage := Input,
+			                    RADIX := Decimal,
+			                    Required := No,
+			                    Visible := No,
+			                    ExternalAccess := Read Only);
+			EnableOut : BOOL (Description := "Enable Output - System Defined Parameter",
+			                     Usage := Output,
+			                     RADIX := Decimal,
+			                     Required := No,
+			                     Visible := No,
+			                     ExternalAccess := Read Only);
+			ModuleInputs : SINT[4] (Description := "Input process image of WAGO 750-461 module.",
+			                        COMMENT[1].7 := "TC1 Sign Bit",
+			                        COMMENT[3].7 := "TC2 Sign Bit",
+			                        Usage := InOut,
+			                        RADIX := Decimal,
+			                        Required := Yes,
+			                        Visible := Yes);
+			Ch1_Value : DINT (Description := "Ch 1 Resistance Value (Hex)",
+			                     Usage := Output,
+			                     RADIX := Hex,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch1_Temp_degCx10 : DINT (Description := "Channel 1 Temperature (degCx10)",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch1_Ohms : DINT (Description := "Channel 1 Resistance (ohms)",
+			                    Usage := Output,
+			                    RADIX := Decimal,
+			                    Required := No,
+			                    Visible := Yes,
+			                    ExternalAccess := Read Only,
+			                    DefaultData := 0);
+			Ch1_RTD_Type : DINT (Description := "(See Add-On Help for RTD Types)",
+			                        Usage := Input,
+			                        RADIX := Decimal,
+			                        Required := Yes,
+			                        Visible := Yes,
+			                        DefaultData := 0);
+			Ch1_UnderRange : BOOL (Description := "Channel 1 Under-Range Detected",
+			                          Usage := Output,
+			                          RADIX := Decimal,
+			                          Required := No,
+			                          Visible := Yes,
+			                          ExternalAccess := Read Only,
+			                          DefaultData := 0);
+			Ch1_OverRange : BOOL (Description := "Channel 1 Over-Range Detected",
+			                         Usage := Output,
+			                         RADIX := Decimal,
+			                         Required := No,
+			                         Visible := Yes,
+			                         ExternalAccess := Read Only,
+			                         DefaultData := 0);
+			Ch2_Value : DINT (Description := "Ch 2 Resistance Value (Hex)",
+			                     Usage := Output,
+			                     RADIX := Hex,
+			                     Required := No,
+			                     Visible := Yes,
+			                     ExternalAccess := Read Only,
+			                     DefaultData := 0);
+			Ch2_Temp_degCx10 : DINT (Description := "Channel 2 Temperature (degCx10)",
+			                            Usage := Output,
+			                            RADIX := Decimal,
+			                            Required := No,
+			                            Visible := Yes,
+			                            ExternalAccess := Read Only,
+			                            DefaultData := 0);
+			Ch2_Ohms : DINT (Description := "Channel 2 Resistance (ohms)",
+			                    Usage := Output,
+			                    RADIX := Decimal,
+			                    Required := No,
+			                    Visible := Yes,
+			                    ExternalAccess := Read Only,
+			                    DefaultData := 0);
+			Ch2_RTD_Type : DINT (Description := "(See Add-On Help for RTD Types)",
+			                        Usage := Input,
+			                        RADIX := Decimal,
+			                        Required := Yes,
+			                        Visible := Yes,
+			                        DefaultData := 0);
+			Ch2_UnderRange : BOOL (Description := "Channel 2 Under-Range Detected",
+			                          Usage := Output,
+			                          RADIX := Decimal,
+			                          Required := No,
+			                          Visible := Yes,
+			                          ExternalAccess := Read Only,
+			                          DefaultData := 0);
+			Ch2_OverRange : BOOL (Description := "Channel 2 Over-Range Detected",
+			                         Usage := Output,
+			                         RADIX := Decimal,
+			                         Required := No,
+			                         Visible := Yes,
+			                         ExternalAccess := Read Only,
+			                         DefaultData := 0);
+		END_PARAMETERS
+
+		LOCAL_TAGS
+			tmpDINT : DINT[10] (RADIX := Decimal,
+			                  ExternalAccess := Read/Write,
+			                  DefaultData := "[0,0,0,0,0,0,0,0,0,0]");
+			tmpINT : INT (RADIX := Decimal,
+			                 ExternalAccess := Read/Write,
+			                 DefaultData := 0);
+		END_LOCAL_TAGS
+
+		ROUTINE Logic 
+				RC: "**** CHANNEL 1 ****";
+				N: BTD(ModuleInputs[0],0,tmpDINT[0],0,8)BTD(ModuleInputs[1],0,tmpDINT[1],8,8)ADD(tmpDINT[1],tmpDINT[0],tmpDINT[2])MOV(tmpDINT[2],Ch1_Value);
+				RC: "**** Pt100, Pt1000 ****";
+				N: [EQU(Ch1_RTD_Type,0) ,EQU(Ch1_RTD_Type,3) ][NEQ(Ch1_Value,16#8001) MOV(Ch1_Value,tmpINT) MOV(tmpINT,Ch1_Temp_degCx10) ,MOV(0,Ch1_Ohms) ,[EQU(Ch1_Value,16#8001) MOV(-2000,Ch1_Temp_degCx10) OTL(Ch1_UnderRange) ,NEQ(Ch1_Value,16#8001) OTU(Ch1_UnderRange) ] ,[EQU(Ch1_Value,16#2134) OTL(Ch1_OverRange) ,NEQ(Ch1_Value,16#2134) OTU(Ch1_OverRange) ] ];
+				RC: "**** Ni100, Ni1000 ****";
+				N: [EQU(Ch1_RTD_Type,4) ,EQU(Ch1_RTD_Type,6) ][NEQ(Ch1_Value,16#8001) NEQ(Ch1_Value,16#2134) MOV(Ch1_Value,tmpINT) MOV(tmpINT,Ch1_Temp_degCx10) ,MOV(0,Ch1_Ohms) ,[EQU(Ch1_Value,16#8001) MOV(-600,Ch1_Temp_degCx10) OTL(Ch1_UnderRange) ,NEQ(Ch1_Value,16#8001) OTU(Ch1_UnderRange) ] ,[EQU(Ch1_Value,16#2134) MOV(2500,Ch1_Temp_degCx10) OTL(Ch1_OverRange) ,NEQ(Ch1_Value,16#2134) OTU(Ch1_OverRange) ] ];
+				RC: "**** 10 0hm to 1.2 k-ohm ****";
+				N: EQU(Ch1_RTD_Type,7)[NEQ(Ch1_Value,16#EC00) NEQ(Ch1_Value,16#2134) DIV(Ch1_Value,10,Ch1_Ohms) ,MOV(0,Ch1_Temp_degCx10) ,EQU(Ch1_Value,16#EC00) MOV(0,Ch1_Ohms) OTU(Ch1_UnderRange) ,[EQU(Ch1_Value,16#2134) MOV(1200,Ch1_Ohms) OTL(Ch1_OverRange) ,NEQ(Ch1_Value,16#2134) OTU(Ch1_OverRange) ] ];
+				RC: "**** 10 0hm to 5.0 k-ohm ****";
+				N: EQU(Ch1_RTD_Type,8)[NEQ(Ch1_Value,16#EC00) NEQ(Ch1_Value,16#2710) DIV(Ch1_Value,2,Ch1_Ohms) ,MOV(0,Ch1_Temp_degCx10) ,EQU(Ch1_Value,16#EC00) MOV(0,Ch1_Ohms) OTU(Ch1_UnderRange) ,[EQU(Ch1_Value,16#2710) MOV(5000,Ch1_Ohms) OTL(Ch1_OverRange) ,NEQ(Ch1_Value,16#2710) OTU(Ch1_OverRange) ] ];
+				RC: "**** Unsupported RTD_Type Entered ****";
+				N: [LES(Ch1_RTD_Type,0) ,GRT(Ch1_RTD_Type,8) ,EQU(Ch1_RTD_Type,1) ,EQU(Ch1_RTD_Type,2) ,EQU(Ch1_RTD_Type,5) ][MOV(0,Ch1_Temp_degCx10) ,MOV(0,Ch1_Ohms) ,OTU(Ch1_UnderRange) OTU(Ch1_OverRange) ];
+				RC: "**** CHANNEL 2 ****";
+				N: BTD(ModuleInputs[2],0,tmpDINT[5],0,8)BTD(ModuleInputs[3],0,tmpDINT[6],8,8)ADD(tmpDINT[6],tmpDINT[5],tmpDINT[7])MOV(tmpDINT[7],Ch2_Value);
+				RC: "**** Pt100, Pt1000 ****";
+				N: [EQU(Ch2_RTD_Type,0) ,EQU(Ch2_RTD_Type,3) ][NEQ(Ch2_Value,16#8001) MOV(Ch2_Value,tmpINT) MOV(tmpINT,Ch2_Temp_degCx10) ,MOV(0,Ch2_Ohms) ,[EQU(Ch2_Value,16#8001) MOV(-2000,Ch2_Temp_degCx10) OTL(Ch2_UnderRange) ,NEQ(Ch2_Value,16#8001) OTU(Ch2_UnderRange) ] ,[EQU(Ch2_Value,16#2134) OTL(Ch2_OverRange) ,NEQ(Ch2_Value,16#2134) OTU(Ch2_OverRange) ] ];
+				RC: "**** Ni100, Ni1000 ****";
+				N: [EQU(Ch2_RTD_Type,4) ,EQU(Ch2_RTD_Type,6) ][NEQ(Ch2_Value,16#8001) NEQ(Ch2_Value,16#2134) MOV(Ch2_Value,tmpINT) MOV(tmpINT,Ch2_Temp_degCx10) ,MOV(0,Ch2_Ohms) ,[EQU(Ch2_Value,16#8001) MOV(-600,Ch2_Temp_degCx10) OTL(Ch2_UnderRange) ,NEQ(Ch2_Value,16#8001) OTU(Ch2_UnderRange) ] ,[EQU(Ch2_Value,16#2134) MOV(2500,Ch2_Temp_degCx10) OTL(Ch2_OverRange) ,NEQ(Ch2_Value,16#2134) OTU(Ch2_OverRange) ] ];
+				RC: "**** 10 0hm to 1.2 k-ohm ****";
+				N: EQU(Ch2_RTD_Type,7)[NEQ(Ch2_Value,16#EC00) NEQ(Ch2_Value,16#2134) DIV(Ch2_Value,10,Ch2_Ohms) ,MOV(0,Ch2_Temp_degCx10) ,EQU(Ch2_Value,16#EC00) MOV(0,Ch2_Ohms) OTU(Ch2_UnderRange) ,[EQU(Ch2_Value,16#2134) MOV(1200,Ch2_Ohms) OTL(Ch2_OverRange) ,NEQ(Ch2_Value,16#2134) OTU(Ch2_OverRange) ] ];
+				RC: "**** 10 0hm to 5.0 k-ohm ****";
+				N: EQU(Ch2_RTD_Type,8)[NEQ(Ch2_Value,16#EC00) NEQ(Ch2_Value,16#2710) DIV(Ch2_Value,2,Ch2_Ohms) ,MOV(0,Ch2_Temp_degCx10) ,EQU(Ch2_Value,16#EC00) MOV(0,Ch2_Ohms) OTU(Ch2_UnderRange) ,[EQU(Ch2_Value,16#2710) MOV(5000,Ch2_Ohms) OTL(Ch2_OverRange) ,NEQ(Ch2_Value,16#2710) OTU(Ch2_OverRange) ] ];
+				RC: "**** Unsupported RTD_Type Entered ****";
+				N: [LES(Ch2_RTD_Type,0) ,GRT(Ch2_RTD_Type,8) ,EQU(Ch2_RTD_Type,1) ,EQU(Ch2_RTD_Type,2) ,EQU(Ch2_RTD_Type,5) ][MOV(0,Ch2_Temp_degCx10) ,MOV(0,Ch2_Ohms) ,OTU(Ch2_UnderRange) OTU(Ch2_OverRange) ];
+		END_ROUTINE
+
+	END_ADD_ON_INSTRUCTION_DEFINITION
+
 	TAG
 		Abort_MCV_Initial_Fill : BOOL (RADIX := Decimal) := 0;
 		AIC0706 : PID_ENHANCED (Description := "Disolved Oxygen PID") := [1,40960,3.26333976e+000,2.00000000e+002,0.00000000e+000,9.00000000e+001,3.26333976e+000
@@ -21251,6 +21631,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		            RADIX := Float) := 0.00000000e+000;
 		DO_LoDev : REAL (Description := "low deviation alarm$N",
 		            RADIX := Float) := 0.00000000e+000;
+		DO_Normalized : DINT (RADIX := Decimal) := 0;
 		DO_ON : BOOL (RADIX := Decimal) := 1;
 		DO_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
 		do_probe_placement_ready : BOOL (RADIX := Decimal) := 0;
@@ -21264,8 +21645,9 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		do_r_unit : DINT (RADIX := Decimal) := 0;
 		do_r_user_level : DINT (RADIX := Decimal) := 0;
 		do_r_user_password : DINT (RADIX := Decimal) := 0;
-		do_r_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
 		do_r_wrong_sensor : DINT (RADIX := Decimal) := 0;
+		DO_Scale : SCALE  := [1,0.00000000e+000,3.27670000e+004,0.00000000e+000,3.00000000e+002,0.00000000e+000,0,0.00000000e+000
+				,0,5.60519386e-045,0.00000000e+000,0.00000000e+000,0.00000000e+000];
 		do_stability_ok : BOOL (RADIX := Decimal) := 0;
 		do_w_cal_buffer_tab : DINT (RADIX := Decimal) := 0;
 		do_w_cal_control : DINT (RADIX := Decimal) := 0;
@@ -21278,7 +21660,6 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		do_w_sensor_type : DINT (RADIX := Decimal) := 0;
 		do_w_user_level : DINT (RADIX := Decimal) := 0;
 		do_w_user_password : DINT (RADIX := Decimal) := 0;
-		do_w_user_unlock_eeprom : DINT (RADIX := Decimal) := 0;
 		Enable_Toggle : BOOL (RADIX := Decimal) := 1;
 		EStop : P_DIn  := [1128428823,0,0.00000000e+000,1,18,7,0,1,1,[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				],[14,'Discrete Input$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
@@ -21734,6 +22115,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		MT_0_R_UNIT : DINT (RADIX := Decimal) := 0;
 		MT_0_R_ZERO_ACK : BOOL (RADIX := Decimal) := 0;
 		MT_0_W_RESET : BOOL (RADIX := Decimal) := 0;
+		MT_0_W_SER_PORT : DINT (RADIX := Decimal) := 0;
 		MT_0_W_TARE : BOOL (RADIX := Decimal) := 0;
 		MT_0_W_ZERO : BOOL (RADIX := Decimal) := 0;
 		MT_1_R_DATA_OK : BOOL (RADIX := Decimal) := 1;
@@ -21744,6 +22126,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		MT_1_R_UNIT : DINT (RADIX := Decimal) := 0;
 		MT_1_R_ZERO_ACK : BOOL (RADIX := Decimal) := 0;
 		MT_1_W_RESET : BOOL (RADIX := Decimal) := 0;
+		MT_1_W_SER_PORT : DINT (RADIX := Decimal) := 0;
 		MT_1_W_TARE : BOOL (RADIX := Decimal) := 0;
 		MT_1_W_ZERO : BOOL (RADIX := Decimal) := 0;
 		N2CVMax : REAL (RADIX := Float) := -5.00000000e+000;
@@ -21893,7 +22276,8 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0],[9,0,242,0,427,0,74332490,0,0,0,255,15,0,0],[0,0]];
 		P101_Jog_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P101_Jog_Update_Timer : TIMER  := [0,1000,0];
-		P101_MaxRPM : REAL (RADIX := Float) := 2.00000000e+002;
+		P101_MaxRPM : REAL (RADIX := Float,
+		            Constant := Yes) := 4.50000000e+002;
 		P101_Motor_Constant : DINT (RADIX := Decimal) := 20000;
 		P101_New_Speed : REAL (RADIX := Float) := 0.00000000e+000;
 		P101_Relative_Move : AMP_Relative_Move  := [43,100,0,0.00000000e+000,1.00000000e+001,1.00000000e+001,70,[9,0],[-1609548288,130,200],[111440,130
@@ -21947,21 +22331,21 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		P102_Alarm_Reset_Trigger : BOOL (RADIX := Decimal) := 0;
 		P102_Cal : Pump_Cal  := [32,0.00000000e+000,0.00000000e+000,5.00000000e-001,1.00000000e+002,0.00000000e+000,0.00000000e+000
 				,5,[0,60000,0],[0,30000,0],0.00000000e+000];
-		P102_CalRevs : REAL (RADIX := Float) := 0.00000000e+000;
+		P102_CalRevs : REAL (RADIX := Float) := 5.00000000e+001;
 		P102_Cal_Abort : BOOL (RADIX := Decimal) := 0;
 		P102_Cal_Accept : BOOL (RADIX := Decimal) := 0;
 		P102_Cal_ColConst : REAL (RADIX := Float) := 9.99999975e-005;
 		P102_Cal_Collected : REAL (RADIX := Float) := 1.00000000e+002;
 		P102_Cal_Complete : BOOL (RADIX := Decimal) := 0;
-		P102_Cal_Constant : REAL (RADIX := Float) := 0.00000000e+000;
+		P102_Cal_Constant : REAL (RADIX := Float) := 2.00000000e+000;
 		P102_Cal_Direction : BOOL (RADIX := Decimal) := 0;
-		P102_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 0;
-		P102_Cal_Max_Flow : REAL (RADIX := Float) := 0.00000000e+000;
+		P102_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 1000000;
+		P102_Cal_Max_Flow : REAL (RADIX := Float) := 4.00000000e+002;
 		P102_Cal_Running : BOOL (RADIX := Decimal) := 0;
 		P102_Cal_Speed : REAL (Description := "ml/min",
 		            RADIX := Float) := 0.00000000e+000;
 		P102_Cal_Start : BOOL (RADIX := Decimal) := 0;
-		P102_Cal_Steps : REAL (RADIX := Float) := 0.00000000e+000;
+		P102_Cal_Steps : REAL (RADIX := Float) := 1.00000000e+006;
 		P102_Crash_Stop : AMP_Crash_Stop  := [83,100,10,[0,0],[-1609548088,130,200],[0,130,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 		P102_Crash_Stop_Trigger : BOOL (RADIX := Decimal) := 0;
 		P102_Current_Speed : REAL (RADIX := Float) := 0.00000000e+000;
@@ -22004,10 +22388,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0]];
 		P102_Jog_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P102_Jog_Update_Timer : TIMER  := [0,1000,0];
-		P102_MaxRPM : REAL (RADIX := Float) := 0.00000000e+000;
+		P102_MaxRPM : REAL (RADIX := Float,
+		            Constant := Yes) := 4.50000000e+002;
 		P102_Motor_Constant : REAL (RADIX := Float) := 2.00000000e+004;
-		P102_Relative_Move : AMP_Relative_Move  := [67,100,0,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[0,0],[-1609548488,130,200],[0,130,0],[0,0,0,0
-				,0,0,0,0,0,0,0,0,0,0],[0,0]];
+		P102_Relative_Move : AMP_Relative_Move  := [67,100,1000000,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[0,0],[-1609548488,130,200],[0,130
+				,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0]];
 		P102_Relative_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P102_Running_Fwd : BOOL (RADIX := Decimal) := 0;
 		P102_Running_Rev : BOOL (RADIX := Decimal) := 0;
@@ -22048,21 +22433,21 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		P103_Alarm_Reset_Trigger : BOOL (RADIX := Decimal) := 0;
 		P103_Cal : Pump_Cal  := [64,5.00000000e+001,0.00000000e+000,5.00000000e-001,1.00000000e+002,1.00000000e+002,0.00000000e+000
 				,5,[0,60000,0],[0,30000,0],5.00000000e+001];
-		P103_CalRevs : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_CalRevs : REAL (RADIX := Float) := 5.00000000e+000;
 		P103_Cal_Abort : BOOL (RADIX := Decimal) := 0;
 		P103_Cal_Accept : BOOL (RADIX := Decimal) := 0;
-		P103_Cal_ColConst : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_Cal_ColConst : REAL (RADIX := Float) := 9.99999975e-005;
 		P103_Cal_Collected : REAL (RADIX := Float) := 0.00000000e+000;
 		P103_Cal_Complete : BOOL (RADIX := Decimal) := 0;
-		P103_Cal_Constant : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_Cal_Constant : REAL (RADIX := Float) := 2.00000000e+000;
 		P103_Cal_Direction : BOOL (RADIX := Decimal) := 0;
-		P103_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 0;
-		P103_Cal_Max_Flow : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 1000000;
+		P103_Cal_Max_Flow : REAL (RADIX := Float) := 4.00000000e+002;
 		P103_Cal_Running : BOOL (RADIX := Decimal) := 0;
 		P103_Cal_Speed : REAL (Description := "ml/min",
 		            RADIX := Float) := 0.00000000e+000;
 		P103_Cal_Start : BOOL (RADIX := Decimal) := 0;
-		P103_Cal_Steps : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_Cal_Steps : REAL (RADIX := Float) := 1.00000000e+006;
 		P103_Crash_Stop : AMP_Crash_Stop  := [43,100,70,[9,0],[-1609548088,130,200],[881448,130,0],[9,0,242,0,379,0,0,0,0,0,255,15,0,0]];
 		P103_Crash_Stop_Trigger : BOOL (RADIX := Decimal) := 0;
 		P103_Current_Speed : REAL (RADIX := Float) := -1.#IND0000e+000;
@@ -22105,10 +22490,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0],[9,0,242,0,379,0,0,0,0,0,255,15,0,0],[0,0]];
 		P103_Jog_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P103_Jog_Update_Timer : TIMER  := [881248,1000,0];
-		P103_MaxRPM : REAL (RADIX := Float) := 0.00000000e+000;
+		P103_MaxRPM : REAL (RADIX := Float,
+		            Constant := Yes) := 4.50000000e+002;
 		P103_Motor_Constant : REAL (RADIX := Float) := 2.00000000e+004;
-		P103_Relative_Move : AMP_Relative_Move  := [67,100,0,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[9,0],[-1609547888,130,200],[0,130,0],[9,0,242
-				,0,379,0,0,0,0,0,255,15,0,0],[0,0]];
+		P103_Relative_Move : AMP_Relative_Move  := [67,100,1000000,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[9,0],[-1609547888,130,200],[0,130
+				,0],[9,0,242,0,379,0,0,0,0,0,255,15,0,0],[0,0]];
 		P103_Relative_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P103_Running_Fwd : BOOL (RADIX := Decimal) := 0;
 		P103_Running_Rev : BOOL (RADIX := Decimal) := 0;
@@ -22149,24 +22535,24 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		P104_Alarm_Reset_Trigger : BOOL (RADIX := Decimal) := 0;
 		P104_Cal : Pump_Cal  := [64,1.10000000e+002,0.00000000e+000,5.00000000e-001,1.00000000e+002,2.20000000e+002,0.00000000e+000
 				,5,[0,60000,0],[0,30000,0],1.10000000e+002];
-		P104_CalRevs : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_CalRevs : REAL (RADIX := Float) := 5.00000000e+000;
 		P104_Cal_Abort : BOOL (RADIX := Decimal) := 0;
 		P104_Cal_Accept : BOOL (RADIX := Decimal) := 0;
-		P104_Cal_ColConst : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_Cal_ColConst : REAL (RADIX := Float) := 9.99999975e-005;
 		P104_Cal_Collected : REAL (RADIX := Float) := 0.00000000e+000;
 		P104_Cal_Complete : BOOL (RADIX := Decimal) := 0;
-		P104_Cal_Constant : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_Cal_Constant : REAL (RADIX := Float) := 2.00000000e+000;
 		P104_Cal_Direction : BOOL (RADIX := Decimal) := 0;
-		P104_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 0;
-		P104_Cal_Max_Flow : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_Cal_Encoder_Steps : DINT (RADIX := Decimal) := 1000000;
+		P104_Cal_Max_Flow : REAL (RADIX := Float) := 4.00000000e+002;
 		P104_Cal_Running : BOOL (RADIX := Decimal) := 0;
 		P104_Cal_Speed : REAL (Description := "ml/min",
 		            RADIX := Float) := 0.00000000e+000;
 		P104_Cal_Start : BOOL (RADIX := Decimal) := 0;
-		P104_Cal_Steps : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_Cal_Steps : REAL (RADIX := Float) := 1.00000000e+006;
 		P104_Crash_Stop : AMP_Crash_Stop  := [83,100,10,[0,0],[-1609548088,130,200],[0,130,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 		P104_Crash_Stop_Trigger : BOOL (RADIX := Decimal) := 0;
-		P104_Current_Speed : DINT (RADIX := Decimal) := 0;
+		P104_Current_Speed : REAL (RADIX := Float) := 0.00000000e+000;
 		P104_Disable : AMP_Motor_Disable  := [43,100,70,[0,0],[-1609547888,130,200],[2700442,130,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 		P104_Disable_Trigger : BOOL (RADIX := Decimal) := 0;
 		P104_Dose_Abort : BOOL (RADIX := Decimal) := 0;
@@ -22206,10 +22592,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0]];
 		P104_Jog_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P104_Jog_Update_Timer : TIMER  := [0,1000,0];
-		P104_MaxRPM : REAL (RADIX := Float) := 0.00000000e+000;
+		P104_MaxRPM : REAL (RADIX := Float,
+		            Constant := Yes) := 4.50000000e+002;
 		P104_Motor_Constant : REAL (RADIX := Float) := 2.00000000e+004;
-		P104_Relative_Move : AMP_Relative_Move  := [67,100,0,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[0,0],[-1609548088,130,200],[0,130,0],[0,0,0,0
-				,0,0,0,0,0,0,0,0,0,0],[0,0]];
+		P104_Relative_Move : AMP_Relative_Move  := [67,100,1000000,0.00000000e+000,1.00000000e+001,1.00000000e+001,10,[0,0],[-1609548088,130,200],[0,130
+				,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0]];
 		P104_Relative_Move_Trigger : BOOL (RADIX := Decimal) := 0;
 		P104_Running_Fwd : BOOL (RADIX := Decimal) := 0;
 		P104_Running_Rev : BOOL (RADIX := Decimal) := 0;
@@ -22289,7 +22676,8 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				],[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'],[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				]],[6,'RA-BAS$00$00$00$00$00$00'],0,[6,'area01$00$00'],[5,'EStop$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				]];
-		P105_MaxRPM : REAL (RADIX := Float) := 4.00000000e+002;
+		P105_MaxRPM : REAL (RADIX := Float,
+		            Constant := Yes) := 4.00000000e+002;
 		P105_mLrev : REAL (Description := "mL/rev",
 		            RADIX := Float) := 1.00000000e+001;
 		P105_Motor_Constant : REAL (RADIX := Float) := 2.00000000e+001;
@@ -22347,6 +22735,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		pH_Initialize : BOOL (RADIX := Decimal) := 0;
 		pH_LoDev : REAL (Description := "pH Lo deviation alarm$N",
 		            RADIX := Float) := 0.00000000e+000;
+		pH_Normalized : REAL (RADIX := Float) := 0.00000000e+000;
 		PH_On : BOOL (RADIX := Decimal) := 1;
 		pH_PID_AUTOREQ : BOOL (RADIX := Decimal) := 1;
 		pH_probe_placement_ready : BOOL (RADIX := Decimal) := 0;
@@ -22363,9 +22752,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		ph_r_unit : DINT (RADIX := Decimal) := 0;
 		ph_r_user_level : DINT (Description := "Current Enumerated user level:$NLevel: 0 Hex: 0x3$NLevel 1: Hex: 0xC$NLevel 2: Hex: 0x30",
 		            RADIX := Decimal) := 0;
-		ph_r_user_unlock_eeprom : BOOL (Description := "current probe eeprom lock state",
-		            RADIX := Decimal) := 0;
 		ph_r_wrong_sensor : BOOL (RADIX := Decimal) := 0;
+		pH_Scale : SCALE  := [1,0.00000000e+000,3.27670000e+004,0.00000000e+000,3.00000000e+002,0.00000000e+000,0,0.00000000e+000
+				,0,5.60519386e-045,0.00000000e+000,0.00000000e+000,0.00000000e+000];
+		pH_Scale1 : SCALE  := [1,0.00000000e+000,3.27670000e+004,0.00000000e+000,1.40000000e+001,0.00000000e+000,0,0.00000000e+000
+				,0,5.60519386e-045,0.00000000e+000,0.00000000e+000,0.00000000e+000];
 		pH_stability_ok : BOOL (RADIX := Decimal) := 0;
 		ph_w_cal_buffer_tab : DINT (RADIX := Decimal) := 0;
 		ph_w_cal_control : DINT (RADIX := Decimal) := 0;
@@ -22379,8 +22770,6 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		            RADIX := Decimal) := 0;
 		ph_w_user_password : DINT (Description := "Commanded Password:$NLevel 0: 0x0000 0000$NLevel 1: 0x01145DEA$NLevel 2: 0x00F479CE",
 		            RADIX := Decimal) := 0;
-		ph_w_user_unlock_eeprom : BOOL (Description := "Commanded probe eeprom lock state",
-		            RADIX := Decimal) := 0;
 		PlaceHolderFeedback1 : REAL (RADIX := Float) := 0.00000000e+000;
 		PlaceHolderFeedback2 : REAL (RADIX := Float) := 0.00000000e+000;
 		PlaceHolderFeedback3 : REAL (RADIX := Float) := 0.00000000e+000;
@@ -22390,6 +22779,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		PlaceHolderOutput2 : REAL (RADIX := Float) := 4.95000000e+001;
 		PlaceHolderOutput3 : REAL (RADIX := Float) := 4.99800034e+001;
 		PlaceHolderOutput4 : REAL (RADIX := Float) := 4.95000000e+001;
+		Pump_Prime_Enable : BOOL (RADIX := Decimal) := 0;
 		Recirc_HiSP1 : REAL (Description := "BRX Hi recirc hi speed modifier",
 		            RADIX := Float) := 1.10000000e+002;
 		Recirc_LoSP1 : REAL (Description := "MCV Hi recirc lo speed modifier",
@@ -22445,6 +22835,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				],[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'],[0,'$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00$00'
 				]],[6,'RA-BAS$00$00$00$00$00$00'],0,[6,'area01$00$00'],[10,'WT702 LoLo$00$00$00$00$00$00$00$00$00$00'
 				]];
+		Slot1_RTD_WAGO461 : WAGO_461  := [1,0,0,0,0,0,0,0,0,[0,0,0,0,0,0,0,0,0,0],0];
+		Slot1_RTD_WAGO461_Inputs : SINT[4] (RADIX := Decimal) := [0,0,0,0];
+		Slot2_AI_WAGO455 : WAGO_455 (Description := "Normalizes data received from a WAGO 750-455 4-Channel 4-20mA Analog Input Module.") := [1,0,0,0,0,0,0,0,0,[0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000
+				,0.00000000e+000,0.00000000e+000,0.00000000e+000],[0,0,0,0,0,0,0,0,0,0,0,0]];
+		Slot2_AI_WAGO455_Inputs : SINT[8] (RADIX := Decimal) := [0,0,0,0,0,0,0,0];
 		Start_ConditionedMedia_Initialize : BOOL (RADIX := Decimal) := 0;
 		Start_MCV_Initial_Fill : BOOL (RADIX := Decimal) := 0;
 		Stop_ConditionedMedia_Initialize : BOOL (RADIX := Decimal) := 0;
@@ -22669,6 +23064,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				],0],[43,0.00000000e+000,0.00000000e+000,0.00000000e+000,[-1609548287,0,0],[0,0,0],[-1609548287,0,0],[13,'Input Failure$00$00$00$00$00$00$00'
 				],[6,'RA-BAS$00$00$00$00$00$00'],[6,'P_Gate$00$00$00$00$00$00$00$00$00$00'],[16,'Gating Condition$00$00$00$00'
 				],0],[6,'RA-BAS$00$00$00$00$00$00'],[6,'area01$00$00'],1,1,-6.02299988e-001];
+		WT701_Tare : BOOL (RADIX := Decimal) := 0;
+		WT701_Tare_Success : BOOL (RADIX := Decimal) := 0;
+		WT701_Zero : BOOL (RADIX := Decimal) := 0;
+		WT701_Zero_Success : BOOL (RADIX := Decimal) := 0;
+		WT701_Zero_Timer : TIMER  := [0,5000,0];
 		WT702 : P_AInAdv (Description := "MCV Weight, Mettler-Toledo 60kg") := [134512651,8.12699974e-001,0,0,2,0.00000000e+000,1.00000000e+002,0.00000000e+000,1.00000000e+002
 				,0.00000000e+000,1.00000000e+000,0.00000000e+000,1.50000000e+038,1.00000000e+000,1.50000000e+038
 				,1.00000000e+000,-1.50000000e+038,1.00000000e+000,-1.50000000e+038,1.00000000e+000,2.50000000e+001
@@ -22716,6 +23116,11 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				,0,0],[0,0,0],[-1609547687,0,0],[13,'Input Failure$00$00$00$00$00$00$00'],[6,'RA-BAS$00$00$00$00$00$00'
 				],[6,'P_Gate$00$00$00$00$00$00$00$00$00$00'],[16,'Gating Condition$00$00$00$00'],0],[6,'RA-BAS$00$00$00$00$00$00'
 				],[6,'area01$00$00'],4,1,8.12699974e-001];
+		WT702_Tare : BOOL (RADIX := Decimal) := 0;
+		WT702_Tare_Success : BOOL (RADIX := Decimal) := 0;
+		WT702_Zero : BOOL (RADIX := Decimal) := 0;
+		WT702_Zero_Success : BOOL (RADIX := Decimal) := 0;
+		WT702_Zero_Timer : TIMER  := [0,5000,0];
 		WT703 : P_AInAdv (Description := "Spent Media/Harvest Scale, Hardy") := [134512643,0.00000000e+000,0,0,2,0.00000000e+000,1.00000000e+002,0.00000000e+000,6.00000000e+001
 				,0.00000000e+000,1.00000000e+000,0.00000000e+000,1.50000000e+038,1.00000000e+000,1.50000000e+038
 				,1.00000000e+000,-1.50000000e+038,1.00000000e+000,-1.50000000e+038,1.00000000e+000,2.00000000e+001
@@ -22779,6 +23184,8 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 	                UseAsFolder := 0)
 		TAG
 			BOR_01 : FBD_BOOLEAN_OR  := [1,0,5.60519386e-045];
+			SCL_01 : SCALE  := [1,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0.00000000e+000,0,0.00000000e+000
+					,0,5.60519386e-045,0.00000000e+000,0.00000000e+000,0.00000000e+000];
 			SEL_01 : SELECT  := [1,0.00000000e+000,1.00000000e+002,1,0.00000000e+000,5.60519386e-045];
 			SEL_02 : SELECT  := [1,0.00000000e+000,0.00000000e+000,1,0.00000000e+000,5.60519386e-045];
 			SEL_03 : SELECT  := [1,0.00000000e+000,0.00000000e+000,1,0.00000000e+000,5.60519386e-045];
@@ -22807,9 +23214,12 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_ROUTINE
 
 		ROUTINE CM_AI 
-				N: [MOV(Test_Temp_Raw,TT700.Inp_PV) ,P_AInAdv(TT700) ];
-				N: P_AInAdv(AT701);
-				N: P_AInAdv(AT702);
+				RC: "=====================================================================$N"
+				    "TT700$N"
+				    "=====================================================================";
+				N: [MOV(Slot1_RTD_WAGO461.Ch1_Temp_degCx10,TT700.Inp_PV) ,P_AInAdv(TT700) ];
+				N: [MOV(DO_Normalized,AT701.Inp_PV) ,P_AInAdv(AT701) ];
+				N: [MOV(pH_Normalized,AT702.Inp_PV) ,P_AInAdv(AT702) ];
 				N: P_AInAdv(LIT801);
 				N: P_AInAdv(WT701);
 				N: P_AInAdv(WT702);
@@ -23334,6 +23744,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 
 		ROUTINE Main 
 				N: JSR(RL_PH,0);
+				N: JSR(Wago_Comms,0);
 				N: JSR(RL_MTS,0);
 				N: JSR(RL_DO,0);
 				N: JSR(PBS_MFCs,0);
@@ -23358,6 +23769,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				N: JSR(SM_BRX_LoAdj,0);
 				N: JSR(DO_CAL,0);
 				N: JSR(PH_CAL,0);
+				N: JSR(Wago_Signal_Scaling,0);
 		END_ROUTINE
 
 		ROUTINE Media_Fill 
@@ -23431,7 +23843,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "";
 				N: [XIC(P101.Out_Start) [XIC(P101.Out_Fwd) CPT(P101_Jog_Move.Speed,( P101.Val_SpeedRef )/ ( P101_Cal_Constant * 60)) ,XIC(P101.Out_Rev) CPT(P101_Jog_Move.Speed,( P101.Val_SpeedRef )/ ( P101_Cal_Constant * 60) * (-1)) ] ,XIC(Perfusion_Start) CPT(P101_Jog_Move.Speed,( P101_Speed ) / ( P101_Cal_Constant * 60) * (-1)) ][MOV(P101_Jog_Move.Speed,P101_Current_Speed) ,OTE(P101_Jog_Move_Trigger) ];
 				RC: "Timer for Speed Update during Jog";
-				N: XIC(P101_Status_Code.Jogging)[[TON(P101_Jog_Update_Timer,?,?) ,XIC(P101_Jog_Update_Timer.DN) [MOV(P101_Update_Jog_Speed.Speed,P101_Current_Speed) ,RES(P101_Jog_Update_Timer) ] ] ,CPT(P101.Val_SpeedFdbk,ABS( P101_Current_Speed * P101_Cal_Constant * 60)) ];
+				N: XIC(P101_Status_Code.Jogging)XIO(P101_Status_Code.Q_Program_Running)[[TON(P101_Jog_Update_Timer,?,?) ,XIC(P101_Jog_Update_Timer.DN) [MOV(P101_Update_Jog_Speed.Speed,P101_Current_Speed) ,RES(P101_Jog_Update_Timer) ] ] ,CPT(P101.Val_SpeedFdbk,ABS( P101_Current_Speed * P101_Cal_Constant * 60)) ];
 				RC: "Logic to Choos which Move New Jog Speed off of Timer$N"
 				    "";
 				N: XIC(P101_Status_Code.Jogging)XIC(P101_Jog_Update_Timer.EN)[XIC(P101.Sts_Oper) [XIC(P101.Out_Fwd) CPT(P101_Update_Jog_Speed.Speed,( P101.Val_SpeedRef )/ ( P101_Cal_Constant * 60)) ,XIC(P101.Out_Rev) CPT(P101_Update_Jog_Speed.Speed,( P101.Val_SpeedRef )/ ( P101_Cal_Constant * 60) * (-1)) ] ,XIC(Perfusion_Running) CPT(P101_Update_Jog_Speed.Speed,( P101_Speed ) * (1 / 60 ) * ( 1 / P101_Cal_Constant ) * ( -1 )) ]OTE(P101_Update_Jog_Speed_Trigger);
@@ -23446,7 +23858,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				RC: "Initialize P101 Cal Run";
 				N: XIC(p101_Cal_Start)XIO(P101_Dose_Running)[OTL(P101_Cal_Running) ,OTU(P101_Relative_Move.Done) ];
 				RC: "P101 Calibration Run";
-				N: XIC(P101_Cal_Running)[CPT(P101_Relative_Move.Speed,( P101_Cal_Speed / 100 ) * 6.66) MUL(P101_CalRevs,P101_Motor_Constant,P101_Cal_Steps) MOV(P101_Cal_Steps,P101_Cal_Encoder_Steps) [XIC(P101_Cal_Direction) NEG(P101_Cal_Encoder_Steps,P101_Relative_Move.Distance) ,XIO(P101_Cal_Direction) MOV(P101_Cal_Encoder_Steps,P101_Relative_Move.Distance) ] ,XIC(P101_Relative_Move.Done) [CPT(P101_Cal_ColConst,P101_Cal_Collected / P101_Cal_Steps) MUL(P101_Cal_ColConst,P101_Motor_Constant,P101_Cal_Constant) MUL(P101_Cal_Constant,P101_MaxRPM,P101_Cal_Max_Flow) ,XIC(P101_Cal_Accept) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedRefEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedFdbkEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_MaxSpdRef) [OTU(P101_Cal_Running) ,OTL(P101_Cal_Complete) ] ] ,XIC(P101_Cal_Abort) [OTU(P101_Cal_Running) ,OTU(P101_Cal_Complete) ] ];
+				N: XIC(P101_Cal_Running)[CPT(P101_Relative_Move.Speed,( P101_Cal_Speed / 100 ) * (7.5)) MUL(P101_CalRevs,P101_Motor_Constant,P101_Cal_Steps) MOV(P101_Cal_Steps,P101_Cal_Encoder_Steps) [XIC(P101_Cal_Direction) NEG(P101_Cal_Encoder_Steps,P101_Relative_Move.Distance) ,XIO(P101_Cal_Direction) MOV(P101_Cal_Encoder_Steps,P101_Relative_Move.Distance) ] ,XIC(P101_Relative_Move.Done) [CPT(P101_Cal_ColConst,P101_Cal_Collected / P101_Cal_Steps) MUL(P101_Cal_ColConst,P101_Motor_Constant,P101_Cal_Constant) MUL(P101_Cal_Constant,P101_MaxRPM,P101_Cal_Max_Flow) ,XIC(P101_Cal_Accept) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedRefEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_SpeedFdbkEUMax) MOV(P101_Cal_Max_Flow,P101.Cfg_MaxSpdRef) [OTU(P101_Cal_Running) ,OTL(P101_Cal_Complete) ] ] ,XIC(P101_Cal_Abort) [OTU(P101_Cal_Running) ,OTU(P101_Cal_Complete) ] ];
 				RC: "Initialize P101 Dose Run";
 				N: XIC(P101_Dose_Start)XIO(P101_Cal_Running)[OTL(P101_Dose_Running) ,OTU(P101_Relative_Move.Done) ];
 				RC: "P101 Dosing";
@@ -23464,7 +23876,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "";
 				N: [XIC(P102.Out_Start) [XIC(P102.Out_Fwd) CPT(P102_Jog_Move.Speed,( P102.Val_SpeedRef )/ ( P102_Cal_Constant * 60)) ,XIC(P102.Out_Rev) CPT(P102_Jog_Move.Speed,( P102.Val_SpeedRef )/ ( P102_Cal_Constant * 60) * (-1)) ] ,XIC(MCV_InitialFillRunning) CPT(P102_Jog_Move.Speed,( MCV_InitialFillSpeed ) / ( P102_Cal_Constant * 60) * (-1)) ,XIC(MCV_LoAdj_Idle) MOV(0,P102_Jog_Move.Speed) ][MOV(P102_Jog_Move.Speed,P102_Current_Speed) ,OTE(P102_Jog_Move_Trigger) ];
 				RC: "Timer for Speed Update during Jog";
-				N: XIC(P102_Status_Code.Jogging)[[TON(P102_Jog_Update_Timer,?,?) ,XIC(P102_Jog_Update_Timer.DN) [MOV(P102_Update_Jog_Speed.Speed,P102_Current_Speed) ,RES(P102_Jog_Update_Timer) ] ] ,CPT(P102.Val_SpeedFdbk,ABS(P102_Current_Speed*P102_Cal_Constant*60)) ];
+				N: XIC(P102_Status_Code.Jogging)XIO(P102_Status_Code.Q_Program_Running)[[TON(P102_Jog_Update_Timer,?,?) ,XIC(P102_Jog_Update_Timer.DN) [MOV(P102_Update_Jog_Speed.Speed,P102_Current_Speed) ,RES(P102_Jog_Update_Timer) ] ] ,CPT(P102.Val_SpeedFdbk,ABS(P102_Current_Speed*P102_Cal_Constant*60)) ];
 				RC: "Logic to Choos which Move New Jog Speed off of Timer$N"
 				    "";
 				N: XIC(P102_Status_Code.Jogging)XIC(P102_Jog_Update_Timer.EN)[XIC(P102.Sts_Oper) [XIC(P102.Out_Fwd) CPT(P102_Update_Jog_Speed.Speed,( P102.Val_SpeedRef )/ ( P102_Cal_Constant * 60)) ,XIC(P102.Out_Rev) CPT(P102_Update_Jog_Speed.Speed,( P102.Val_SpeedRef )/ ( P102_Cal_Constant * 60) * (-1)) ] ,XIC(MCV_InitialFillRunning) CPT(P102_Update_Jog_Speed.Speed,( MCV_InitialFillSpeed ) / ( P102_Cal_Constant * 60) * (-1)) ,XIC(MCV_LoAdj_PumpAdj) CPT(P102_Update_Jog_Speed.Speed,( MediaLoSpeed ) / ( P102_Cal_Constant * 60) * (-1)) ,XIC(MCV_LoAdj_Buffer) MOV(0,P102_Update_Jog_Speed.Speed) ]OTE(P102_Update_Jog_Speed_Trigger);
@@ -23479,7 +23891,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				RC: "Initialize P102 Cal Run";
 				N: XIC(P102_Cal_Start)XIO(P102_Dose_Running)[OTL(P102_Cal_Running) ,OTU(P102_Relative_Move.Done) ];
 				RC: "P102 Calibration Run";
-				N: XIC(P102_Cal_Running)[CPT(P102_Relative_Move.Speed,( P102_Cal_Speed / 100 ) * 6.66) MUL(P102_CalRevs,P102_Motor_Constant,P102_Cal_Steps) MOV(P102_Cal_Steps,P102_Cal_Encoder_Steps) [XIC(P102_Cal_Direction) NEG(P102_Cal_Encoder_Steps,P102_Relative_Move.Distance) ,XIO(P102_Cal_Direction) MOV(P102_Cal_Encoder_Steps,P102_Relative_Move.Distance) ] ,XIC(P102_Relative_Move.Done) [CPT(P102_Cal_ColConst,P102_Cal_Collected / P102_Cal_Steps) MUL(P102_Cal_ColConst,P102_Motor_Constant,P102_Cal_Constant) MUL(P102_Cal_Constant,P102_MaxRPM,P102_Cal_Max_Flow) ,XIC(P102_Cal_Accept) MOV(P102_Cal_Max_Flow,P102.Cfg_SpeedRefEUMax) MOV(P102_Cal_Max_Flow,P102.Cfg_SpeedFdbkEUMax) MOV(P102_Cal_Max_Flow,P102.Cfg_MaxSpdRef) [OTU(P102_Cal_Running) ,OTL(P102_Cal_Complete) ] ] ,XIC(P102_Cal_Abort) [OTU(P102_Cal_Running) ,OTU(P102_Cal_Complete) ] ];
+				N: XIC(P102_Cal_Running)[CPT(P102_Relative_Move.Speed,( P102_Cal_Speed / 100 ) * 7.5) MUL(P102_CalRevs,P102_Motor_Constant,P102_Cal_Steps) MOV(P102_Cal_Steps,P102_Cal_Encoder_Steps) [XIC(P102_Cal_Direction) NEG(P102_Cal_Encoder_Steps,P102_Relative_Move.Distance) ,XIO(P102_Cal_Direction) MOV(P102_Cal_Encoder_Steps,P102_Relative_Move.Distance) ] ,XIC(P102_Relative_Move.Done) [CPT(P102_Cal_ColConst,P102_Cal_Collected / P102_Cal_Steps) MUL(P102_Cal_ColConst,P102_Motor_Constant,P102_Cal_Constant) MUL(P102_Cal_Constant,P102_MaxRPM,P102_Cal_Max_Flow) ,XIC(P102_Cal_Accept) MOV(P102_Cal_Max_Flow,P102.Cfg_SpeedRefEUMax) MOV(P102_Cal_Max_Flow,P102.Cfg_SpeedFdbkEUMax) MOV(P102_Cal_Max_Flow,P102.Cfg_MaxSpdRef) [OTU(P102_Cal_Running) ,OTL(P102_Cal_Complete) ] ] ,XIC(P102_Cal_Abort) [OTU(P102_Cal_Running) ,OTU(P102_Cal_Complete) ] ];
 				RC: "Initialize P102 Dose Run";
 				N: XIC(P102_Dose_Start)XIO(P102_Cal_Running)[OTL(P102_Dose_Running) ,OTU(P102_Relative_Move.Done) ];
 				RC: "P102 Dosing";
@@ -23497,7 +23909,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "";
 				N: [XIC(P103.Out_Start) [XIC(P103.Out_Fwd) CPT(P103_Jog_Move.Speed,( P103.Val_SpeedRef )/ ( P103_Cal_Constant * 60)) ,XIC(P103.Out_Rev) CPT(P103_Jog_Move.Speed,( P103.Val_SpeedRef )/ ( P103_Cal_Constant * 60) * (-1)) ] ,XIC(ConditionedMedia_Running) CPT(P103_Jog_Move.Speed,( ConditionedMedia_Scaler.Out )/ ( P103_Cal_Constant * 60) * (-1)) ][MOV(P103_Jog_Move.Speed,P103_Current_Speed) ,OTE(P103_Jog_Move_Trigger) ];
 				RC: "Timer for Speed Update during Jog";
-				N: XIC(P103_Status_Code.Jogging)[[TON(P103_Jog_Update_Timer,?,?) ,XIC(P103_Jog_Update_Timer.DN) [MOV(P103_Update_Jog_Speed.Speed,P103_Current_Speed) ,RES(P103_Jog_Update_Timer) ] ] ,CPT(P103.Val_SpeedFdbk,ABS(P103_Current_Speed*P103_Cal_Constant*60)) ];
+				N: XIC(P103_Status_Code.Jogging)XIO(P103_Status_Code.Q_Program_Running)[[TON(P103_Jog_Update_Timer,?,?) ,XIC(P103_Jog_Update_Timer.DN) [MOV(P103_Update_Jog_Speed.Speed,P103_Current_Speed) ,RES(P103_Jog_Update_Timer) ] ] ,CPT(P103.Val_SpeedFdbk,ABS(P103_Current_Speed*P103_Cal_Constant*60)) ];
 				RC: "Logic to Choos which Move New Jog Speed off of Timer$N"
 				    "";
 				N: XIC(P103_Status_Code.Jogging)XIC(P103_Jog_Update_Timer.EN)XIC(P103.Sts_Oper)[XIC(P103.Out_Fwd) CPT(P103_Update_Jog_Speed.Speed,( P103.Val_SpeedRef )/ ( P103_Cal_Constant * 60)) ,XIC(P103.Out_Rev) CPT(P103_Update_Jog_Speed.Speed,( P103.Val_SpeedRef )/ ( P103_Cal_Constant * 60) * (-1)) ,XIC(ConditionedMedia_NoAdjust_Speed) CPT(P103_Jog_Move.Speed,( ConditionedMedia_Scaler.Out )/ ( P103_Cal_Constant * 60) * (-1)) ,XIC(MCV_HiAdj_Idle) MOV(0,P103_Jog_Move.Speed) ,XIC(MCV_HiAdj_PumpAdj) CPT(P103_Update_Jog_Speed.Speed,ConditionedMedia_Scaler.Out) ,XIC(MCV_HiAdj_Buffer) MOV(0,P103_Update_Jog_Speed.Speed) ,XIC(BRX_LoAdj_Idle) MOV(0,P103_Jog_Move.Speed) ,XIC(BRX_LoAdj_PumpAdj) CPT(P103_Update_Jog_Speed.Speed,ConditionedMedia_Scaler.Out) ,XIC(BRX_LoAdj_Buffer) MOV(0,P103_Update_Jog_Speed.Speed) ,XIC(BRX_HiAdj_Idle) MOV(0,P103_Jog_Move.Speed) ,XIC(BRX_HiAdj_PumpAdj) [CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1<P104.Cfg_MaxSpdRef) CPT(P103_Update_Jog_Speed.Speed,ConditionedMedia_Scaler.Out) ,CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1>P104.Cfg_MaxSpdRef) CPT(P103.PSet_SpeedRef,P103.Cfg_MaxSpdRef/(Recirc_HiSP1/100)) ] ,XIC(BRX_HiAdj_Buffer) MOV(0,P103_Update_Jog_Speed.Speed) ]OTE(P103_Update_Jog_Speed_Trigger);
@@ -23512,7 +23924,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				RC: "Initialize P103 Cal Run";
 				N: XIC(P103_Cal_Start)XIO(P103_Dose_Running)[OTL(P103_Cal_Running) ,OTU(P103_Relative_Move.Done) ];
 				RC: "P103 Calibration Run";
-				N: XIC(P103_Cal_Running)[CPT(P103_Relative_Move.Speed,( P103_Cal_Speed / 100 ) * 6.66) MUL(P103_CalRevs,P103_Motor_Constant,P103_Cal_Steps) MOV(P103_Cal_Steps,P103_Cal_Encoder_Steps) [XIC(P103_Cal_Direction) NEG(P103_Cal_Encoder_Steps,P103_Relative_Move.Distance) ,XIO(P103_Cal_Direction) MOV(P103_Cal_Encoder_Steps,P103_Relative_Move.Distance) ] ,XIC(P103_Relative_Move.Done) [CPT(P103_Cal_ColConst,P103_Cal_Collected / P103_Cal_Steps) MUL(P103_Cal_ColConst,P103_Motor_Constant,P103_Cal_Constant) MUL(P103_Cal_Constant,P103_MaxRPM,P103_Cal_Max_Flow) ,XIC(P103_Cal_Accept) MOV(P103_Cal_Max_Flow,P103.Cfg_SpeedRefEUMax) MOV(P103_Cal_Max_Flow,P103.Cfg_SpeedFdbkEUMax) MOV(P103_Cal_Max_Flow,P103.Cfg_MaxSpdRef) [OTU(P103_Cal_Running) ,OTL(P103_Cal_Complete) ] ] ,XIC(P103_Cal_Abort) [OTU(P103_Cal_Running) ,OTU(P103_Cal_Complete) ] ];
+				N: XIC(P103_Cal_Running)[CPT(P103_Relative_Move.Speed,( P103_Cal_Speed / 100 ) * 7.5) MUL(P103_CalRevs,P103_Motor_Constant,P103_Cal_Steps) MOV(P103_Cal_Steps,P103_Cal_Encoder_Steps) [XIC(P103_Cal_Direction) NEG(P103_Cal_Encoder_Steps,P103_Relative_Move.Distance) ,XIO(P103_Cal_Direction) MOV(P103_Cal_Encoder_Steps,P103_Relative_Move.Distance) ] ,XIC(P103_Relative_Move.Done) [CPT(P103_Cal_ColConst,P103_Cal_Collected / P103_Cal_Steps) MUL(P103_Cal_ColConst,P103_Motor_Constant,P103_Cal_Constant) MUL(P103_Cal_Constant,P103_MaxRPM,P103_Cal_Max_Flow) ,XIC(P103_Cal_Accept) MOV(P103_Cal_Max_Flow,P103.Cfg_SpeedRefEUMax) MOV(P103_Cal_Max_Flow,P103.Cfg_SpeedFdbkEUMax) MOV(P103_Cal_Max_Flow,P103.Cfg_MaxSpdRef) [OTU(P103_Cal_Running) ,OTL(P103_Cal_Complete) ] ] ,XIC(P103_Cal_Abort) [OTU(P103_Cal_Running) ,OTU(P103_Cal_Complete) ] ];
 				RC: "Initialize P103 Dose Run";
 				N: XIC(P103_Dose_Start)XIO(P103_Cal_Running)[OTL(P103_Dose_Running) ,OTU(P103_Relative_Move.Done) ];
 				RC: "P103 Dosing";
@@ -23530,7 +23942,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "";
 				N: [XIC(P104.Out_Start) [XIC(P104.Out_Fwd) CPT(P104_Jog_Move.Speed,( P104.Val_SpeedRef )/ ( P104_Cal_Constant * 60)) ,XIC(P104.Out_Rev) CPT(P104_Jog_Move.Speed,( P104.Val_SpeedRef )/ ( P104_Cal_Constant * 60) * (-1)) ] ,XIC(ConditionedMedia_Running) CPT(P104_Jog_Move.Speed,( ConditionedMedia_Scaler.Out )/ ( P104_Cal_Constant * 60) * (-1)) ][MOV(P104_Jog_Move.Speed,P104_Current_Speed) ,OTE(P104_Jog_Move_Trigger) ];
 				RC: "Timer for Speed Update during Jog";
-				N: XIC(P104_Status_Code.Jogging)[[TON(P104_Jog_Update_Timer,?,?) ,XIC(P104_Jog_Update_Timer.DN) [MOV(P104_Update_Jog_Speed.Speed,P104_Current_Speed) ,RES(P104_Jog_Update_Timer) ] ] ,CPT(P104.Val_SpeedFdbk,ABS(P104_Current_Speed*P104_Cal_Constant*60)) ];
+				N: XIC(P104_Status_Code.Jogging)XIO(P104_Status_Code.Q_Program_Running)[[TON(P104_Jog_Update_Timer,?,?) ,XIC(P104_Jog_Update_Timer.DN) [MOV(P104_Update_Jog_Speed.Speed,P104_Current_Speed) ,RES(P104_Jog_Update_Timer) ] ] ,CPT(P104.Val_SpeedFdbk,ABS(P104_Current_Speed*P104_Cal_Constant*60)) ];
 				RC: "Logic to Choos which Move New Jog Speed off of Timer$N"
 				    "";
 				N: XIC(P104_Status_Code.Jogging)XIC(P104_Jog_Update_Timer.EN)XIC(P104.Sts_Oper)[XIC(P104.Out_Fwd) CPT(P104_Update_Jog_Speed.Speed,( P104.Val_SpeedRef )/ ( P104_Cal_Constant * 60)) ,XIC(P104.Out_Rev) CPT(P104_Update_Jog_Speed.Speed,( P104.Val_SpeedRef )/ ( P104_Cal_Constant * 60) * (-1)) ,XIC(ConditionedMedia_NoAdjust_Speed) CPT(P104_Jog_Move.Speed,( ConditionedMedia_Scaler.Out )/ ( P104_Cal_Constant * 60) * (-1)) ,XIC(MCV_HiAdj_Idle) MOV(0,P104_Jog_Move.Speed) ,XIC(MCV_HiAdj_PumpAdj) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP1 / 100 )) ,XIC(MCV_HiAdj_Buffer) MOV(0,P104_Update_Jog_Speed.Speed) ,XIC(BRX_LoAdj_Idle) MOV(0,P104_Jog_Move.Speed) ,XIC(BRX_LoAdj_PumpAdj) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out * ( Recirc_LoSP2 / 100 )) ,XIC(BRX_LoAdj_Buffer) MOV(0,P104_Update_Jog_Speed.Speed) ,XIC(BRX_HiAdj_Idle) MOV(0,P104_Jog_Move.Speed) ,XIC(BRX_HiAdj_PumpAdj) [CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1<P104.Cfg_MaxSpdRef) CPT(P104.PSet_SpeedRef,ConditionedMedia_Scaler.Out*(Recirc_HiSP1/100)) ,CMP(ConditionedMedia_Scaler.Out*Recirc_HiSP1>P104.Cfg_MaxSpdRef) CPT(P104.PSet_SpeedRef,P104.Cfg_MaxSpdRef) ] ,XIC(BRX_HiAdj_Buffer) MOV(0,P104_Update_Jog_Speed.Speed) ]OTE(P104_Update_Jog_Speed_Trigger);
@@ -23545,7 +23957,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				RC: "Initialize P104 Cal Run";
 				N: XIC(P104_Cal_Start)XIO(P104_Dose_Running)[OTL(P104_Cal_Running) ,OTU(P104_Relative_Move.Done) ];
 				RC: "P104 Calibration Run";
-				N: XIC(P104_Cal_Running)[CPT(P104_Relative_Move.Speed,( P104_Cal_Speed / 100 ) * 6.66) MUL(P104_CalRevs,P104_Motor_Constant,P104_Cal_Steps) MOV(P104_Cal_Steps,P104_Cal_Encoder_Steps) [XIC(P104_Cal_Direction) NEG(P104_Cal_Encoder_Steps,P104_Relative_Move.Distance) ,XIO(P104_Cal_Direction) MOV(P104_Cal_Encoder_Steps,P104_Relative_Move.Distance) ] ,XIC(P104_Relative_Move.Done) [CPT(P104_Cal_ColConst,P104_Cal_Collected / P104_Cal_Steps) MUL(P104_Cal_ColConst,P104_Motor_Constant,P104_Cal_Constant) MUL(P104_Cal_Constant,P104_MaxRPM,P104_Cal_Max_Flow) ,XIC(P104_Cal_Accept) MOV(P104_Cal_Max_Flow,P104.Cfg_SpeedRefEUMax) MOV(P104_Cal_Max_Flow,P104.Cfg_SpeedFdbkEUMax) MOV(P104_Cal_Max_Flow,P104.Cfg_MaxSpdRef) [OTU(P104_Cal_Running) ,OTL(P104_Cal_Complete) ] ] ,XIC(P104_Cal_Abort) [OTU(P104_Cal_Running) ,OTU(P104_Cal_Complete) ] ];
+				N: XIC(P104_Cal_Running)[CPT(P104_Relative_Move.Speed,( P104_Cal_Speed / 100 ) * 7.5) MUL(P104_CalRevs,P104_Motor_Constant,P104_Cal_Steps) MOV(P104_Cal_Steps,P104_Cal_Encoder_Steps) [XIC(P104_Cal_Direction) NEG(P104_Cal_Encoder_Steps,P104_Relative_Move.Distance) ,XIO(P104_Cal_Direction) MOV(P104_Cal_Encoder_Steps,P104_Relative_Move.Distance) ] ,XIC(P104_Relative_Move.Done) [CPT(P104_Cal_ColConst,P104_Cal_Collected / P104_Cal_Steps) MUL(P104_Cal_ColConst,P104_Motor_Constant,P104_Cal_Constant) MUL(P104_Cal_Constant,P104_MaxRPM,P104_Cal_Max_Flow) ,XIC(P104_Cal_Accept) MOV(P104_Cal_Max_Flow,P104.Cfg_SpeedRefEUMax) MOV(P104_Cal_Max_Flow,P104.Cfg_SpeedFdbkEUMax) MOV(P104_Cal_Max_Flow,P104.Cfg_MaxSpdRef) [OTU(P104_Cal_Running) ,OTL(P104_Cal_Complete) ] ] ,XIC(P104_Cal_Abort) [OTU(P104_Cal_Running) ,OTU(P104_Cal_Complete) ] ];
 				RC: "Initialize P104 Dose Run";
 				N: XIC(P104_Dose_Start)XIO(P104_Cal_Running)[OTL(P104_Dose_Running) ,OTU(P104_Relative_Move.Done) ];
 				RC: "P104 Dosing";
@@ -23553,7 +23965,7 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_ROUTINE
 
 		ROUTINE PBS_P105 
-				N: [[XIC(WT703.Alm_HiHi) OTE(P105_intlk.Inp_Intlk00) ,XIC(LIT801.Alm_LoLo) OTE(P105_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(P105_intlk.Inp_Intlk02) ,P_Intlk(P105_intlk) ,XIC(P105_intlk.Sts_IntlkOK) OTE(P105.Inp_IntlkOK) ] ,P_VSD(P105,P105_FaultCodeList) ,AFI() Pump_Cal(P105_Cal,P105.Sts_RunningFwd,P105.PCmd_Prog,P105.Cfg_SpeedRefEUMin,P105.Cfg_SpeedRefEUMax,P105.Cfg_SpeedFdbkEUMin,P105.Cfg_SpeedFdbkEUMax,P105.Cfg_MinSpdRef,P105.Cfg_MaxSpdRef,P105.PSet_SpeedRef,P105.PCmd_StartFwd,P105.Sts_Prog,P105.PCmd_Stop) ];
+				N: [[XIC(WT703.Alm_HiHi) OTE(P105_intlk.Inp_Intlk00) ,XIC(LIT801.Alm_LoLo) OTE(P105_intlk.Inp_Intlk01) ,XIC(EStop.Alm_TgtDisagree) OTE(P105_intlk.Inp_Intlk02) ,P_Intlk(P105_intlk) ,XIC(P105_intlk.Sts_IntlkOK) OTE(P105.Inp_IntlkOK) ] ,P_VSD(P105,P105_FaultCodeList) ,AFI() Pump_Cal(P105_Cal,P105.Sts_RunningFwd,P105.PCmd_Prog,P105.Cfg_SpeedRefEUMin,P105.Cfg_SpeedRefEUMax,P105.Cfg_SpeedFdbkEUMin,P105.Cfg_SpeedFdbkEUMax,P105.Cfg_MinSpdRef,P105.Cfg_MaxSpdRef,P105.PSet_SpeedRef,P105.PCmd_StartFwd,P105.Sts_Prog,P105.PCmd_Stop) ,MOV(P105_Ethernet:I.SpeedLimit,P105.Cfg_MaxSpdRef) ];
 				RC: "Set Pump DIrection";
 				N: [XIC(P105.Sts_Oper) XIC(P105.Out_Rev) ,XIC(P105_Dose_Running) XIC(P105_Dose_Direction) ][OTE(P105_Run_Reverse) ,OTE(P105_Ethernet:O.SetReverse) ];
 				N: [XIC(P105_Dose_Running) ,XIC(Perfusion_Running) ,XIC(P105.Sts_RunningFwd) ,XIC(P105.Sts_RunningRev) ]OTE(P105_Ethernet:O.Run);
@@ -23618,8 +24030,8 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 		END_ROUTINE
 
 		ROUTINE RL_MTS (Description := "Propagate MT scale data")
-				N: [MOV(MT_0_R_PV,WT701.Inp_PV) ,XIO(MT_0_R_DATA_OK) OTE(WT701.Inp_PVBad) ,XIO(MT_0_R_DATA_STABLE) OTE(WT701.Inp_PVUncertain) ];
-				N: [MOV(MT_1_R_PV,WT702.Inp_PV) ,XIO(MT_1_R_DATA_OK) OTE(WT702.Inp_PVBad) ,XIO(MT_1_R_DATA_STABLE) OTE(WT702.Inp_PVUncertain) ];
+				N: [MOV(MT_0_R_PV,WT701.Inp_PV) ,XIO(MT_0_R_DATA_OK) OTE(WT701.Inp_PVBad) ,XIO(MT_0_R_DATA_STABLE) OTE(WT701.Inp_PVUncertain) ,XIC(WT701_Zero) [OTE(MT_0_W_ZERO) ,OTU(WT701_Zero_Success) ,OTU(WT701_Tare_Success) ] ,XIC(WT701_Tare) [OTE(MT_0_W_TARE) ,OTU(WT701_Tare_Success) ,OTU(WT701_Zero_Success) ] ,EQU(MT_0_R_PV,0) TON(WT701_Zero_Timer,?,?) XIO(WT701_Zero_Timer.DN) OTE(WT701_Zero_Success) ];
+				N: [MOV(MT_1_R_PV,WT702.Inp_PV) ,XIO(MT_1_R_DATA_OK) OTE(WT702.Inp_PVBad) ,XIO(MT_1_R_DATA_STABLE) OTE(WT702.Inp_PVUncertain) ,XIC(WT702_Zero) [OTE(MT_1_W_ZERO) ,OTU(WT702_Zero_Success) ,OTU(WT702_Tare_Success) ] ,XIC(WT702_Tare) [OTE(MT_1_W_TARE) ,OTU(WT702_Zero_Success) ,OTU(WT702_Tare_Success) ] ,EQU(MT_1_R_PV,0) TON(WT702_Zero_Timer,?,?) XIO(WT702_Zero_Timer.DN) OTE(WT702_Zero_Success) ];
 		END_ROUTINE
 
 		ROUTINE RL_PH (Description := "Propagate MT scale data")
@@ -23730,6 +24142,110 @@ CONTROLLER PBS_Perfusion (Description := "pbs perfusion / oxygenation skid",
 				    "If Vessel weight PV exceeds configured MCV Hi Adjust Weight go to State 20.";
 				N: EQU(MCV_HiAdj_State,50)[OTE(MCV_HiAdj_Assess2) ,GEQ(WT702.Val,MCV_HiSP) MOV(20,MCV_HiAdj_State) ,LES(WT702.Val,MCV_HiSP) MOV(10,MCV_HiAdj_State) ];
 		END_ROUTINE
+
+		ROUTINE Wago_Comms 
+				RC: "===========================================================$N"
+				    "Inputs$N"
+				    "===========================================================";
+				N: NOP();
+				RC: "Slot 1 Analog Input$N"
+				    "Grabs and Stores Analog Input Data for Temperature probes from Wago";
+				N: COP(Wago_IO:I2.Data[0],Slot2_AI_WAGO455_Inputs[0],4)NOP();
+				N: WAGO_461(Slot1_RTD_WAGO461,Slot1_RTD_WAGO461_Inputs,0,0);
+				RC: "Slot 2 Analog Input$N"
+				    "Grabs and Stores Analog Input Data for pH and DO probes from Wago";
+				N: COP(Wago_IO:I2.Data[4],Slot2_AI_WAGO455_Inputs[0],8);
+				N: WAGO_455(Slot2_AI_WAGO455,Slot2_AI_WAGO455_Inputs);
+				RC: "Slot 4$N"
+				    "Grab and Store Digital Input Data for Gas Manifold Valves";
+				N: NOP();
+				RC: "===========================================================$N"
+				    "Outputs$N"
+				    "===========================================================";
+				N: NOP();
+				RC: "Slot 3$N"
+				    "Grab and Stor Analog Output Values";
+				N: NOP();
+				RC: "Slot 5$N"
+				    "Grab and Store Digital Output";
+				N: NOP();
+		END_ROUTINE
+
+		FBD_ROUTINE Wago_Signal_Scaling (Description := "Scale Wago Signals",
+		                                 SheetSize := "Tabloid - 11 x 17 in",
+		                                 SheetOrientation := Landscape)
+			SHEET  (Name := "")
+				IREF  (ID := 0,
+				       X := 220,
+				       Y := 100,
+				       Operand := "Slot2_AI_WAGO455.Ch1_Value",
+				       HideDescription := No)
+				END_IREF
+
+				IREF  (ID := 1,
+				       X := 220,
+				       Y := 220,
+				       Operand := "Slot2_AI_WAGO455.Ch2_Value",
+				       HideDescription := No)
+				END_IREF
+
+				OREF  (ID := 2,
+				       X := 480,
+				       Y := 220,
+				       Operand := "DO_Normalized",
+				       HideDescription := No)
+				END_OREF
+
+				OREF  (ID := 3,
+				       X := 480,
+				       Y := 100,
+				       Operand := "pH_Normalized",
+				       HideDescription := No)
+				END_OREF
+
+				SCL_BLOCK  (ID := 4,
+				            X := 340,
+				            Y := 200,
+				            Operand := "DO_Scale",
+				            VisiblePins := "In, Out",
+				            HideDescription := No)
+				END_SCL_BLOCK
+
+				SCL_BLOCK  (ID := 5,
+				            X := 340,
+				            Y := 80,
+				            Operand := "pH_Scale1",
+				            VisiblePins := "In, Out",
+				            HideDescription := No)
+				END_SCL_BLOCK
+
+				WIRE  (FromElementID := 0,
+				       FromParameter := "",
+				       ToElementID := 5,
+				       ToParameter := "In")
+				END_WIRE
+
+				WIRE  (FromElementID := 1,
+				       FromParameter := "",
+				       ToElementID := 4,
+				       ToParameter := "In")
+				END_WIRE
+
+				WIRE  (FromElementID := 4,
+				       FromParameter := "Out",
+				       ToElementID := 2,
+				       ToParameter := "")
+				END_WIRE
+
+				WIRE  (FromElementID := 5,
+				       FromParameter := "Out",
+				       ToElementID := 3,
+				       ToParameter := "")
+				END_WIRE
+
+			END_SHEET
+
+		END_FBD_ROUTINE
 
 		CHILD_PROGRAMS
 		END_CHILD_PROGRAMS
